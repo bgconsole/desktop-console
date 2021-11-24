@@ -104,9 +104,9 @@
                         <version>0.0.8</version>
                         <configuration>
                             <release>${maven.compiler.release}</release>
-                            <jlinkImageName>terminal</jlinkImageName>
+                            <jlinkImageName>desktop-console</jlinkImageName>
                             <launcher>launcher</launcher>
-                            <mainClass>terminal/com.bgconsole.desktop.MainClass</mainClass>
+                            <mainClass>desktop-console/com.bgconsole.desktop.MainClass</mainClass>
                         </configuration>
                     </plugin>
                     <plugin>
@@ -160,6 +160,15 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>desktop</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <client.target>host</client.target>
+            </properties>
+        </profile>
     </profiles>
     <build>
         <plugins>
@@ -184,6 +193,18 @@
                     <mainClass>terminal/com.bgconsole.desktop.MainClass</mainClass>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.gluonhq</groupId>
+                <artifactId>gluonfx-maven-plugin</artifactId>
+                <version>1.0.9</version>
+                <configuration>
+<!--                    <target>desktop</target>-->
+                    <target>host</target>
+                    <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
