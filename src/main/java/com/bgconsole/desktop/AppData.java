@@ -2,6 +2,7 @@ package com.bgconsole.desktop;
 
 import com.bgconsole.desktop.location.Location;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,10 @@ public class AppData {
         locations.forEach(location -> {
             locationList.put(location.getId(), new LocationData(location));
         });
+    }
+
+    public List<LocationData> getLocations() {
+        return new ArrayList<>(locationList.values());
     }
 
 }

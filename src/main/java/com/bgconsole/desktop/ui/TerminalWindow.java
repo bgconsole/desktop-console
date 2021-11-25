@@ -13,6 +13,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 
+
 public class TerminalWindow {
 
     private final Stage stage;
@@ -62,7 +63,6 @@ public class TerminalWindow {
 //        }
 //
 //        GlobalScreen.addNativeKeyListener(new GlobalKeyListener());
-        //new GlobalKeyListener();
     }
 
     public void closeWindow() {

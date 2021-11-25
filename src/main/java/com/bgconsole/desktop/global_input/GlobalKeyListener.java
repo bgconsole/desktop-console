@@ -2,8 +2,9 @@ package com.bgconsole.desktop.global_input;
 
 import com.bgconsole.desktop.AppData;
 import com.bgconsole.desktop.command.Command;
-import com.bgconsole.desktop.command.CommandList;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
@@ -17,6 +18,7 @@ import org.simplenativehooks.staticResources.BootStrapResources;
 import org.simplenativehooks.utilities.Function;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,31 +66,33 @@ public class GlobalKeyListener implements ExecCommand {
                 }
                 if (ctrl && alt && x) {
                     Platform.runLater(() -> {
-                        newWindow = new Stage(StageStyle.UTILITY);
-                        newWindow.setTitle("Exec command");
-                        newWindow.initModality(Modality.APPLICATION_MODAL);
+//                        newWindow = new Stage(StageStyle.UTILITY);
+//                        newWindow.setTitle("Exec command");
+//                        newWindow.initModality(Modality.APPLICATION_MODAL);
 
 //                        AutoCompletionTextField text = new AutoCompletionTextField();
 
-                        List<Command> commands = new ArrayList<>();
-                        for (CommandList commandList : AppData.instance.get(null).getEnvironment().getCommandLists()) {
-                            //                                commands.add(command.getName() + "(" + command.getAlias() + ")");
-                            commands.addAll(commandList.getCommands());
-                        }
 
-                        ComboBox<Command> text = new ComboBox<>();
-                        text.getItems().addAll(commands);
-//                        text.s
-                        new AutoCompleteBox(text, keyListener);
+                        List<Command> commands = new ArrayList<>();
+                        AppData.instance.getLocations().forEach(locationData -> locationData.getEnvironment().getCommandLists().forEach(cmds -> commands.addAll(cmds.getCommands())));
+//                        for (CommandList commandList : ) {
+//                            //                                commands.add(command.getName() + "(" + command.getAlias() + ")");
+//                            commands.addAll(commandList.getCommands());
+//                        }
+
+//                        ComboBox<Command> text = new ComboBox<>();
+//                        text.getItems().addAll(commands);
+////                        text.s
+//                        new AutoCompleteBox(text, keyListener);
 
 //                        AutoCompleteTextField text = new AutoCompleteTextField(commands);
 ////                        TextField text = new TextField();
-                        text.setPromptText("Type a command");
-                        text.setMinHeight(60);
-                        text.setMinWidth(400);
-                        text.setStyle("-fx-text-box-border: #242424;-fx-border-width: 5px; -fx-focus-color: #242424;");
-//                        text.setFont(new Font(24));
-                        text.requestFocus();
+//                        text.setPromptText("Type a command");
+//                        text.setMinHeight(60);
+//                        text.setMinWidth(400);
+//                        text.setStyle("-fx-text-box-border: #242424;-fx-border-width: 5px; -fx-focus-color: #242424;");
+////                        text.setFont(new Font(24));
+//                        text.requestFocus();
 //                        text.setOnAction((event) -> {
 ////                            int selectedIndex = text.getSelectionModel().getSelectedIndex();
 //                            Command command = text.getSelectionModel().getSelectedItem();
@@ -97,18 +101,24 @@ public class GlobalKeyListener implements ExecCommand {
 //                        });
 
 
-                        StackPane secondaryLayout = new StackPane();
-                        secondaryLayout.getChildren().add(text);
+//                        StackPane secondaryLayout = new StackPane();
+//                        secondaryLayout.getChildren().add(text);
 
-                        Scene secondScene = new Scene(secondaryLayout);
-                        secondScene.getStylesheets().add(getClass().getResource("/com/bgconsole/desktop/styles.css").toExternalForm());
+//                        Scene secondScene = new Scene(secondaryLayout);
+//                        secondScene.getStylesheets().add(getClass().getResource("/com/bgconsole/desktop/styles.css").toExternalForm());
+//
+//                        newWindow.setAlwaysOnTop(true);
+//                        newWindow.setResizable(false);
+//                        newWindow.requestFocus();
+//                        newWindow.setScene(secondScene);
+//                        newWindow.toFront();
+//                        newWindow.show();
 
-                        newWindow.setAlwaysOnTop(true);
-                        newWindow.setResizable(false);
-                        newWindow.requestFocus();
-                        newWindow.setScene(secondScene);
-                        newWindow.toFront();
-                        newWindow.show();
+                        try {
+                            openWindow();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                     });
                 }
@@ -133,6 +143,27 @@ public class GlobalKeyListener implements ExecCommand {
         key.startListening();
         // });
         // thread.start();
+    }
+
+    private void openWindow() throws IOException {
+        newWindow = new Stage(StageStyle.UTILITY);
+        newWindow.setTitle("Exec command");
+        newWindow.initModality(Modality.APPLICATION_MODAL);
+
+        URL resource = getClass().getResource("/com/bgconsole/desktop/global_window.fxml");
+        FXMLLoader loader = new FXMLLoader(resource);
+
+        Parent root = loader.load();
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/com/bgconsole/desktop/styles.css").toExternalForm());
+
+        newWindow.setAlwaysOnTop(true);
+        newWindow.setResizable(false);
+        newWindow.requestFocus();
+        newWindow.setScene(scene);
+        newWindow.toFront();
+        newWindow.show();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.bgconsole.desktop;
 
+import com.bgconsole.desktop.global_input.GlobalKeyListener;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ public class MainWindow extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
         URL resource = getClass().getResource("/com/bgconsole/desktop/main_window.fxml");
         FXMLLoader loader = new FXMLLoader(resource);
 
@@ -37,6 +39,8 @@ public class MainWindow extends Application {
         }
         controller.setStage(stage);
         controller.setLocationList(MainWindowData.instance.getLocations());
+
+        new GlobalKeyListener();
     }
 
     public static void main(String[] args) {
