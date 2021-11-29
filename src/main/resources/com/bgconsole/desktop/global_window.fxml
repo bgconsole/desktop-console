@@ -12,17 +12,13 @@
    <children>
       <BorderPane layoutY="6.0" prefHeight="393.0" prefWidth="600.0">
          <top>
-            <TextField BorderPane.alignment="CENTER" />
+            <TextField fx:id="searchField" BorderPane.alignment="CENTER" />
          </top>
          <right>
             <WebView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </right>
          <center>
-            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
-              </columns>
+            <TableView fx:id="commandTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             </TableView>
          </center>
       </BorderPane>

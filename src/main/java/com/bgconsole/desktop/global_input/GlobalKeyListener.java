@@ -73,8 +73,6 @@ public class GlobalKeyListener implements ExecCommand {
 //                        AutoCompletionTextField text = new AutoCompletionTextField();
 
 
-                        List<Command> commands = new ArrayList<>();
-                        AppData.instance.getLocations().forEach(locationData -> locationData.getEnvironment().getCommandLists().forEach(cmds -> commands.addAll(cmds.getCommands())));
 //                        for (CommandList commandList : ) {
 //                            //                                commands.add(command.getName() + "(" + command.getAlias() + ")");
 //                            commands.addAll(commandList.getCommands());

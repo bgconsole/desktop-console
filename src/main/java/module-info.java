@@ -6,6 +6,7 @@ module terminal {
     requires com.fasterxml.jackson.annotation;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.dataformat.yaml;
+    requires org.apache.commons.lang3;
 //    requires com.fasterxml.jackson.;
 //    requires jnativehook;
     requires java.logging;
@@ -15,7 +16,7 @@ module terminal {
     opens com.bgconsole.desktop to javafx.fxml;
     opens com.bgconsole.desktop.ui.vareditor to javafx.fxml;
     opens com.bgconsole.desktop.ui.commandeditor to javafx.fxml;
-    opens com.bgconsole.desktop.ui.global_window to javafx.fxml;
+    opens com.bgconsole.desktop.ui.global_window to javafx.fxml, javafx.base;
     opens com.bgconsole.desktop.workspace to com.fasterxml.jackson.databind;
     exports com.bgconsole.desktop;
     exports com.bgconsole.desktop.variable;
