@@ -90,4 +90,8 @@ public class LocationData {
     public Environment getEnvironment() {
         return environment;
     }
+
+    public String getWorkspaceName() {
+        return location.getName();
+    }
 }

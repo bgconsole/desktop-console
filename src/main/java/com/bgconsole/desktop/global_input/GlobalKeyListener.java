@@ -2,12 +2,11 @@ package com.bgconsole.desktop.global_input;
 
 import com.bgconsole.desktop.AppData;
 import com.bgconsole.desktop.command.Command;
+import com.bgconsole.desktop.ui.global_window.GlobalWindowController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -19,8 +18,6 @@ import org.simplenativehooks.utilities.Function;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class GlobalKeyListener implements ExecCommand {
@@ -152,6 +149,9 @@ public class GlobalKeyListener implements ExecCommand {
         FXMLLoader loader = new FXMLLoader(resource);
 
         Parent root = loader.load();
+
+        GlobalWindowController controller = loader.getController();
+        controller.setStage(newWindow);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/com/bgconsole/desktop/styles.css").toExternalForm());

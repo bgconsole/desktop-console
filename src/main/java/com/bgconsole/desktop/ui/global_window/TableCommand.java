@@ -1,38 +1,35 @@
 package com.bgconsole.desktop.ui.global_window;
 
+import com.bgconsole.desktop.LocationData;
+import com.bgconsole.desktop.command.Command;
+
 public class TableCommand {
 
-    private String command;
-    private String workspace;
-    private String alias;
+    private Command command;
+    private LocationData locationData;
 
-    public TableCommand(String command, String workspace, String alias) {
+    public TableCommand(Command command, LocationData locationData) {
         this.command = command;
-        this.workspace = workspace;
-        this.alias = alias;
+        this.locationData = locationData;
+    }
+
+    public String getName() {
+        return command.getName();
     }
 
     public String getCommand() {
-        return command;
-    }
-
-    public void setCommand(String command) {
-        this.command = command;
+        return command.getCommand();
     }
 
     public String getWorkspace() {
-        return workspace;
-    }
-
-    public void setWorkspace(String workspace) {
-        this.workspace = workspace;
+        return locationData.getWorkspaceName();
     }
 
     public String getAlias() {
-        return alias;
+        return command.getAlias();
     }
 
-    public void setAlias(String alias) {
-        this.alias = alias;
+    public LocationData getLocationData() {
+        return locationData;
     }
 }
