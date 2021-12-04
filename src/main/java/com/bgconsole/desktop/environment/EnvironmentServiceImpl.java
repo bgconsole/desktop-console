@@ -44,7 +44,7 @@ public class EnvironmentServiceImpl implements EnvironmentService {
     private List<CommandList> loadCommands(Environment environment,Workspace workspace) {
         List<CommandList> commands = new ArrayList<>();
         for (WorkspaceCommand command : workspace.getCommands()) {
-            CommandList commandList = commandService.loadCommands(command.getPath());
+            CommandList commandList = commandService.loadCommands(command.getName(), command.getPath());
             commandList.setNewList(commandService.replaceAllVars(environment.getVariableLists(), commandList.getCommands()));
             commands.add(commandList);
         }

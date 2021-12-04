@@ -31,7 +31,7 @@ public class CommandEditorController {
                 CommandEditorTabController controller = loader.getController();
                 controller.setCommandList(commandList);
 
-                Tab tab = new Tab("Commands", root);
+                Tab tab = new Tab(commandList.getName(), root);
 
 
                 commandTab.getTabs().add(tab);

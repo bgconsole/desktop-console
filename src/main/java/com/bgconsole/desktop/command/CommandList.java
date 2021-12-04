@@ -7,9 +7,12 @@ public class CommandList {
 
     private String absolutePath;
 
+    private String name;
+
     private List<Command> commands;
 
-    public CommandList(String absolutePath) {
+    public CommandList(String name, String absolutePath) {
+        this.name = name;
         this.absolutePath = absolutePath;
         commands = new ArrayList<>();
     }
@@ -24,5 +27,9 @@ public class CommandList {
 
     public String getAbsolutePath() {
         return absolutePath;
+    }
+
+    public String getName() {
+        return name;
     }
 }

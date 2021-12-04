@@ -1,10 +1,12 @@
 package com.bgconsole.desktop.ui.vareditor;
 
+import com.bgconsole.desktop.MainWindow;
 import com.bgconsole.desktop.ui.SimpleTrigger;
 import com.bgconsole.desktop.variable.VariableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -12,6 +14,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 
 public class VarEditorWindow {
 
@@ -34,6 +37,7 @@ public class VarEditorWindow {
             stage.setOnCloseRequest(event -> trigger.trigger());
 
             stage.setTitle("Variable Editor");
+            stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("/com/bgconsole/desktop/img/logo.png"))));
             stage.setScene(scene);
             stage.show();
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -13,6 +13,17 @@
                 <TabPane fx:id="commandTab" tabClosingPolicy="UNAVAILABLE"
                          BorderPane.alignment="CENTER"/>
             </center>
+            <top>
+                <ButtonBar prefHeight="40.0" prefWidth="200.0">
+                    <buttons>
+                        <Button mnemonicParsing="false" text="Add" ButtonBar.buttonData="LEFT"/>
+                        <Button mnemonicParsing="false" text="Update" ButtonBar.buttonData="LEFT"/>
+                        <Button mnemonicParsing="false" text="Delete" ButtonBar.buttonData="LEFT"/>
+                        <Button mnemonicParsing="false" text="Move left" ButtonBar.buttonData="LEFT"/>
+                        <Button mnemonicParsing="false" text="Move right" ButtonBar.buttonData="LEFT"/>
+                    </buttons>
+                </ButtonBar>
+            </top>
         </BorderPane>
     </children>
 </AnchorPane>

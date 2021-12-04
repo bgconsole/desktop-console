@@ -123,7 +123,7 @@ public class FXMLController implements CommandRunner {
 
     @FXML
     public void editCommands(ActionEvent event) {
-        List<CommandList> commands = appData.get(location.getId()).getEnvironment().getCommandLists().stream().map(command -> commandService.loadCommands(command.getAbsolutePath())).collect(Collectors.toList());
+        List<CommandList> commands = appData.get(location.getId()).getEnvironment().getCommandLists().stream().map(command -> commandService.loadCommands(command.getName(), command.getAbsolutePath())).collect(Collectors.toList());
         new CommandEditorWindow(commands, this::reloadConfig);
     }
 

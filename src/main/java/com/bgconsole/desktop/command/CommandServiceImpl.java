@@ -15,8 +15,8 @@ public class CommandServiceImpl implements CommandService {
     private static final String LINE_RETURN = System.getProperty("line.separator");
 
     @Override
-    public CommandList loadCommands(String path) {
-        CommandList commands = new CommandList(path);
+    public CommandList loadCommands(String name, String path) {
+        CommandList commands = new CommandList(name, path);
         try {
             commands.setNewList(ParseYAMLFile.readCommands(path));
         } catch (IOException e) {

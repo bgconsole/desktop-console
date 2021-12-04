@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface CommandService {
 
-    CommandList loadCommands(String path);
+    CommandList loadCommands(String name, String path);
 
     void sendCommand(TerminalTab terminalTab, String command, VariableResolver resolver);
 

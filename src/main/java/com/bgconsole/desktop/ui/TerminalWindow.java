@@ -2,16 +2,19 @@ package com.bgconsole.desktop.ui;
 
 import com.bgconsole.desktop.AppData;
 import com.bgconsole.desktop.FXMLController;
+import com.bgconsole.desktop.MainWindow;
 import com.bgconsole.desktop.location.Location;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 
 public class TerminalWindow {
@@ -35,6 +38,7 @@ public class TerminalWindow {
         scene.getStylesheets().add(getClass().getResource("/com/bgconsole/desktop/styles.css").toExternalForm());
 
         stage.setTitle(location.getName() + " | BG Console");
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("/com/bgconsole/desktop/img/logo.png"))));
         stage.setScene(scene);
         stage.show();
 

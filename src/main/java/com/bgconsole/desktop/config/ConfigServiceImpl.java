@@ -23,13 +23,13 @@ public class ConfigServiceImpl implements ConfigService {
     public Environment loadConfig(Environment environment, Config config) {
         VariableList variables = variableService.loadVariables(config);
         environment.getVariableLists().add(variables);
-        for (Variable variable : variableService.findVars(environment, "COMMAND_FILE")) {
-            String commandFile = variable.getValue();
-            if (commandFile != null && !commandFile.isBlank()) {
-                CommandList commands = commandService.loadCommands(commandFile);
-                environment.getCommandLists().add(commands);
-            }
-        }
+//        for (Variable variable : variableService.findVars(environment, "COMMAND_FILE")) {
+//            String commandFile = variable.getValue();
+//            if (commandFile != null && !commandFile.isBlank()) {
+//                CommandList commands = commandService.loadCommands(commandFile);
+//                environment.getCommandLists().add(commands);
+//            }
+//        }
         for (VariableList variableList : environment.getVariableLists()) {
             for (CommandList commandList : environment.getCommandLists()) {
                 commandList.setNewList(commandService.replaceVars(variableList.getVariables(), commandList.getCommands()));

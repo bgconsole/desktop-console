@@ -6,9 +6,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.Objects;
 
 public class MainWindow extends Application {
 
@@ -26,6 +28,7 @@ public class MainWindow extends Application {
         scene.getStylesheets().add(getClass().getResource("/com/bgconsole/desktop/styles.css").toExternalForm());
 
         stage.setTitle("BG Console");
+        stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("/com/bgconsole/desktop/img/logo.png"))));
         stage.setScene(scene);
         stage.show();
 
