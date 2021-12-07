@@ -1,5 +1,7 @@
-package com.bgconsole.desktop;
+package com.bgconsole.desktop.ui.new_location;
 
+import com.bgconsole.desktop.AppData;
+import com.bgconsole.desktop.MainWindowController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,6 +38,7 @@ public class NewLocation {
             stage.show();
 
             controller.setStage(stage);
+            controller.setWorkspaceService(AppData.instance.getWorkspaceService());
         } catch (IOException e) {
             e.printStackTrace();
         }

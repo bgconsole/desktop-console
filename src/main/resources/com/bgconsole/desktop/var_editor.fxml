@@ -25,7 +25,7 @@
             <top>
             <HBox>
                <children>
-                        <Button mnemonicParsing="false" text="Add" />
+                        <Button mnemonicParsing="false" text="Add" onAction="#add"/>
                         <Button mnemonicParsing="false" text="Update" />
                         <Button mnemonicParsing="false" text="Delete" />
                         <Button mnemonicParsing="false" text="Move left" />

@@ -2,7 +2,10 @@ package com.bgconsole.desktop.ui.commandeditor;
 
 import com.bgconsole.desktop.MainWindow;
 import com.bgconsole.desktop.command.CommandList;
+import com.bgconsole.desktop.location.Location;
 import com.bgconsole.desktop.ui.SimpleTrigger;
+import com.bgconsole.desktop.workspace.Workspace;
+import com.bgconsole.desktop.workspace.WorkspaceService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,7 +21,7 @@ import java.util.Objects;
 
 public class CommandEditorWindow {
 
-    public CommandEditorWindow(List<CommandList> lists, SimpleTrigger trigger) {
+    public CommandEditorWindow(WorkspaceService workspaceService,Location location, Workspace workspace, List<CommandList> lists, SimpleTrigger trigger) {
         try {
             URL resource = getClass().getResource("/com/bgconsole/desktop/command_editor.fxml");
             FXMLLoader loader = new FXMLLoader(resource);
@@ -27,6 +30,9 @@ public class CommandEditorWindow {
 
             CommandEditorController controller = loader.getController();
             controller.setCommandLists(lists);
+            controller.setWorkspaceService(workspaceService);
+            controller.setLocation(location);
+            controller.setWorkspace(workspace);
 
             Stage stage = new Stage(StageStyle.UTILITY);
             stage.initModality(Modality.WINDOW_MODAL);

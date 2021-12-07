@@ -1,6 +1,8 @@
 package com.bgconsole.desktop;
 
 import com.bgconsole.desktop.location.Location;
+import com.bgconsole.desktop.workspace.WorkspaceService;
+import com.bgconsole.desktop.workspace.WorkspaceServiceImpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,10 +13,13 @@ public class AppData {
 
     public static final AppData instance = new AppData();
 
+    private final WorkspaceService workspaceService;
+
     private Map<String, LocationData> locationList;
 
     private AppData() {
         locationList = new HashMap<>();
+        workspaceService = new WorkspaceServiceImpl();
     }
 
     public LocationData get(String id) {
@@ -24,7 +29,7 @@ public class AppData {
     public void setLocationList(List<Location> locations) {
         locationList.clear();
         locations.forEach(location -> {
-            locationList.put(location.getId(), new LocationData(location));
+            locationList.put(location.getId(), new LocationData(location, workspaceService));
         });
     }
 
@@ -32,4 +37,7 @@ public class AppData {
         return new ArrayList<>(locationList.values());
     }
 
+    public WorkspaceService getWorkspaceService() {
+        return workspaceService;
+    }
 }

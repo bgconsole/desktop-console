@@ -13,12 +13,14 @@ import com.bgconsole.desktop.terminal.TerminalServiceImpl;
 import com.bgconsole.desktop.variable.VariableService;
 import com.bgconsole.desktop.variable.VariableServiceImpl;
 import com.bgconsole.desktop.workspace.WorkspaceService;
-import com.bgconsole.desktop.workspace.WorkspaceServiceImpl;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 public class LocationData {
+
+    public static final Path DEFAULT_LOCATION = Paths.get(System.getProperty("user.home"), ".cloud.dest.terminal", "locations.yaml");
 
     private final Location location;
 
@@ -38,12 +40,12 @@ public class LocationData {
 
     private CommandRunner commandRunner;
 
-    public LocationData(Location location) {
+    public LocationData(Location location, WorkspaceService workspaceService) {
         this.location = location;
+        this.workspaceService = workspaceService;
         commandService = new CommandServiceImpl();
         variableService = new VariableServiceImpl();
         terminalService = new TerminalServiceImpl(variableService, commandService);
-        workspaceService = new WorkspaceServiceImpl();
         environmentService = new EnvironmentServiceImpl(variableService, workspaceService, commandService);
         configService = new ConfigServiceImpl(variableService, commandService);
         environment = environmentService.initEnv(location.getId(), Paths.get(location.getPath(), "workspace.yaml"));
@@ -93,5 +95,9 @@ public class LocationData {
 
     public String getWorkspaceName() {
         return location.getName();
+    }
+
+    public WorkspaceService getWorkspaceService() {
+        return workspaceService;
     }
 }

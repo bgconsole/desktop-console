@@ -78,4 +78,8 @@ public class Environment {
     public void setCommandLists(List<CommandList> commandLists) {
         this.commandLists = commandLists;
     }
+
+    public Workspace getWorkspace() {
+        return workspace;
+    }
 }

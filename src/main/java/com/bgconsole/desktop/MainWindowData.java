@@ -6,14 +6,12 @@ import com.bgconsole.desktop.utils.WriteYAMLFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainWindowData {
+import static com.bgconsole.desktop.LocationData.DEFAULT_LOCATION;
 
-    public static final Path DEFAULT_LOCATION = Paths.get(System.getProperty("user.home"), ".cloud.dest.terminal", "locations.yaml");
+public class MainWindowData {
 
     public static final MainWindowData instance = new MainWindowData();
 

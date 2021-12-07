@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1"
@@ -14,15 +14,18 @@
                          BorderPane.alignment="CENTER"/>
             </center>
             <top>
-                <ButtonBar prefHeight="40.0" prefWidth="200.0">
-                    <buttons>
-                        <Button mnemonicParsing="false" text="Add" ButtonBar.buttonData="LEFT"/>
-                        <Button mnemonicParsing="false" text="Update" ButtonBar.buttonData="LEFT"/>
-                        <Button mnemonicParsing="false" text="Delete" ButtonBar.buttonData="LEFT"/>
-                        <Button mnemonicParsing="false" text="Move left" ButtonBar.buttonData="LEFT"/>
-                        <Button mnemonicParsing="false" text="Move right" ButtonBar.buttonData="LEFT"/>
-                    </buttons>
-                </ButtonBar>
+                <HBox>
+                    <children>
+                        <Button mnemonicParsing="false" text="Add" onAction="#add"/>
+                        <Button mnemonicParsing="false" text="Update" onAction="#modify"/>
+                        <Button mnemonicParsing="false" text="Delete"/>
+                        <Button mnemonicParsing="false" text="Move left"/>
+                        <Button mnemonicParsing="false" text="Move right"/>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </HBox>
             </top>
         </BorderPane>
     </children>

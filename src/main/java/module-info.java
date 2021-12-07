@@ -26,5 +26,8 @@ module terminal {
     exports com.bgconsole.desktop.environment;
     exports com.bgconsole.desktop.global_input;
     exports com.bgconsole.desktop.location;
+    exports com.bgconsole.desktop.workspace;
     opens com.bgconsole.desktop.global_input to javafx.fxml;
+    exports com.bgconsole.desktop.ui.new_location;
+    opens com.bgconsole.desktop.ui.new_location to javafx.fxml;
 }

@@ -2,6 +2,7 @@ package com.bgconsole.desktop;
 
 import com.bgconsole.desktop.location.Location;
 import com.bgconsole.desktop.ui.TerminalWindow;
+import com.bgconsole.desktop.ui.new_location.NewLocation;
 import com.bgconsole.desktop.utils.ParseYAMLFile;
 import com.bgconsole.desktop.utils.WriteYAMLFile;
 import com.bgconsole.desktop.workspace.Workspace;
@@ -20,6 +21,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
+import static com.bgconsole.desktop.LocationData.DEFAULT_LOCATION;
 
 public class MainWindowController {
 
@@ -63,7 +66,7 @@ public class MainWindowController {
                     List<Location> locations = new ArrayList<>(MainWindowData.instance.getLocations());
                     locations.add(newLocation);
 
-                    WriteYAMLFile.writeLocations(locations, MainWindowData.DEFAULT_LOCATION.toString());
+                    WriteYAMLFile.writeLocations(locations, DEFAULT_LOCATION.toString());
 
                     MainWindowData.instance.reloadLocations();
                     setLocationList(MainWindowData.instance.getLocations());

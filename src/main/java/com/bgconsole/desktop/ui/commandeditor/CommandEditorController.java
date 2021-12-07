@@ -1,11 +1,17 @@
 package com.bgconsole.desktop.ui.commandeditor;
 
 import com.bgconsole.desktop.command.CommandList;
+import com.bgconsole.desktop.location.Location;
+import com.bgconsole.desktop.workspace.Workspace;
+import com.bgconsole.desktop.workspace.WorkspaceService;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,7 +24,62 @@ public class CommandEditorController {
 
     private List<CommandList> commandLists;
 
+    private WorkspaceService workspaceService;
+
+    private Location location;
+
+    private Workspace workspace;
+
     public void initialize() {
+    }
+
+    @FXML
+    public void add() {
+        Dialog<Result> dialog = new Dialog<>();
+        dialog.setTitle("New command list");
+        dialog.setHeaderText("Please specify…");
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+        TextField textField = new TextField("Name");
+        ObservableList<String> options =
+                FXCollections.observableArrayList("In workspace", "Locally");
+        ComboBox<String> comboBox = new ComboBox<>(options);
+        comboBox.getSelectionModel().selectFirst();
+        dialogPane.setContent(new VBox(8, textField, comboBox));
+        Platform.runLater(textField::requestFocus);
+        dialog.setResultConverter((ButtonType button) -> {
+            if (button == ButtonType.OK) {
+                return new Result(textField.getText(),
+                        comboBox.getValue().equals("Locally"));
+            }
+            return null;
+        });
+        dialog.showAndWait().ifPresent(result -> {
+            if (result.createLocally) {
+                workspaceService.createCommandListLocally(location, result.name);
+            } else {
+                workspaceService.createCommandList(location, result.name);
+            }
+        });
+    }
+
+    @FXML
+    public void modify() {
+        CommandList currentCommand = commandLists.get(commandTab.getSelectionModel().getSelectedIndex());
+        TextInputDialog inputDialog = new TextInputDialog("Change command list name");
+        inputDialog.setContentText("Name: ");
+        inputDialog.setHeaderText("Set the new name of the command list");
+        inputDialog.getEditor().setText(currentCommand.getName());
+        inputDialog.showAndWait().ifPresent(newName -> {
+            if (!newName.equals(currentCommand.getName())) {
+
+            }
+        });
+    }
+
+    @FXML
+    public void delete() {
+
     }
 
     public void setCommandLists(List<CommandList> commandLists) {
@@ -33,11 +94,32 @@ public class CommandEditorController {
 
                 Tab tab = new Tab(commandList.getName(), root);
 
-
                 commandTab.getTabs().add(tab);
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void setWorkspaceService(WorkspaceService workspaceService) {
+        this.workspaceService = workspaceService;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setWorkspace(Workspace workspace) {
+        this.workspace = workspace;
+    }
+
+    private static class Result {
+        String name;
+        boolean createLocally;
+
+        public Result(String name, boolean createLocally) {
+            this.name = name;
+            this.createLocally = createLocally;
         }
     }
 }
