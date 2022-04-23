@@ -1,9 +1,9 @@
 package com.bgconsole.desktop.environment;
 
-import java.nio.file.Path;
+import com.bgconsole.desktop.project.Project;
 
 public interface EnvironmentService {
 
-    Environment initEnv(String id, Path dir);
+    Environment initEnv(Project project);
 
 }

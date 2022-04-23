@@ -1,6 +1,9 @@
 package com.bgconsole.desktop;
 
-import com.bgconsole.desktop.location.Location;
+import com.bgconsole.desktop.profile.Profile;
+import com.bgconsole.desktop.project.Project;
+import com.bgconsole.desktop.project.ProjectService;
+import com.bgconsole.desktop.project.ProjectServiceImpl;
 import com.bgconsole.desktop.workspace.WorkspaceService;
 import com.bgconsole.desktop.workspace.WorkspaceServiceImpl;
 
@@ -15,29 +18,44 @@ public class AppData {
 
     private final WorkspaceService workspaceService;
 
-    private Map<String, LocationData> locationList;
+    private final ProjectService projectService;
+
+    private final Map<String, ProjectData> projectList;
+
+    private List<Profile> profiles;
 
     private AppData() {
-        locationList = new HashMap<>();
+        projectList = new HashMap<>();
         workspaceService = new WorkspaceServiceImpl();
+        projectService = new ProjectServiceImpl();
+        profiles = new ArrayList<>();
     }
 
-    public LocationData get(String id) {
-        return locationList.get(id);
+    public ProjectData get(String id) {
+        return projectList.get(id);
     }
 
-    public void setLocationList(List<Location> locations) {
-        locationList.clear();
-        locations.forEach(location -> {
-            locationList.put(location.getId(), new LocationData(location, workspaceService));
-        });
+    public void setProfiles(List<Profile> profiles) {
+        this.profiles = profiles;
     }
 
-    public List<LocationData> getLocations() {
-        return new ArrayList<>(locationList.values());
+    public List<Profile> getProfiles() {
+        return profiles;
+    }
+
+    public void addProject(Project project) {
+        projectList.put(project.getId(), new ProjectData(project));
+    }
+
+    public List<ProjectData> getProjects() {
+        return new ArrayList<>(projectList.values());
     }
 
     public WorkspaceService getWorkspaceService() {
         return workspaceService;
+    }
+
+    public ProjectService getProjectService() {
+        return projectService;
     }
 }

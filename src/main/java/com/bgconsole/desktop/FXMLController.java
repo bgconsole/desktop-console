@@ -4,7 +4,7 @@ import com.bgconsole.desktop.command.Command;
 import com.bgconsole.desktop.command.CommandList;
 import com.bgconsole.desktop.command.CommandService;
 import com.bgconsole.desktop.config.ConfigService;
-import com.bgconsole.desktop.location.Location;
+import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.terminal.OpenerCallBack;
 import com.bgconsole.desktop.terminal.Terminal;
 import com.bgconsole.desktop.terminal.TerminalService;
@@ -14,7 +14,6 @@ import com.bgconsole.desktop.ui.vareditor.VarEditorWindow;
 import com.bgconsole.desktop.variable.Variable;
 import com.bgconsole.desktop.variable.VariableList;
 import com.bgconsole.desktop.variable.VariableService;
-import com.bgconsole.desktop.workspace.Workspace;
 import com.kodedu.terminalfx.TerminalTab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,8 +57,7 @@ public class FXMLController implements CommandRunner {
     private List<Config> configs;
     private List<Command> commandCache;
 
-    private Location location;
-    private Workspace workspace;
+    private Project project;
 
     private TerminalWindow terminalWindow;
 
@@ -67,16 +65,15 @@ public class FXMLController implements CommandRunner {
         appData = AppData.instance;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-        commandService = appData.get(location.getId()).getCommandService();
-        terminalService = appData.get(location.getId()).getTerminalService();
-        variableService = appData.get(location.getId()).getVariableService();
-        configService = appData.get(location.getId()).getConfigService();
+    public void setProject(Project project) {
+        this.project = project;
+        commandService = appData.get(project.getId()).getCommandService();
+        terminalService = appData.get(project.getId()).getTerminalService();
+        variableService = appData.get(project.getId()).getVariableService();
+        configService = appData.get(project.getId()).getConfigService();
         commandCache = new ArrayList<>();
-        appData.get(location.getId()).setCommandRunner(this);
-        configs = loadConfigs(new ArrayList<>(), appData.get(location.getId()).getEnvironment().getDir());
-        workspace = appData.get(location.getId()).getEnvironment().getWorkspace();
+        appData.get(project.getId()).setCommandRunner(this);
+        configs = loadConfigs(new ArrayList<>(), appData.get(project.getId()).getEnvironment().getDir());
 //        buildConfigMenu(configs, configMenu);
     }
 
@@ -119,18 +116,18 @@ public class FXMLController implements CommandRunner {
 
     @FXML
     public void editVars(ActionEvent event) {
-        List<VariableList> variables = appData.get(location.getId()).getEnvironment().getVariableLists().stream().filter(var -> !var.getConfig().getConfig().equals("SYS_VAR")).map(variable -> variableService.loadVariables(variable.getConfig())).collect(Collectors.toList());
+        List<VariableList> variables = appData.get(project.getId()).getEnvironment().getVariableLists().stream().filter(var -> !var.getConfig().getConfig().equals("SYS_VAR")).map(variable -> variableService.loadVariables(variable.getConfig())).collect(Collectors.toList());
         new VarEditorWindow(variables, this::reloadConfig);
     }
 
     @FXML
     public void editCommands(ActionEvent event) {
-        List<CommandList> commands = appData.get(location.getId()).getEnvironment().getCommandLists().stream().map(command -> commandService.loadCommands(command.getName(), command.getAbsolutePath())).collect(Collectors.toList());
-        new CommandEditorWindow(appData.getWorkspaceService(), location, workspace, commands, this::reloadConfig);
+        List<CommandList> commands = appData.get(project.getId()).getEnvironment().getCommandLists().stream().map(command -> commandService.loadCommands(command.getName(), command.getAbsolutePath())).collect(Collectors.toList());
+        new CommandEditorWindow(appData.getWorkspaceService(), project, commands, this::reloadConfig);
     }
 
     public void runCommand(String command) {
-        Optional<Command> alias = commandService.findAlias(appData.get(location.getId()).getEnvironment(), command);
+        Optional<Command> alias = commandService.findAlias(appData.get(project.getId()).getEnvironment(), command);
         if (alias.isPresent()) {
             execCommandInRightTerminal(tabPane, alias.get());
             commandField.setText("");
@@ -148,7 +145,7 @@ public class FXMLController implements CommandRunner {
     }
 
     private void openTerminal(String id, String name, OpenerCallBack callBack) {
-        terminalService.openTerminal(appData.get(location.getId()).getEnvironment(), id, name, (terminal, isNew) -> {
+        terminalService.openTerminal(appData.get(project.getId()).getEnvironment(), id, name, (terminal, isNew) -> {
             addClosingEvent(terminal);
             callBack.openerCallBack(terminal, isNew);
         }, this::resolveVariable);
@@ -161,7 +158,7 @@ public class FXMLController implements CommandRunner {
             if (config.getType().equals("file")) {
                 item = new MenuItem(config.getConfig());
                 item.setOnAction(t -> {
-                    configService.loadConfig(appData.get(location.getId()).getEnvironment(), config);
+                    configService.loadConfig(appData.get(project.getId()).getEnvironment(), config);
                     //loadConfig();
                 });
                 menu.getItems().add(item);
@@ -174,7 +171,7 @@ public class FXMLController implements CommandRunner {
     }
 
     private void execCommandInRightTerminal(TabPane tabPane, Command command) {
-        Optional<Variable> optTitle = variableService.findVar(appData.get(location.getId()).getEnvironment(), "TITLE:" + command.getConsoleId());
+        Optional<Variable> optTitle = variableService.findVar(appData.get(project.getId()).getEnvironment(), "TITLE:" + command.getConsoleId());
         String title = command.getConsoleId();
         if (optTitle.isPresent() && optTitle.get().getValue() != null && !optTitle.get().getValue().isBlank()) {
             title = optTitle.get().getValue();
@@ -194,7 +191,7 @@ public class FXMLController implements CommandRunner {
 
     private void addClosingEvent(Terminal terminal) {
         terminal.getTerminalTab().setOnCloseRequest(event1 -> {
-            terminalService.closeTerminal(appData.get(location.getId()).getEnvironment(), terminal);
+            terminalService.closeTerminal(appData.get(project.getId()).getEnvironment(), terminal);
         });
     }
 
@@ -255,11 +252,11 @@ public class FXMLController implements CommandRunner {
     }
 
     private void reloadConfig() {
-        appData.get(location.getId()).reloadEnv();
-        configs = loadConfigs(new ArrayList<>(), appData.get(location.getId()).getEnvironment().getDir());
+        appData.get(project.getId()).reloadEnv();
+        configs = loadConfigs(new ArrayList<>(), appData.get(project.getId()).getEnvironment().getDir());
 //        configMenu.getItems().clear();
 //        buildConfigMenu(configs, configMenu);
-        loadConfig(appData.get(location.getId()).getEnvironment().getCommandLists());
+        loadConfig(appData.get(project.getId()).getEnvironment().getCommandLists());
     }
 
     @Override

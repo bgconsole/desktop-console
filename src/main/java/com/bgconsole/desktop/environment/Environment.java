@@ -2,29 +2,25 @@ package com.bgconsole.desktop.environment;
 
 import com.bgconsole.desktop.Config;
 import com.bgconsole.desktop.command.CommandList;
+import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.terminal.TerminalList;
 import com.bgconsole.desktop.variable.VariableList;
-import com.bgconsole.desktop.workspace.Workspace;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Environment {
 
-    private String id;
-    private Path dir;
-
-    private Workspace workspace;
+    private Project project;
     private TerminalList terminalList;
     private List<Config> configs;
     private List<VariableList> variableLists;
     private List<CommandList> commandLists;
 
-    public Environment(String id, Path dir, Workspace workspace) {
-        this.id = id;
-        this.dir = dir;
-        this.workspace = workspace;
+    public Environment(Project project) {
+        this.project = project;
         this.terminalList = new TerminalList();
         configs = new ArrayList<>();
         variableLists = new ArrayList<>();
@@ -32,19 +28,11 @@ public class Environment {
     }
 
     public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        return project.getId();
     }
 
     public Path getDir() {
-        return dir;
-    }
-
-    public void setDir(Path dir) {
-        this.dir = dir;
+        return Paths.get(project.getPath());
     }
 
     public TerminalList getTerminalList() {
@@ -79,7 +67,7 @@ public class Environment {
         this.commandLists = commandLists;
     }
 
-    public Workspace getWorkspace() {
-        return workspace;
+    public Project getProject() {
+        return project;
     }
 }

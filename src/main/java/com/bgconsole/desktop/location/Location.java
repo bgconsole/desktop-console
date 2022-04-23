@@ -9,6 +9,11 @@ public class Location {
     public Location() {
     }
 
+    public Location(String name, String path) {
+        this.name = name;
+        this.path = path;
+    }
+
     public Location(String id, String name, String path) {
         this.id = id;
         this.name = name;

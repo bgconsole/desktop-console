@@ -3,14 +3,14 @@ package com.bgconsole.desktop.environment;
 import com.bgconsole.desktop.Config;
 import com.bgconsole.desktop.command.CommandList;
 import com.bgconsole.desktop.command.CommandService;
+import com.bgconsole.desktop.project.Project;
+import com.bgconsole.desktop.project.ProjectCommand;
+import com.bgconsole.desktop.project.ProjectService;
+import com.bgconsole.desktop.project.ProjectVariable;
 import com.bgconsole.desktop.variable.VariableList;
 import com.bgconsole.desktop.variable.VariableService;
-import com.bgconsole.desktop.workspace.Workspace;
-import com.bgconsole.desktop.workspace.WorkspaceCommand;
-import com.bgconsole.desktop.workspace.WorkspaceService;
-import com.bgconsole.desktop.workspace.WorkspaceVariable;
 
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,41 +20,41 @@ public class EnvironmentServiceImpl implements EnvironmentService {
 
     private final CommandService commandService;
 
-    private final WorkspaceService workspaceService;
+    private final ProjectService projectService;
 
-    public EnvironmentServiceImpl(VariableService variableService, WorkspaceService workspaceService, CommandService commandService) {
+    public EnvironmentServiceImpl(VariableService variableService, ProjectService projectService, CommandService commandService) {
         this.variableService = variableService;
-        this.workspaceService = workspaceService;
+        this.projectService = projectService;
         this.commandService = commandService;
     }
 
     @Override
-    public Environment initEnv(String id, Path dir) {
-        Workspace workspace = workspaceService.loadWorkspace(dir.toString());
-
-        Environment environment = new Environment(id, dir, workspace);
+    public Environment initEnv(Project project) {
+        Environment environment = new Environment(project);
         VariableList sysVar = new VariableList(new Config("file", "SYS_VAR", ""));
         sysVar.setNewVariables(variableService.getSystemVariable());
         environment.getVariableLists().add(sysVar);
-        environment.getVariableLists().addAll(loadVariables(workspace));
-        environment.getCommandLists().addAll(loadCommands(environment,workspace));
+        environment.getVariableLists().addAll(loadVariables(project));
+        environment.getCommandLists().addAll(loadCommands(environment, project));
         return environment;
     }
 
-    private List<CommandList> loadCommands(Environment environment,Workspace workspace) {
+    private List<CommandList> loadCommands(Environment environment, Project project) {
         List<CommandList> commands = new ArrayList<>();
-        for (WorkspaceCommand command : workspace.getCommands()) {
-            CommandList commandList = commandService.loadCommands(command.getName(), command.getPath());
+        for (ProjectCommand command : project.getCommands()) {
+            String path = Paths.get(project.getWorkspace().getPath(), "projects", command.getPath()).toString();
+            CommandList commandList = commandService.loadCommands(command.getName(), path);
             commandList.setNewList(commandService.replaceAllVars(environment.getVariableLists(), commandList.getCommands()));
             commands.add(commandList);
         }
         return commands;
     }
 
-    private List<VariableList> loadVariables(Workspace workspace) {
+    private List<VariableList> loadVariables(Project project) {
         List<VariableList> variables = new ArrayList<>();
-        for (WorkspaceVariable variable : workspace.getVariables()) {
-            variables.add(variableService.loadVariables(new Config("file", variable.getId(), variable.getPath())));
+        for (ProjectVariable variable : project.getVariables()) {
+            String path = Paths.get(project.getWorkspace().getPath(), "projects", variable.getPath()).toString();
+            variables.add(variableService.loadVariables(new Config("file", variable.getId(), path)));
         }
         return variables;
     }

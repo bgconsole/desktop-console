@@ -35,7 +35,7 @@ public class GlobalWindowController {
     public void initialize() {
         commands = FXCollections.observableArrayList();
         allCommands = new ArrayList<>();
-        AppData.instance.getLocations().forEach(locationData -> {
+        AppData.instance.getProjects().forEach(locationData -> {
             Environment environment = locationData.getEnvironment();
             environment.getCommandLists().forEach(cmds -> allCommands.addAll(cmds.getCommands().stream().map(command -> new TableCommand(command, locationData)).collect(Collectors.toList())));
         });

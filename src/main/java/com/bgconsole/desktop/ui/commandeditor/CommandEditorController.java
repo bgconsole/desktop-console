@@ -1,8 +1,7 @@
 package com.bgconsole.desktop.ui.commandeditor;
 
 import com.bgconsole.desktop.command.CommandList;
-import com.bgconsole.desktop.location.Location;
-import com.bgconsole.desktop.workspace.Workspace;
+import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.workspace.WorkspaceService;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -26,9 +25,7 @@ public class CommandEditorController {
 
     private WorkspaceService workspaceService;
 
-    private Location location;
-
-    private Workspace workspace;
+    private Project project;
 
     public void initialize() {
     }
@@ -56,9 +53,9 @@ public class CommandEditorController {
         });
         dialog.showAndWait().ifPresent(result -> {
             if (result.createLocally) {
-                workspaceService.createCommandListLocally(location, result.name);
+                workspaceService.createCommandListLocally(project.getWorkspaceLocation(), result.name);
             } else {
-                workspaceService.createCommandList(location, result.name);
+                workspaceService.createCommandList(project.getWorkspaceLocation(), result.name);
             }
         });
     }
@@ -105,12 +102,8 @@ public class CommandEditorController {
         this.workspaceService = workspaceService;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public void setWorkspace(Workspace workspace) {
-        this.workspace = workspace;
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     private static class Result {

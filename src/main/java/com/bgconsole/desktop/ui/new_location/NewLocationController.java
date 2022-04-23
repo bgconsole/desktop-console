@@ -57,7 +57,7 @@ public class NewLocationController {
         workspaceService.createWorkspace(strName, strPath);
 
         MainWindowData.instance.reloadLocations();
-        mainWindowController.setLocationList(MainWindowData.instance.getLocations());
+        mainWindowController.setProfileList(MainWindowData.instance.getProfiles());
         stage.close();
     }
 

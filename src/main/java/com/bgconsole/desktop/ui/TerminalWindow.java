@@ -4,6 +4,7 @@ import com.bgconsole.desktop.AppData;
 import com.bgconsole.desktop.FXMLController;
 import com.bgconsole.desktop.MainWindow;
 import com.bgconsole.desktop.location.Location;
+import com.bgconsole.desktop.project.Project;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,14 +22,14 @@ public class TerminalWindow {
 
     private final Stage stage;
 
-    public TerminalWindow(Location location) throws IOException {
+    public TerminalWindow(Project project) throws IOException {
         URL resource = getClass().getResource("/com/bgconsole/desktop/scene.fxml");
         FXMLLoader loader = new FXMLLoader(resource);
 
         Parent root = loader.load();
 
         FXMLController controller = loader.getController();
-        controller.setLocation(location);
+        controller.setProject(project);
         controller.setTerminalWindow(this);
 
         stage = new Stage(StageStyle.DECORATED);
@@ -37,7 +38,7 @@ public class TerminalWindow {
         stage.setScene(scene);
         scene.getStylesheets().add(getClass().getResource("/com/bgconsole/desktop/styles.css").toExternalForm());
 
-        stage.setTitle(location.getName() + " | BG Console");
+        stage.setTitle(project.getName() + " | BG Console");
         stage.getIcons().add(new Image(Objects.requireNonNull(MainWindow.class.getResourceAsStream("/com/bgconsole/desktop/img/logo.png"))));
         stage.setScene(scene);
         stage.show();
@@ -51,7 +52,7 @@ public class TerminalWindow {
             });
         }
 
-        controller.loadConfig(AppData.instance.get(location.getId()).getEnvironment().getCommandLists());
+        controller.loadConfig(AppData.instance.get(project.getId()).getEnvironment().getCommandLists());
 
 //        try {
 //            Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());

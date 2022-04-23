@@ -41,7 +41,7 @@ public class MainWindow extends Application {
             });
         }
         controller.setStage(stage);
-        controller.setLocationList(MainWindowData.instance.getLocations());
+        controller.setProfileList(MainWindowData.instance.getProfiles());
 
         new GlobalKeyListener();
     }

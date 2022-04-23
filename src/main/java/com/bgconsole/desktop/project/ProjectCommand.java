@@ -1,16 +1,16 @@
-package com.bgconsole.desktop.workspace;
+package com.bgconsole.desktop.project;
 
-public class WorkspaceCommand {
+public class ProjectCommand {
 
     private String id;
     private String name;
     private String namespace;
     private String path;
 
-    public WorkspaceCommand() {
+    public ProjectCommand() {
     }
 
-    public WorkspaceCommand(String id, String name, String namespace, String path) {
+    public ProjectCommand(String id, String name, String namespace, String path) {
         this.id = id;
         this.name = name;
         this.namespace = namespace;

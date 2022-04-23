@@ -27,7 +27,10 @@ module terminal {
     exports com.bgconsole.desktop.global_input;
     exports com.bgconsole.desktop.location;
     exports com.bgconsole.desktop.workspace;
+    exports com.bgconsole.desktop.project;
+    exports com.bgconsole.desktop.profile;
     opens com.bgconsole.desktop.global_input to javafx.fxml;
     exports com.bgconsole.desktop.ui.new_location;
     opens com.bgconsole.desktop.ui.new_location to javafx.fxml;
+    opens com.bgconsole.desktop.project to com.fasterxml.jackson.databind;
 }

@@ -1,17 +1,26 @@
 package com.bgconsole.desktop;
 
 import com.bgconsole.desktop.location.Location;
+import com.bgconsole.desktop.profile.Profile;
+import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.ui.TerminalWindow;
 import com.bgconsole.desktop.ui.new_location.NewLocation;
 import com.bgconsole.desktop.utils.ParseYAMLFile;
 import com.bgconsole.desktop.utils.WriteYAMLFile;
 import com.bgconsole.desktop.workspace.Workspace;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
+import javafx.scene.layout.TilePane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,8 +30,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
-import static com.bgconsole.desktop.LocationData.DEFAULT_LOCATION;
+import static com.bgconsole.desktop.ProjectData.DEFAULT_PROFILE_DIR;
 
 public class MainWindowController {
 
@@ -32,7 +42,17 @@ public class MainWindowController {
     @FXML
     private ListView<String> locationList;
 
+    @FXML
+    private ChoiceBox<Profile> profileSelector;
+
+    @FXML
+    private TilePane projectPane;
+
+    private List<Profile> profiles;
+
     private List<Location> locationCache;
+
+    private Profile selectedProfile;
 
     private Stage stage;
 
@@ -50,7 +70,7 @@ public class MainWindowController {
     }
 
     @FXML
-    public void openLocation(ActionEvent event) {
+    public void openProject(ActionEvent event) {
         final DirectoryChooser directoryChooser =
                 new DirectoryChooser();
         final File selectedDirectory =
@@ -63,13 +83,13 @@ public class MainWindowController {
                     Workspace workspace = ParseYAMLFile.readWorkspace(Paths.get(strPath, "workspace.yaml").toString());
 
                     Location newLocation = new Location(UUID.randomUUID().toString(), workspace.getName(), strPath);
-                    List<Location> locations = new ArrayList<>(MainWindowData.instance.getLocations());
+                    List<Location> locations = new ArrayList<>(selectedProfile.getLocations());
                     locations.add(newLocation);
 
-                    WriteYAMLFile.writeLocations(locations, DEFAULT_LOCATION.toString());
+                    WriteYAMLFile.writeLocations(locations, DEFAULT_PROFILE_DIR.toString());
 
                     MainWindowData.instance.reloadLocations();
-                    setLocationList(MainWindowData.instance.getLocations());
+                    setProfileList(MainWindowData.instance.getProfiles());
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -81,21 +101,68 @@ public class MainWindowController {
         this.stage = stage;
     }
 
-    public void setLocationList(List<Location> locations) {
-        locationCache = new ArrayList<>(locations);
+    public void setProfileList(List<Profile> profiles) {
+        this.profiles = profiles;
+        ObservableList<Profile> profileList = FXCollections.observableArrayList(profiles);
+        profileSelector.setConverter(new StringConverter<Profile>() {
+            @Override
+            public String toString(Profile profile) {
+                return profile.getName();
+            }
+
+            @Override
+            public Profile fromString(String s) {
+                return profiles.stream().filter(profile -> profile.getName().equals(s)).findFirst().orElse(null);
+            }
+        });
+        profileSelector.setItems(profileList);
+    }
+
+    public void changeProfile(ActionEvent event) {
+        setCurrentProfile(profileSelector.getValue());
+    }
+
+    private void setCurrentProfile(Profile profile) {
+        selectedProfile = profile;
+        locationCache = new ArrayList<>(profile.getLocations());
         locationList.getItems().clear();
         locationCache.forEach(location -> {
             locationList.getItems().add(location.getName());
             locationList.setOnMouseClicked(click -> {
-                if (click.getClickCount() == 2) {
-                    Location loc = locationCache.get(locationList.getSelectionModel().getSelectedIndex());
-                    try {
-                        new TerminalWindow(loc);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
+                Location loc = locationCache.get(locationList.getSelectionModel().getSelectedIndex());
+                Workspace workspace = MainWindowData.instance.loadWorkspace(loc);
+                workspace.setPath(loc.getPath());
+                List<Project> projects = MainWindowData.instance.loadProjects(loc.getPath());
+                projects.forEach(project -> project.setWorkspace(workspace));
+                changeProjectInPane(projects);
+//                if (click.getClickCount() == 1) {
+//                    Location loc = locationCache.get(locationList.getSelectionModel().getSelectedIndex());
+//                    try {
+//                        new TerminalWindow(loc);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+
             });
         });
+    }
+
+    private void changeProjectInPane(List<Project> projects) {
+        List<Button> buttons = projects.stream().map(project -> {
+            Button button = new Button();
+            button.setText(project.getName());
+            button.setOnMouseClicked(mouseEvent -> {
+                try {
+                    AppData.instance.addProject(project);
+                    new TerminalWindow(project);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            return button;
+        }).collect(Collectors.toList());
+        ObservableList<Node> children = projectPane.getChildren();
+        children.addAll(buttons);
     }
 }

@@ -1,16 +1,16 @@
 package com.bgconsole.desktop.ui.global_window;
 
-import com.bgconsole.desktop.LocationData;
+import com.bgconsole.desktop.ProjectData;
 import com.bgconsole.desktop.command.Command;
 
 public class TableCommand {
 
     private Command command;
-    private LocationData locationData;
+    private ProjectData projectData;
 
-    public TableCommand(Command command, LocationData locationData) {
+    public TableCommand(Command command, ProjectData projectData) {
         this.command = command;
-        this.locationData = locationData;
+        this.projectData = projectData;
     }
 
     public String getName() {
@@ -22,14 +22,14 @@ public class TableCommand {
     }
 
     public String getWorkspace() {
-        return locationData.getWorkspaceName();
+        return projectData.getWorkspaceName();
     }
 
     public String getAlias() {
         return command.getAlias();
     }
 
-    public LocationData getLocationData() {
-        return locationData;
+    public ProjectData getLocationData() {
+        return projectData;
     }
 }

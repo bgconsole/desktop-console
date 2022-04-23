@@ -1,14 +1,19 @@
 package com.bgconsole.desktop.workspace;
 
-import java.util.List;
-
 public class Workspace {
 
     private String id;
     private String name;
+    private String path;
 
-    private List<WorkspaceCommand> commands;
-    private List<WorkspaceVariable> variables;
+    public Workspace() {
+    }
+
+    public Workspace(String id, String name, String path) {
+        this.id = id;
+        this.name = name;
+        this.path = path;
+    }
 
     public String getId() {
         return id;
@@ -26,19 +31,11 @@ public class Workspace {
         this.name = name;
     }
 
-    public List<WorkspaceCommand> getCommands() {
-        return commands;
+    public String getPath() {
+        return path;
     }
 
-    public void setCommands(List<WorkspaceCommand> commands) {
-        this.commands = commands;
-    }
-
-    public List<WorkspaceVariable> getVariables() {
-        return variables;
-    }
-
-    public void setVariables(List<WorkspaceVariable> variables) {
-        this.variables = variables;
+    public void setPath(String path) {
+        this.path = path;
     }
 }
