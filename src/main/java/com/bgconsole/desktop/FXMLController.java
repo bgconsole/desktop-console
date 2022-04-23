@@ -8,8 +8,9 @@ import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.terminal.OpenerCallBack;
 import com.bgconsole.desktop.terminal.Terminal;
 import com.bgconsole.desktop.terminal.TerminalService;
-import com.bgconsole.desktop.ui.TerminalWindow;
+import com.bgconsole.desktop.ui.ProjectWindow;
 import com.bgconsole.desktop.ui.commandeditor.CommandEditorWindow;
+import com.bgconsole.desktop.ui.terminal_window.TerminalWindow;
 import com.bgconsole.desktop.ui.vareditor.VarEditorWindow;
 import com.bgconsole.desktop.variable.Variable;
 import com.bgconsole.desktop.variable.VariableList;
@@ -18,8 +19,6 @@ import com.kodedu.terminalfx.TerminalTab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 
 import java.io.File;
@@ -36,9 +35,6 @@ public class FXMLController implements CommandRunner {
 
     @FXML
     private ListView<String> commandList;
-
-    @FXML
-    private TextField commandField;
 
 //    @FXML
 //    private Menu configMenu;
@@ -59,10 +55,13 @@ public class FXMLController implements CommandRunner {
 
     private Project project;
 
-    private TerminalWindow terminalWindow;
+    private ProjectWindow projectWindow;
+
+    private List<TerminalWindow> terminalWindows;
 
     public FXMLController() {
         appData = AppData.instance;
+        terminalWindows = new ArrayList<>();
     }
 
     public void setProject(Project project) {
@@ -77,24 +76,22 @@ public class FXMLController implements CommandRunner {
 //        buildConfigMenu(configs, configMenu);
     }
 
-    public void setTerminalWindow(TerminalWindow terminalWindow) {
-        this.terminalWindow = terminalWindow;
+    public void setProjectWindow(ProjectWindow projectWindow) {
+        this.projectWindow = projectWindow;
     }
 
     public void initialize() {
         tabPane = new TabPane();
-
-
         termPane.getChildren().add(tabPane);
     }
 
-    @FXML
-    public void onEnter(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            String command = commandField.getText();
-            runCommand(command);
-        }
-    }
+//    @FXML
+//    public void onEnter(KeyEvent event) {
+//        if (event.getCode() == KeyCode.ENTER) {
+//            String command = commandField.getText();
+//            runCommand(command);
+//        }
+//    }
 
     @FXML
     public void newTerminal(ActionEvent event) {
@@ -106,7 +103,7 @@ public class FXMLController implements CommandRunner {
 
     @FXML
     public void quit(ActionEvent event) {
-        terminalWindow.closeWindow();
+        projectWindow.closeWindow();
     }
 
     @FXML
@@ -130,12 +127,12 @@ public class FXMLController implements CommandRunner {
         Optional<Command> alias = commandService.findAlias(appData.get(project.getId()).getEnvironment(), command);
         if (alias.isPresent()) {
             execCommandInRightTerminal(tabPane, alias.get());
-            commandField.setText("");
+//            commandField.setText("");
         } else {
             TerminalTab terminalTab = (TerminalTab) tabPane.getSelectionModel().getSelectedItem();
             if (terminalTab != null) {
                 commandService.sendCommand(terminalTab, command, this::resolveVariable);
-                commandField.setText("");
+//                commandField.setText("");
             }
         }
     }
@@ -178,15 +175,24 @@ public class FXMLController implements CommandRunner {
         }
 
         openTerminal(command.getConsoleId(), title, (terminal, isNew) -> {
-            TerminalTab terminalTab = findTab(tabPane, command.getConsoleId());
-            if (terminalTab != null) {
-                tabPane.getSelectionModel().select(terminalTab);
-            } else {
-                tabPane.getTabs().add(terminal.getTerminalTab());
-                tabPane.getSelectionModel().select(terminal.getTerminalTab());
+//            Terminal terminalTab = findTab(command.getConsoleId());
+//            if (terminalTab != null) {
+//                terminalTab.getTerminal().getSelectionModel().select(terminalTab);
+//            } else {
+//                tabPane.getTabs().add(terminal.getTerminalTab());
+//                tabPane.getSelectionModel().select(terminal.getTerminalTab());
+//            }
+            if (terminal.getWindow() == null) {
+                terminalWindows.add(new TerminalWindow(terminal));
             }
+            terminal.getWindow().popUp();
+            terminal.getWindow().selectTerminal(terminal);
+
             commandService.sendCommand(terminal.getTerminalTab(), command.getCommand(), this::resolveVariable);
         });
+//        Terminal terminal = new Terminal(command.getConsoleId(), title);
+//        new TerminalWindow(terminal);
+//        commandService.sendCommand(terminal.getTerminalTab(), command.getCommand(), this::resolveVariable);
     }
 
     private void addClosingEvent(Terminal terminal) {
@@ -195,11 +201,13 @@ public class FXMLController implements CommandRunner {
         });
     }
 
-    private TerminalTab findTab(TabPane tabPane, String terminalId) {
-        for (int i = 0; i < tabPane.getTabs().size(); i++) {
-            TerminalTab terminalTab = (TerminalTab) tabPane.getTabs().get(i);
-            if (terminalTab.getId() != null && terminalTab.getId().equals(terminalId)) {
-                return terminalTab;
+    private Terminal findTab(String terminalId) {
+        for (TerminalWindow terminalWindow : terminalWindows) {
+            for (int i = 0; i < terminalWindow.getTerminals().size(); i++) {
+                Terminal terminal = terminalWindow.getTerminals().get(i);
+                if (terminal.getId() != null && terminal.getId().equals(terminalId)) {
+                    return terminal;
+                }
             }
         }
         return null;

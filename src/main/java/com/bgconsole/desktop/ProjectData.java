@@ -35,7 +35,6 @@ public class ProjectData {
 
     private final VariableService variableService;
 
-
     private final ProjectService projectService;
 
     private final ProfileService profileService;

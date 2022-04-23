@@ -3,7 +3,6 @@ package com.bgconsole.desktop.ui;
 import com.bgconsole.desktop.AppData;
 import com.bgconsole.desktop.FXMLController;
 import com.bgconsole.desktop.MainWindow;
-import com.bgconsole.desktop.location.Location;
 import com.bgconsole.desktop.project.Project;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -18,11 +17,11 @@ import java.net.URL;
 import java.util.Objects;
 
 
-public class TerminalWindow {
+public class ProjectWindow {
 
     private final Stage stage;
 
-    public TerminalWindow(Project project) throws IOException {
+    public ProjectWindow(Project project) throws IOException {
         URL resource = getClass().getResource("/com/bgconsole/desktop/scene.fxml");
         FXMLLoader loader = new FXMLLoader(resource);
 
@@ -30,7 +29,7 @@ public class TerminalWindow {
 
         FXMLController controller = loader.getController();
         controller.setProject(project);
-        controller.setTerminalWindow(this);
+        controller.setProjectWindow(this);
 
         stage = new Stage(StageStyle.DECORATED);
 //        stage.initModality(Modality.);

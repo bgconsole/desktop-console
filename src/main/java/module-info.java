@@ -16,6 +16,7 @@ module terminal {
     opens com.bgconsole.desktop to javafx.fxml;
     opens com.bgconsole.desktop.ui.vareditor to javafx.fxml;
     opens com.bgconsole.desktop.ui.commandeditor to javafx.fxml;
+    opens com.bgconsole.desktop.ui.terminal_window to javafx.fxml;
     opens com.bgconsole.desktop.ui.global_window to javafx.fxml, javafx.base;
     opens com.bgconsole.desktop.workspace to com.fasterxml.jackson.databind;
     exports com.bgconsole.desktop;
@@ -29,6 +30,7 @@ module terminal {
     exports com.bgconsole.desktop.workspace;
     exports com.bgconsole.desktop.project;
     exports com.bgconsole.desktop.profile;
+    exports com.bgconsole.desktop.ui.terminal_window;
     opens com.bgconsole.desktop.global_input to javafx.fxml;
     exports com.bgconsole.desktop.ui.new_location;
     opens com.bgconsole.desktop.ui.new_location to javafx.fxml;

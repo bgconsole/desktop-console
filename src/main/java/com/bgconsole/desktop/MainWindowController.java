@@ -3,7 +3,7 @@ package com.bgconsole.desktop;
 import com.bgconsole.desktop.location.Location;
 import com.bgconsole.desktop.profile.Profile;
 import com.bgconsole.desktop.project.Project;
-import com.bgconsole.desktop.ui.TerminalWindow;
+import com.bgconsole.desktop.ui.ProjectWindow;
 import com.bgconsole.desktop.ui.new_location.NewLocation;
 import com.bgconsole.desktop.utils.ParseYAMLFile;
 import com.bgconsole.desktop.utils.WriteYAMLFile;
@@ -104,10 +104,11 @@ public class MainWindowController {
     public void setProfileList(List<Profile> profiles) {
         this.profiles = profiles;
         ObservableList<Profile> profileList = FXCollections.observableArrayList(profiles);
-        profileSelector.setConverter(new StringConverter<Profile>() {
+        profileSelector.getSelectionModel().selectFirst();
+        profileSelector.setConverter(new StringConverter<>() {
             @Override
             public String toString(Profile profile) {
-                return profile.getName();
+                return profile != null ? profile.getName() : null;
             }
 
             @Override
@@ -155,7 +156,7 @@ public class MainWindowController {
             button.setOnMouseClicked(mouseEvent -> {
                 try {
                     AppData.instance.addProject(project);
-                    new TerminalWindow(project);
+                    new ProjectWindow(project);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

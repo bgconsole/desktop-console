@@ -26,9 +26,9 @@
             </items>
         </SplitPane>
     </center>
-    <bottom>
-        <TextField fx:id="commandField" onKeyPressed="#onEnter" BorderPane.alignment="CENTER"/>
-    </bottom>
+<!--    <bottom>-->
+<!--        <TextField fx:id="commandField" onKeyPressed="#onEnter" BorderPane.alignment="CENTER"/>-->
+<!--    </bottom>-->
     <top>
         <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
             <menus>

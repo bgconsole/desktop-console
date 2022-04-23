@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.bgconsole.desktop.ui.terminal_window.TerminalWindowController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <center>
+        <AnchorPane>
+            <StackPane fx:id="terminalTabPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+        </AnchorPane>
+    </center>
+</BorderPane>

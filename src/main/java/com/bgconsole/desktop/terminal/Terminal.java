@@ -1,5 +1,6 @@
 package com.bgconsole.desktop.terminal;
 
+import com.bgconsole.desktop.ui.terminal_window.TerminalWindow;
 import com.kodedu.terminalfx.TerminalBuilder;
 import com.kodedu.terminalfx.TerminalTab;
 import com.kodedu.terminalfx.config.TerminalConfig;
@@ -10,6 +11,7 @@ public class Terminal {
     private String name;
     private String id;
     private TerminalTab terminal;
+    private TerminalWindow window;
 
     public Terminal(String id) {
         this(id, id);
@@ -54,5 +56,17 @@ public class Terminal {
 
     public void setTerminal(TerminalTab terminal) {
         this.terminal = terminal;
+    }
+
+    public TerminalTab getTerminal() {
+        return terminal;
+    }
+
+    public TerminalWindow getWindow() {
+        return window;
+    }
+
+    public void setWindow(TerminalWindow window) {
+        this.window = window;
     }
 }

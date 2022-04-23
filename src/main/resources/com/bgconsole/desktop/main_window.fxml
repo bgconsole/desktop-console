@@ -36,20 +36,22 @@
             <items>
                 <AnchorPane prefWidth="100.0">
 
-                    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <children>
+                    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <top>
                             <AnchorPane>
                                 <ChoiceBox fx:id="profileSelector" onAction="#changeProfile" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                             </AnchorPane>
-                            <AnchorPane>
+                        </top>
+                        <center>
+                            <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <StackPane fx:id="listPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                         <ListView fx:id="locationList" />
                                     </children>
                                 </StackPane>
                             </AnchorPane>
-                        </children>
-                    </VBox>
+                        </center>
+                    </BorderPane>
                 </AnchorPane>
                 <AnchorPane prefWidth="100.0">
                <children>
