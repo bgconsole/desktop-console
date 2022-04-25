@@ -2,10 +2,13 @@ package com.bgconsole.desktop;
 
 import com.bgconsole.desktop.location.Location;
 import com.bgconsole.desktop.profile.Profile;
+import com.bgconsole.desktop.profile.ProfileService;
 import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.ui.ProjectWindow;
 import com.bgconsole.desktop.ui.new_location.NewLocation;
+import com.bgconsole.desktop.ui.profile.ProfileWindow;
 import com.bgconsole.desktop.utils.ParseYAMLFile;
+import com.bgconsole.desktop.utils.ProfileObservableConverter;
 import com.bgconsole.desktop.utils.WriteYAMLFile;
 import com.bgconsole.desktop.workspace.Workspace;
 import javafx.collections.FXCollections;
@@ -20,7 +23,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.TilePane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,7 +58,12 @@ public class MainWindowController {
 
     private Stage stage;
 
+    private ProfileWindow profileWindow;
+
+    private final ProfileService profileService;
+
     public MainWindowController() {
+        profileService = AppData.instance.getProfileService();
     }
 
     @FXML
@@ -105,17 +112,7 @@ public class MainWindowController {
         this.profiles = profiles;
         ObservableList<Profile> profileList = FXCollections.observableArrayList(profiles);
         profileSelector.getSelectionModel().selectFirst();
-        profileSelector.setConverter(new StringConverter<>() {
-            @Override
-            public String toString(Profile profile) {
-                return profile != null ? profile.getName() : null;
-            }
-
-            @Override
-            public Profile fromString(String s) {
-                return profiles.stream().filter(profile -> profile.getName().equals(s)).findFirst().orElse(null);
-            }
-        });
+        profileSelector.setConverter(new ProfileObservableConverter(profiles));
         profileSelector.setItems(profileList);
     }
 
@@ -165,5 +162,13 @@ public class MainWindowController {
         }).collect(Collectors.toList());
         ObservableList<Node> children = projectPane.getChildren();
         children.addAll(buttons);
+    }
+
+    public void openProfileManager(ActionEvent event) {
+        if (profileWindow == null) {
+            profileWindow = new ProfileWindow(profileService, () -> profileWindow = null);
+        } else {
+            profileWindow.popUp();
+        }
     }
 }

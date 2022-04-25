@@ -1,6 +1,7 @@
 package com.bgconsole.desktop.profile;
 
 import com.bgconsole.desktop.utils.ParseYAMLFile;
+import com.bgconsole.desktop.utils.WriteYAMLFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,6 +30,12 @@ public class ProfileServiceImpl implements ProfileService {
 
     @Override
     public Profile create(Profile profile) {
+        try {
+            WriteYAMLFile.writeProfile(profile);
+            return profile;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

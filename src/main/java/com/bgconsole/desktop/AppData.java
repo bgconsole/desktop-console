@@ -1,6 +1,8 @@
 package com.bgconsole.desktop;
 
 import com.bgconsole.desktop.profile.Profile;
+import com.bgconsole.desktop.profile.ProfileService;
+import com.bgconsole.desktop.profile.ProfileServiceImpl;
 import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.project.ProjectService;
 import com.bgconsole.desktop.project.ProjectServiceImpl;
@@ -20,6 +22,8 @@ public class AppData {
 
     private final ProjectService projectService;
 
+    private final ProfileService profileService;
+
     private final Map<String, ProjectData> projectList;
 
     private List<Profile> profiles;
@@ -28,6 +32,7 @@ public class AppData {
         projectList = new HashMap<>();
         workspaceService = new WorkspaceServiceImpl();
         projectService = new ProjectServiceImpl();
+        profileService = new ProfileServiceImpl();
         profiles = new ArrayList<>();
     }
 
@@ -57,5 +62,9 @@ public class AppData {
 
     public ProjectService getProjectService() {
         return projectService;
+    }
+
+    public ProfileService getProfileService() {
+        return profileService;
     }
 }

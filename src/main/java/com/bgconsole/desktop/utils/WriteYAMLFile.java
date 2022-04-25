@@ -1,7 +1,9 @@
 package com.bgconsole.desktop.utils;
 
+import com.bgconsole.desktop.ProjectData;
 import com.bgconsole.desktop.command.Command;
 import com.bgconsole.desktop.location.Location;
+import com.bgconsole.desktop.profile.Profile;
 import com.bgconsole.desktop.variable.Variable;
 import com.bgconsole.desktop.workspace.Workspace;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
@@ -11,7 +13,9 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 public class WriteYAMLFile {
 
@@ -28,6 +32,12 @@ public class WriteYAMLFile {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
         writer.writeValue(new File(absoluteFile), commands);
+    }
+
+    public static void writeProfile(Profile profile) throws IOException {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+        writer.writeValue(Paths.get(ProjectData.DEFAULT_PROFILE_DIR.toString(), UUID.randomUUID() + ".yaml").toFile(), profile);
     }
 
     public static void writeWorkspace(Workspace workspace, String absoluteFile) throws IOException {
