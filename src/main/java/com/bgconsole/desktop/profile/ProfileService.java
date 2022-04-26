@@ -6,9 +6,9 @@ public interface ProfileService {
 
     List<Profile> loadProfiles(String path);
 
-    Profile save(Profile profile);
+    Profile save(String id, Profile profile);
 
-    void delete(Profile profile);
+    void delete(String id);
 
     Profile create(Profile profile);
 }

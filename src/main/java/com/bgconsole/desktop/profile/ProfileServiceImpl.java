@@ -1,10 +1,14 @@
 package com.bgconsole.desktop.profile;
 
+import com.bgconsole.desktop.ProjectData;
 import com.bgconsole.desktop.utils.ParseYAMLFile;
 import com.bgconsole.desktop.utils.WriteYAMLFile;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.UUID;
 
 public class ProfileServiceImpl implements ProfileService {
 
@@ -19,19 +23,31 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public Profile save(Profile profile) {
-        return null;
+    public Profile save(String id, Profile profile) {
+        return saveProfile(profile, id);
     }
 
     @Override
-    public void delete(Profile profile) {
-
+    public void delete(String id) {
+        var path = Paths.get(ProjectData.DEFAULT_PROFILE_DIR.toString(), id + ".yaml");
+        try {
+            Files.deleteIfExists(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Profile create(Profile profile) {
+        var id = UUID.randomUUID().toString();
+        return saveProfile(profile, id);
+    }
+
+    private Profile saveProfile(Profile profile, String id) {
         try {
-            WriteYAMLFile.writeProfile(profile);
+            String path = Paths.get(ProjectData.DEFAULT_PROFILE_DIR.toString(), id + ".yaml").toString();
+            profile.setId(id);
+            WriteYAMLFile.writeProfile(profile, path);
             return profile;
         } catch (IOException e) {
             e.printStackTrace();

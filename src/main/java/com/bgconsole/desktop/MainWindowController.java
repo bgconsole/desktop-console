@@ -11,15 +11,13 @@ import com.bgconsole.desktop.utils.ParseYAMLFile;
 import com.bgconsole.desktop.utils.ProfileObservableConverter;
 import com.bgconsole.desktop.utils.WriteYAMLFile;
 import com.bgconsole.desktop.workspace.Workspace;
+import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.TilePane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -62,8 +60,14 @@ public class MainWindowController {
 
     private final ProfileService profileService;
 
+    private HostServices hostServices;
+
     public MainWindowController() {
         profileService = AppData.instance.getProfileService();
+    }
+
+    public void setHostServices(HostServices hostServices) {
+        this.hostServices = hostServices;
     }
 
     @FXML
@@ -72,12 +76,12 @@ public class MainWindowController {
     }
 
     @FXML
-    public void newLocation(ActionEvent event) {
+    public void newWorkspace(ActionEvent event) {
         new NewLocation(this);
     }
 
     @FXML
-    public void openProject(ActionEvent event) {
+    public void openWorkspace(ActionEvent event) {
         final DirectoryChooser directoryChooser =
                 new DirectoryChooser();
         final File selectedDirectory =
@@ -117,7 +121,9 @@ public class MainWindowController {
     }
 
     public void changeProfile(ActionEvent event) {
-        setCurrentProfile(profileSelector.getValue());
+        if (profileSelector.getValue() != null) {
+            setCurrentProfile(profileSelector.getValue());
+        }
     }
 
     private void setCurrentProfile(Profile profile) {
@@ -166,9 +172,32 @@ public class MainWindowController {
 
     public void openProfileManager(ActionEvent event) {
         if (profileWindow == null) {
-            profileWindow = new ProfileWindow(profileService, () -> profileWindow = null);
+            profileWindow = new ProfileWindow(profileService, () -> {
+                profileWindow = null;
+                setProfileList(profileService.loadProfiles(DEFAULT_PROFILE_DIR.toString()));
+            });
         } else {
             profileWindow.popUp();
         }
+    }
+
+    public void about(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About BG Console");
+        alert.setHeaderText("BG Console version:" + MainWindowData.VERSION);
+        alert.setContentText("More info: https://bgconsole.com");
+        alert.showAndWait();
+    }
+
+    public void help(ActionEvent event) {
+        hostServices.showDocument(new Hyperlink("https://bgconsole.com/docs/").getText());
+    }
+
+    public void removeWorkspace(ActionEvent event) {
+
+    }
+
+    public void createProject(ActionEvent event) {
+
     }
 }

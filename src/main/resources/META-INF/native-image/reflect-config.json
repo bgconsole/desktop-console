@@ -1,0 +1,676 @@
+[
+{
+  "name":"[D"
+},
+{
+  "name":"[Lcom.bgconsole.desktop.command.Command;"
+},
+{
+  "name":"[Lcom.bgconsole.desktop.variable.Variable;"
+},
+{
+  "name":"com.bgconsole.desktop.FXMLController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"initialize","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.MainWindow",
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"main","parameterTypes":["java.lang.String[]"] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.MainWindowController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"changeProfile","parameterTypes":["javafx.event.ActionEvent"] }, 
+    {"name":"quit","parameterTypes":["javafx.event.ActionEvent"] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.command.Command",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setAlias","parameterTypes":["java.lang.String"] }, 
+    {"name":"setCommand","parameterTypes":["java.lang.String"] }, 
+    {"name":"setConsoleId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setExecAfter","parameterTypes":["java.lang.String"] }, 
+    {"name":"setExecBefore","parameterTypes":["java.lang.String"] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setShellType","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.location.Location",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setPath","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.profile.Profile",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setLocations","parameterTypes":["java.util.List"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.project.Project",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setCommands","parameterTypes":["java.util.List"] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setVariables","parameterTypes":["java.util.List"] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.project.ProjectCommand",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setNamespace","parameterTypes":["java.lang.String"] }, 
+    {"name":"setPath","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.project.ProjectVariable",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }, 
+    {"name":"setNamespace","parameterTypes":["java.lang.String"] }, 
+    {"name":"setPath","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.ui.terminal_window.TerminalWindowController",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"initialize","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.bgconsole.desktop.variable.Variable",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true
+},
+{
+  "name":"com.bgconsole.desktop.workspace.Workspace",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setName","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"com.fasterxml.jackson.databind.ext.Java7HandlersImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.fasterxml.jackson.databind.ext.Java7SupportImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.kodedu.terminalfx.Terminal",
+  "methods":[{"name":"onTerminalReady","parameterTypes":[] }]
+},
+{
+  "name":"com.kodedu.terminalfx.TerminalView",
+  "methods":[
+    {"name":"getPrefs","parameterTypes":[] }, 
+    {"name":"onTerminalInit","parameterTypes":[] }, 
+    {"name":"resizeTerminal","parameterTypes":["int","int"] }
+  ]
+},
+{
+  "name":"com.kodedu.terminalfx.config.TerminalConfig",
+  "allDeclaredFields":true,
+  "queryAllDeclaredMethods":true,
+  "queryAllDeclaredConstructors":true,
+  "methods":[
+    {"name":"getBackgroundColor","parameterTypes":[] }, 
+    {"name":"getCursorColor","parameterTypes":[] }, 
+    {"name":"getFontFamily","parameterTypes":[] }, 
+    {"name":"getFontSize","parameterTypes":[] }, 
+    {"name":"getForegroundColor","parameterTypes":[] }, 
+    {"name":"getScrollWhellMoveMultiplier","parameterTypes":[] }, 
+    {"name":"getUserCss","parameterTypes":[] }, 
+    {"name":"isClearSelectionAfterCopy","parameterTypes":[] }, 
+    {"name":"isCopyOnSelect","parameterTypes":[] }, 
+    {"name":"isCtrlCCopy","parameterTypes":[] }, 
+    {"name":"isCtrlVPaste","parameterTypes":[] }, 
+    {"name":"isCursorBlink","parameterTypes":[] }, 
+    {"name":"isEnableClipboardNotice","parameterTypes":[] }, 
+    {"name":"isScrollbarVisible","parameterTypes":[] }, 
+    {"name":"isUseDefaultWindowCopy","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.glass.ui.Screen"
+},
+{
+  "name":"com.sun.javafx.font.directwrite.DWFactory",
+  "methods":[{"name":"getFactory","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.logging.PrintLogger",
+  "methods":[{"name":"createInstance","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.logging.jfr.JFRPulseLogger",
+  "methods":[{"name":"createInstance","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.reflect.Trampoline",
+  "methods":[{"name":"invoke","parameterTypes":["java.lang.reflect.Method","java.lang.Object","java.lang.Object[]"] }]
+},
+{
+  "name":"com.sun.javafx.scene.control.skin.Utils",
+  "methods":[{"name":"getResource","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.sun.javafx.tk.quantum.QuantumToolkit",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.webkit.theme.ScrollBarWidget"
+},
+{
+  "name":"com.sun.jna.CallbackProxy",
+  "queriedMethods":[{"name":"callback","parameterTypes":["java.lang.Object[]"] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.BaseTSD$ULONG_PTR",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinBase$OVERLAPPED",
+  "allDeclaredFields":true
+},
+{
+  "name":"com.sun.jna.platform.win32.WinDef$HMODULE",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinDef$HWND",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinDef$LPARAM",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinDef$LRESULT",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinDef$POINT",
+  "allDeclaredFields":true,
+  "queryAllPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":["com.sun.jna.Pointer"] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinDef$WPARAM",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinNT$HANDLE",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinNT$HANDLEByReference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinUser$HHOOK",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinUser$KBDLLHOOKSTRUCT",
+  "allDeclaredFields":true,
+  "queryAllPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinUser$LowLevelKeyboardProc",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
+  "methods":[{"name":"callback","parameterTypes":["int","com.sun.jna.platform.win32.WinDef$WPARAM","com.sun.jna.platform.win32.WinUser$KBDLLHOOKSTRUCT"] }]
+},
+{
+  "name":"com.sun.jna.platform.win32.WinUser$MSG",
+  "allDeclaredFields":true
+},
+{
+  "name":"com.sun.jna.ptr.IntByReference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.ptr.PointerByReference",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.prism.GraphicsPipeline",
+  "methods":[
+    {"name":"getFontFactory","parameterTypes":[] }, 
+    {"name":"getPipeline","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.prism.shader.DrawRoundRect_Color_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.FillPgram_Color_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.FillPgram_LinearGradient_PAD_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.FillRoundRect_Color_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.Solid_TextureFirstPassLCD_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.Solid_TextureRGB_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.Solid_TextureSecondPassLCD_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.Texture_Color_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.prism.shader.Texture_LinearGradient_PAD_Loader",
+  "methods":[{"name":"loadShader","parameterTypes":["com.sun.prism.ps.ShaderFactory","java.io.InputStream"] }]
+},
+{
+  "name":"com.sun.scenario.effect.impl.prism.PrRenderer",
+  "methods":[{"name":"createRenderer","parameterTypes":["com.sun.scenario.effect.FilterContext"] }]
+},
+{
+  "name":"com.sun.scenario.effect.impl.prism.ps.PPSLinearConvolveShadowPeer",
+  "methods":[{"name":"<init>","parameterTypes":["com.sun.scenario.effect.FilterContext","com.sun.scenario.effect.impl.Renderer","java.lang.String"] }]
+},
+{
+  "name":"com.sun.scenario.effect.impl.prism.ps.PPSRenderer",
+  "methods":[{"name":"createRenderer","parameterTypes":["com.sun.scenario.effect.FilterContext"] }]
+},
+{
+  "name":"com.sun.xml.internal.stream.XMLInputFactoryImpl",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"double",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"java.lang.Character",
+  "methods":[{"name":"isIdeographic","parameterTypes":["int"] }]
+},
+{
+  "name":"java.lang.Class",
+  "methods":[
+    {"name":"forName","parameterTypes":["java.lang.Module","java.lang.String"] }, 
+    {"name":"getFields","parameterTypes":[] }, 
+    {"name":"getMethods","parameterTypes":[] }, 
+    {"name":"getModule","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.lang.Module",
+  "queriedMethods":[
+    {"name":"getDescriptor","parameterTypes":[] }, 
+    {"name":"getLayer","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getResourceAsStream","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"java.lang.ModuleLayer",
+  "methods":[
+    {"name":"boot","parameterTypes":[] }, 
+    {"name":"findModule","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"java.lang.Object",
+  "queriedMethods":[
+    {"name":"equals","parameterTypes":["java.lang.Object"] }, 
+    {"name":"hashCode","parameterTypes":[] }, 
+    {"name":"toString","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.lang.Thread",
+  "methods":[{"name":"getContextClassLoader","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.Throwable",
+  "queriedMethods":[{"name":"addSuppressed","parameterTypes":["java.lang.Throwable"] }]
+},
+{
+  "name":"java.lang.invoke.MethodHandle",
+  "queriedMethods":[
+    {"name":"bindTo","parameterTypes":["java.lang.Object"] }, 
+    {"name":"invokeWithArguments","parameterTypes":["java.lang.Object[]"] }
+  ]
+},
+{
+  "name":"java.lang.invoke.MethodHandles",
+  "queriedMethods":[
+    {"name":"lookup","parameterTypes":[] }, 
+    {"name":"privateLookupIn","parameterTypes":["java.lang.Class","java.lang.invoke.MethodHandles$Lookup"] }
+  ]
+},
+{
+  "name":"java.lang.invoke.MethodHandles$Lookup",
+  "queriedMethods":[
+    {"name":"findSpecial","parameterTypes":["java.lang.Class","java.lang.String","java.lang.invoke.MethodType","java.lang.Class"] }, 
+    {"name":"in","parameterTypes":["java.lang.Class"] }, 
+    {"name":"unreflectSpecial","parameterTypes":["java.lang.reflect.Method","java.lang.Class"] }
+  ]
+},
+{
+  "name":"java.lang.invoke.MethodType",
+  "queriedMethods":[{"name":"methodType","parameterTypes":["java.lang.Class","java.lang.Class[]"] }]
+},
+{
+  "name":"java.lang.reflect.Method",
+  "methods":[{"name":"isDefault","parameterTypes":[] }],
+  "queriedMethods":[{"name":"isVarArgs","parameterTypes":[] }]
+},
+{
+  "name":"java.nio.Buffer"
+},
+{
+  "name":"java.nio.ByteBuffer",
+  "methods":[{"name":"order","parameterTypes":["java.nio.ByteOrder"] }]
+},
+{
+  "name":"java.nio.ByteOrder",
+  "methods":[{"name":"nativeOrder","parameterTypes":[] }]
+},
+{
+  "name":"java.security.SecureRandomParameters"
+},
+{
+  "name":"java.sql.Date"
+},
+{
+  "name":"java.sql.Timestamp"
+},
+{
+  "name":"javafx.fxml.FXMLLoader"
+},
+{
+  "name":"javafx.geometry.Pos",
+  "methods":[{"name":"valueOf","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"javafx.scene.Camera"
+},
+{
+  "name":"javafx.scene.Group"
+},
+{
+  "name":"javafx.scene.Node",
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"getId","parameterTypes":[] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"javafx.scene.ParallelCamera"
+},
+{
+  "name":"javafx.scene.Parent",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"javafx.scene.Scene"
+},
+{
+  "name":"javafx.scene.control.ChoiceBox",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setOnAction","parameterTypes":["javafx.event.EventHandler"] }
+  ]
+},
+{
+  "name":"javafx.scene.control.Control",
+  "queryAllDeclaredMethods":true
+},
+{
+  "name":"javafx.scene.control.ListView",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"javafx.scene.control.Menu",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getItems","parameterTypes":[] }
+  ]
+},
+{
+  "name":"javafx.scene.control.MenuBar",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getMenus","parameterTypes":[] }
+  ]
+},
+{
+  "name":"javafx.scene.control.MenuItem",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getId","parameterTypes":[] }, 
+    {"name":"setId","parameterTypes":["java.lang.String"] }, 
+    {"name":"setMnemonicParsing","parameterTypes":["boolean"] }, 
+    {"name":"setOnAction","parameterTypes":["javafx.event.EventHandler"] }, 
+    {"name":"setText","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"javafx.scene.control.SplitPane",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"getItems","parameterTypes":[] }, 
+    {"name":"setDividerPositions","parameterTypes":["double[]"] }
+  ]
+},
+{
+  "name":"javafx.scene.effect.Effect"
+},
+{
+  "name":"javafx.scene.image.Image"
+},
+{
+  "name":"javafx.scene.layout.AnchorPane",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setBottomAnchor","parameterTypes":["javafx.scene.Node","java.lang.Double"] }, 
+    {"name":"setLeftAnchor","parameterTypes":["javafx.scene.Node","java.lang.Double"] }, 
+    {"name":"setRightAnchor","parameterTypes":["javafx.scene.Node","java.lang.Double"] }, 
+    {"name":"setTopAnchor","parameterTypes":["javafx.scene.Node","java.lang.Double"] }
+  ],
+  "queriedMethods":[
+    {"name":"getBottomAnchor","parameterTypes":["javafx.scene.Node"] }, 
+    {"name":"getLeftAnchor","parameterTypes":["javafx.scene.Node"] }, 
+    {"name":"getRightAnchor","parameterTypes":["javafx.scene.Node"] }, 
+    {"name":"getTopAnchor","parameterTypes":["javafx.scene.Node"] }
+  ]
+},
+{
+  "name":"javafx.scene.layout.BorderPane",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[
+    {"name":"<init>","parameterTypes":[] }, 
+    {"name":"setAlignment","parameterTypes":["javafx.scene.Node","javafx.geometry.Pos"] }, 
+    {"name":"setCenter","parameterTypes":["javafx.scene.Node"] }, 
+    {"name":"setTop","parameterTypes":["javafx.scene.Node"] }
+  ],
+  "queriedMethods":[{"name":"getAlignment","parameterTypes":["javafx.scene.Node"] }]
+},
+{
+  "name":"javafx.scene.layout.Pane",
+  "queryAllDeclaredMethods":true,
+  "methods":[{"name":"getChildren","parameterTypes":[] }]
+},
+{
+  "name":"javafx.scene.layout.Region",
+  "queryAllDeclaredMethods":true,
+  "methods":[
+    {"name":"setMaxHeight","parameterTypes":["double"] }, 
+    {"name":"setMaxWidth","parameterTypes":["double"] }, 
+    {"name":"setMinHeight","parameterTypes":["double"] }, 
+    {"name":"setMinWidth","parameterTypes":["double"] }, 
+    {"name":"setPrefHeight","parameterTypes":["double"] }, 
+    {"name":"setPrefWidth","parameterTypes":["double"] }
+  ]
+},
+{
+  "name":"javafx.scene.layout.StackPane",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"javafx.scene.layout.TilePane",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"javafx.scene.shape.Rectangle"
+},
+{
+  "name":"javafx.scene.shape.SVGPath"
+},
+{
+  "name":"javafx.scene.shape.Shape"
+},
+{
+  "name":"javafx.scene.text.Font"
+},
+{
+  "name":"javafx.scene.text.Text"
+},
+{
+  "name":"javafx.scene.transform.Transform"
+},
+{
+  "name":"javafx.scene.web.WebView"
+},
+{
+  "name":"javafx.stage.PopupWindow"
+},
+{
+  "name":"javafx.stage.Stage"
+},
+{
+  "name":"javafx.stage.Window"
+},
+{
+  "name":"org.apache.log4j.Category"
+},
+{
+  "name":"org.apache.log4j.Logger"
+},
+{
+  "name":"org.apache.log4j.helpers.Loader"
+},
+{
+  "name":"org.simplenativehooks.windows.GlobalWindowsJnaEventOchestrator$LowLevelMouseProc",
+  "queryAllDeclaredMethods":true,
+  "queryAllPublicMethods":true,
+  "methods":[{"name":"callback","parameterTypes":["int","com.sun.jna.platform.win32.WinDef$WPARAM","org.simplenativehooks.windows.GlobalWindowsJnaEventOchestrator$MOUSEHOOKSTRUCT"] }]
+},
+{
+  "name":"org.simplenativehooks.windows.GlobalWindowsJnaEventOchestrator$MOUSEHOOKSTRUCT",
+  "allDeclaredFields":true,
+  "queryAllPublicConstructors":true,
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.misc.Unsafe",
+  "fields":[{"name":"theUnsafe"}]
+},
+{
+  "name":"sun.security.provider.DRBG",
+  "methods":[{"name":"<init>","parameterTypes":["java.security.SecureRandomParameters"] }]
+},
+{
+  "name":"sun.security.provider.MD5",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"sun.security.provider.SHA2$SHA256",
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+}
+]

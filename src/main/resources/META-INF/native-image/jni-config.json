@@ -1,0 +1,596 @@
+[
+{
+  "name":"[Lcom.sun.glass.ui.Screen;"
+},
+{
+  "name":"[Ljava.lang.Object;"
+},
+{
+  "name":"com.kodedu.terminalfx.Terminal",
+  "methods":[{"name":"onTerminalReady","parameterTypes":[] }]
+},
+{
+  "name":"com.kodedu.terminalfx.TerminalView",
+  "methods":[
+    {"name":"getPrefs","parameterTypes":[] }, 
+    {"name":"onTerminalInit","parameterTypes":[] }, 
+    {"name":"resizeTerminal","parameterTypes":["int","int"] }
+  ]
+},
+{
+  "name":"com.sun.glass.ui.Cursor",
+  "methods":[
+    {"name":"getNativeCursor","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.glass.ui.Screen",
+  "methods":[{"name":"<init>","parameterTypes":["long","int","int","int","int","int","int","int","int","int","int","int","int","int","int","int","float","float","float","float"] }]
+},
+{
+  "name":"com.sun.glass.ui.Size",
+  "methods":[{"name":"<init>","parameterTypes":["int","int"] }]
+},
+{
+  "name":"com.sun.javafx.font.directwrite.DWRITE_GLYPH_METRICS",
+  "fields":[
+    {"name":"advanceHeight"}, 
+    {"name":"advanceWidth"}, 
+    {"name":"bottomSideBearing"}, 
+    {"name":"leftSideBearing"}, 
+    {"name":"rightSideBearing"}, 
+    {"name":"topSideBearing"}, 
+    {"name":"verticalOriginY"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.font.directwrite.DWRITE_GLYPH_RUN",
+  "fields":[
+    {"name":"advanceOffset"}, 
+    {"name":"ascenderOffset"}, 
+    {"name":"bidiLevel"}, 
+    {"name":"fontEmSize"}, 
+    {"name":"fontFace"}, 
+    {"name":"glyphAdvances"}, 
+    {"name":"glyphIndices"}, 
+    {"name":"isSideways"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.font.directwrite.DWRITE_MATRIX",
+  "fields":[
+    {"name":"dx"}, 
+    {"name":"dy"}, 
+    {"name":"m11"}, 
+    {"name":"m12"}, 
+    {"name":"m21"}, 
+    {"name":"m22"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.javafx.font.directwrite.RECT",
+  "fields":[
+    {"name":"bottom"}, 
+    {"name":"left"}, 
+    {"name":"right"}, 
+    {"name":"top"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.Callback"
+},
+{
+  "name":"com.sun.jna.CallbackProxy",
+  "methods":[{"name":"callback","parameterTypes":["java.lang.Object[]"] }]
+},
+{
+  "name":"com.sun.jna.CallbackReference",
+  "methods":[
+    {"name":"getCallback","parameterTypes":["java.lang.Class","com.sun.jna.Pointer","boolean"] }, 
+    {"name":"getFunctionPointer","parameterTypes":["com.sun.jna.Callback","boolean"] }, 
+    {"name":"getNativeString","parameterTypes":["java.lang.Object","boolean"] }, 
+    {"name":"initializeThread","parameterTypes":["com.sun.jna.Callback","com.sun.jna.CallbackReference$AttachOptions"] }
+  ]
+},
+{
+  "name":"com.sun.jna.CallbackReference$AttachOptions"
+},
+{
+  "name":"com.sun.jna.FromNativeConverter",
+  "methods":[{"name":"nativeType","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.IntegerType",
+  "fields":[{"name":"value"}]
+},
+{
+  "name":"com.sun.jna.JNIEnv"
+},
+{
+  "name":"com.sun.jna.Native",
+  "methods":[
+    {"name":"dispose","parameterTypes":[] }, 
+    {"name":"fromNative","parameterTypes":["com.sun.jna.FromNativeConverter","java.lang.Object","java.lang.reflect.Method"] }, 
+    {"name":"fromNative","parameterTypes":["java.lang.Class","java.lang.Object"] }, 
+    {"name":"fromNative","parameterTypes":["java.lang.reflect.Method","java.lang.Object"] }, 
+    {"name":"nativeType","parameterTypes":["java.lang.Class"] }, 
+    {"name":"toNative","parameterTypes":["com.sun.jna.ToNativeConverter","java.lang.Object"] }
+  ]
+},
+{
+  "name":"com.sun.jna.Native$ffi_callback",
+  "methods":[{"name":"invoke","parameterTypes":["long","long","long"] }]
+},
+{
+  "name":"com.sun.jna.NativeMapped",
+  "methods":[{"name":"toNative","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.jna.Pointer",
+  "fields":[{"name":"peer"}],
+  "methods":[{"name":"<init>","parameterTypes":["long"] }]
+},
+{
+  "name":"com.sun.jna.PointerType",
+  "fields":[{"name":"pointer"}]
+},
+{
+  "name":"com.sun.jna.Structure",
+  "fields":[
+    {"name":"memory"}, 
+    {"name":"typeInfo"}
+  ],
+  "methods":[
+    {"name":"autoRead","parameterTypes":[] }, 
+    {"name":"autoWrite","parameterTypes":[] }, 
+    {"name":"getTypeInfo","parameterTypes":[] }, 
+    {"name":"newInstance","parameterTypes":["java.lang.Class","long"] }
+  ]
+},
+{
+  "name":"com.sun.jna.Structure$ByValue"
+},
+{
+  "name":"com.sun.jna.Structure$FFIType$FFITypes",
+  "fields":[
+    {"name":"ffi_type_double"}, 
+    {"name":"ffi_type_float"}, 
+    {"name":"ffi_type_longdouble"}, 
+    {"name":"ffi_type_pointer"}, 
+    {"name":"ffi_type_sint16"}, 
+    {"name":"ffi_type_sint32"}, 
+    {"name":"ffi_type_sint64"}, 
+    {"name":"ffi_type_sint8"}, 
+    {"name":"ffi_type_uint16"}, 
+    {"name":"ffi_type_uint32"}, 
+    {"name":"ffi_type_uint64"}, 
+    {"name":"ffi_type_uint8"}, 
+    {"name":"ffi_type_void"}
+  ]
+},
+{
+  "name":"com.sun.jna.WString",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"com.sun.media.jfxmedia.logging.Logger",
+  "methods":[
+    {"name":"logMsg","parameterTypes":["int","java.lang.String"] }, 
+    {"name":"logMsg","parameterTypes":["int","java.lang.String","java.lang.String","java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.prism.impl.PrismSettings",
+  "fields":[
+    {"name":"disableD3D9Ex"}, 
+    {"name":"forceGPU"}, 
+    {"name":"isVsyncEnabled"}, 
+    {"name":"verbose"}
+  ]
+},
+{
+  "name":"com.sun.webkit.BackForwardList",
+  "methods":[{"name":"notifyChanged","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.webkit.BackForwardList$Entry",
+  "methods":[
+    {"name":"<init>","parameterTypes":["long","long"] }, 
+    {"name":"notifyItemChanged","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.CursorManager",
+  "methods":[
+    {"name":"getCursorManager","parameterTypes":[] }, 
+    {"name":"getPredefinedCursorID","parameterTypes":["int"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.FileSystem",
+  "methods":[
+    {"name":"fwkFileExists","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkMakeAllDirectories","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkPathByAppendingComponent","parameterTypes":["java.lang.String","java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.MainThread",
+  "methods":[{"name":"fwkScheduleDispatchFunctions","parameterTypes":[] }]
+},
+{
+  "name":"com.sun.webkit.Timer",
+  "methods":[
+    {"name":"fwkSetFireTime","parameterTypes":["double"] }, 
+    {"name":"fwkStopTimer","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.Utilities",
+  "methods":[{"name":"fwkInvokeWithContext","parameterTypes":["java.lang.reflect.Method","java.lang.Object","java.lang.Object[]","java.security.AccessControlContext"] }]
+},
+{
+  "name":"com.sun.webkit.WCWidget",
+  "methods":[
+    {"name":"fwkDestroy","parameterTypes":[] }, 
+    {"name":"fwkRequestFocus","parameterTypes":[] }, 
+    {"name":"fwkSetBounds","parameterTypes":["int","int","int","int"] }, 
+    {"name":"fwkSetCursor","parameterTypes":["long"] }, 
+    {"name":"fwkSetVisible","parameterTypes":["boolean"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.WebPage",
+  "methods":[
+    {"name":"fwkAddMessageToConsole","parameterTypes":["java.lang.String","int","java.lang.String"] }, 
+    {"name":"fwkAlert","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkCanRunBeforeUnloadConfirmPanel","parameterTypes":[] }, 
+    {"name":"fwkChooseFile","parameterTypes":["java.lang.String","boolean","java.lang.String"] }, 
+    {"name":"fwkCloseWindow","parameterTypes":[] }, 
+    {"name":"fwkConfirm","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkCreateWindow","parameterTypes":["boolean","boolean","boolean","boolean"] }, 
+    {"name":"fwkDidClearWindowObject","parameterTypes":["long","long"] }, 
+    {"name":"fwkFireLoadEvent","parameterTypes":["long","int","java.lang.String","java.lang.String","double","int"] }, 
+    {"name":"fwkFireResourceLoadEvent","parameterTypes":["long","int","int","java.lang.String","double","int"] }, 
+    {"name":"fwkFrameCreated","parameterTypes":["long"] }, 
+    {"name":"fwkFrameDestroyed","parameterTypes":["long"] }, 
+    {"name":"fwkGetPageBounds","parameterTypes":[] }, 
+    {"name":"fwkGetWindowBounds","parameterTypes":[] }, 
+    {"name":"fwkPermitAcceptResourceAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitEnableScriptsAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitNavigateAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitNewWindowAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitRedirectAction","parameterTypes":["long","java.lang.String"] }, 
+    {"name":"fwkPermitSubmitDataAction","parameterTypes":["long","java.lang.String","java.lang.String","boolean"] }, 
+    {"name":"fwkPrompt","parameterTypes":["java.lang.String","java.lang.String"] }, 
+    {"name":"fwkRemoveRequestURL","parameterTypes":["long","int"] }, 
+    {"name":"fwkRepaint","parameterTypes":["int","int","int","int"] }, 
+    {"name":"fwkRunBeforeUnloadConfirmPanel","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkScreenToWindow","parameterTypes":["com.sun.webkit.graphics.WCPoint"] }, 
+    {"name":"fwkSetCursor","parameterTypes":["long"] }, 
+    {"name":"fwkSetFocus","parameterTypes":["boolean"] }, 
+    {"name":"fwkSetRequestURL","parameterTypes":["long","int","java.lang.String"] }, 
+    {"name":"fwkSetScrollbarsVisible","parameterTypes":["boolean"] }, 
+    {"name":"fwkSetStatusbarText","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkSetTooltip","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkSetWindowBounds","parameterTypes":["int","int","int","int"] }, 
+    {"name":"fwkShowWindow","parameterTypes":[] }, 
+    {"name":"fwkTransferFocus","parameterTypes":["boolean"] }, 
+    {"name":"fwkWindowToScreen","parameterTypes":["com.sun.webkit.graphics.WCPoint"] }, 
+    {"name":"getHostWindow","parameterTypes":[] }, 
+    {"name":"getPage","parameterTypes":[] }, 
+    {"name":"getRenderTheme","parameterTypes":[] }, 
+    {"name":"getScrollBarTheme","parameterTypes":[] }, 
+    {"name":"setInputMethodState","parameterTypes":["boolean"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.dom.JSObject",
+  "fields":[{"name":"UNDEFINED"}],
+  "methods":[{"name":"<init>","parameterTypes":["long","int"] }]
+},
+{
+  "name":"com.sun.webkit.graphics.Ref",
+  "methods":[
+    {"name":"getID","parameterTypes":[] }, 
+    {"name":"ref","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.ScrollBarTheme",
+  "methods":[
+    {"name":"getScrollBarPartRect","parameterTypes":["long","int","int[]"] }, 
+    {"name":"getThickness","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCFont",
+  "methods":[
+    {"name":"equals","parameterTypes":["java.lang.Object"] }, 
+    {"name":"getAscent","parameterTypes":[] }, 
+    {"name":"getCapHeight","parameterTypes":[] }, 
+    {"name":"getDescent","parameterTypes":[] }, 
+    {"name":"getGlyphCodes","parameterTypes":["char[]"] }, 
+    {"name":"getGlyphWidth","parameterTypes":["int"] }, 
+    {"name":"getLineGap","parameterTypes":[] }, 
+    {"name":"getLineSpacing","parameterTypes":[] }, 
+    {"name":"getXHeight","parameterTypes":[] }, 
+    {"name":"hasUniformLineMetrics","parameterTypes":[] }, 
+    {"name":"hashCode","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCGraphicsManager",
+  "methods":[
+    {"name":"createWCPath","parameterTypes":[] }, 
+    {"name":"getGraphicsManager","parameterTypes":[] }, 
+    {"name":"getSupportedMediaTypes","parameterTypes":[] }, 
+    {"name":"getWCFont","parameterTypes":["java.lang.String","boolean","boolean","float"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCMediaPlayer"
+},
+{
+  "name":"com.sun.webkit.graphics.WCPoint",
+  "methods":[
+    {"name":"<init>","parameterTypes":["float","float"] }, 
+    {"name":"getX","parameterTypes":[] }, 
+    {"name":"getY","parameterTypes":[] }
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCRectangle",
+  "fields":[
+    {"name":"h"}, 
+    {"name":"w"}, 
+    {"name":"x"}, 
+    {"name":"y"}
+  ]
+},
+{
+  "name":"com.sun.webkit.graphics.WCRenderQueue",
+  "methods":[
+    {"name":"fwkAddBuffer","parameterTypes":["java.nio.ByteBuffer"] }, 
+    {"name":"fwkDisposeGraphics","parameterTypes":[] }, 
+    {"name":"refFloatArr","parameterTypes":["float[]"] }, 
+    {"name":"refIntArr","parameterTypes":["int[]"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.network.FormDataElement",
+  "methods":[
+    {"name":"fwkCreateFromByteArray","parameterTypes":["byte[]"] }, 
+    {"name":"fwkCreateFromFile","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.network.NetworkContext",
+  "methods":[
+    {"name":"canHandleURL","parameterTypes":["java.lang.String"] }, 
+    {"name":"fwkGetMaximumHTTPConnectionCountPerHost","parameterTypes":[] }, 
+    {"name":"fwkLoad","parameterTypes":["com.sun.webkit.WebPage","boolean","java.lang.String","java.lang.String","java.lang.String","com.sun.webkit.network.FormDataElement[]","long"] }
+  ]
+},
+{
+  "name":"com.sun.webkit.network.URLLoader",
+  "methods":[{"name":"fwkCancel","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.Boolean",
+  "fields":[
+    {"name":"TYPE"}, 
+    {"name":"value"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":["boolean"] }]
+},
+{
+  "name":"java.lang.Byte",
+  "fields":[
+    {"name":"TYPE"}, 
+    {"name":"value"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":["byte"] }]
+},
+{
+  "name":"java.lang.Character",
+  "fields":[
+    {"name":"TYPE"}, 
+    {"name":"value"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":["char"] }]
+},
+{
+  "name":"java.lang.Class",
+  "methods":[
+    {"name":"forName","parameterTypes":["java.lang.String","boolean","java.lang.ClassLoader"] }, 
+    {"name":"getComponentType","parameterTypes":[] }, 
+    {"name":"getFields","parameterTypes":[] }, 
+    {"name":"getMethods","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"isArray","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.lang.ClassLoader",
+  "methods":[
+    {"name":"getPlatformClassLoader","parameterTypes":[] }, 
+    {"name":"loadClass","parameterTypes":["java.lang.String"] }
+  ]
+},
+{
+  "name":"java.lang.Double",
+  "fields":[
+    {"name":"TYPE"}, 
+    {"name":"value"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":["double"] }]
+},
+{
+  "name":"java.lang.Float",
+  "fields":[
+    {"name":"TYPE"}, 
+    {"name":"value"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":["float"] }]
+},
+{
+  "name":"java.lang.Integer",
+  "fields":[
+    {"name":"TYPE"}, 
+    {"name":"value"}
+  ],
+  "methods":[
+    {"name":"<init>","parameterTypes":["int"] }, 
+    {"name":"valueOf","parameterTypes":["int"] }
+  ]
+},
+{
+  "name":"java.lang.Long",
+  "fields":[
+    {"name":"TYPE"}, 
+    {"name":"value"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":["long"] }]
+},
+{
+  "name":"java.lang.Number"
+},
+{
+  "name":"java.lang.Object",
+  "methods":[
+    {"name":"getClass","parameterTypes":[] }, 
+    {"name":"toString","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.lang.Runnable",
+  "methods":[{"name":"run","parameterTypes":[] }]
+},
+{
+  "name":"java.lang.Short",
+  "fields":[
+    {"name":"TYPE"}, 
+    {"name":"value"}
+  ],
+  "methods":[{"name":"<init>","parameterTypes":["short"] }]
+},
+{
+  "name":"java.lang.String",
+  "methods":[
+    {"name":"<init>","parameterTypes":["byte[]"] }, 
+    {"name":"<init>","parameterTypes":["byte[]","java.lang.String"] }, 
+    {"name":"getBytes","parameterTypes":[] }, 
+    {"name":"getBytes","parameterTypes":["java.lang.String"] }, 
+    {"name":"toCharArray","parameterTypes":[] }, 
+    {"name":"toLowerCase","parameterTypes":["java.util.Locale"] }
+  ]
+},
+{
+  "name":"java.lang.System",
+  "methods":[{"name":"getProperty","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.UnsatisfiedLinkError",
+  "methods":[{"name":"<init>","parameterTypes":["java.lang.String"] }]
+},
+{
+  "name":"java.lang.Void",
+  "fields":[{"name":"TYPE"}]
+},
+{
+  "name":"java.lang.reflect.Field",
+  "methods":[
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.lang.reflect.Method",
+  "methods":[
+    {"name":"getModifiers","parameterTypes":[] }, 
+    {"name":"getName","parameterTypes":[] }, 
+    {"name":"getParameterTypes","parameterTypes":[] }, 
+    {"name":"getReturnType","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.nio.Buffer",
+  "methods":[{"name":"position","parameterTypes":[] }]
+},
+{
+  "name":"java.nio.ByteBuffer",
+  "methods":[
+    {"name":"array","parameterTypes":[] }, 
+    {"name":"arrayOffset","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.nio.CharBuffer",
+  "methods":[
+    {"name":"array","parameterTypes":[] }, 
+    {"name":"arrayOffset","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.nio.DoubleBuffer",
+  "methods":[
+    {"name":"array","parameterTypes":[] }, 
+    {"name":"arrayOffset","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.nio.FloatBuffer",
+  "methods":[
+    {"name":"array","parameterTypes":[] }, 
+    {"name":"arrayOffset","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.nio.IntBuffer",
+  "methods":[
+    {"name":"array","parameterTypes":[] }, 
+    {"name":"arrayOffset","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.nio.LongBuffer",
+  "methods":[
+    {"name":"array","parameterTypes":[] }, 
+    {"name":"arrayOffset","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.nio.ShortBuffer",
+  "methods":[
+    {"name":"array","parameterTypes":[] }, 
+    {"name":"arrayOffset","parameterTypes":[] }
+  ]
+},
+{
+  "name":"java.util.ArrayList",
+  "methods":[
+    {"name":"<init>","parameterTypes":["int"] }, 
+    {"name":"add","parameterTypes":["java.lang.Object"] }
+  ]
+},
+{
+  "name":"java.util.HashMap",
+  "methods":[
+    {"name":"containsKey","parameterTypes":["java.lang.Object"] }, 
+    {"name":"put","parameterTypes":["java.lang.Object","java.lang.Object"] }
+  ]
+},
+{
+  "name":"jdk.internal.loader.ClassLoaders$PlatformClassLoader"
+},
+{
+  "name":"org.graalvm.jniutils.JNIExceptionWrapperEntryPoints",
+  "methods":[{"name":"getClassName","parameterTypes":["java.lang.Class"] }]
+}
+]

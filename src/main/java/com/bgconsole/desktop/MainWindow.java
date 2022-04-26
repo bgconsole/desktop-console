@@ -23,6 +23,7 @@ public class MainWindow extends Application {
         Parent root = loader.load();
 
         MainWindowController controller = loader.getController();
+        controller.setHostServices(getHostServices());
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/com/bgconsole/desktop/styles.css").toExternalForm());

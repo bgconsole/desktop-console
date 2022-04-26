@@ -34,10 +34,10 @@ public class WriteYAMLFile {
         writer.writeValue(new File(absoluteFile), commands);
     }
 
-    public static void writeProfile(Profile profile) throws IOException {
+    public static void writeProfile(Profile profile, String absolutePath) throws IOException {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-        writer.writeValue(Paths.get(ProjectData.DEFAULT_PROFILE_DIR.toString(), UUID.randomUUID() + ".yaml").toFile(), profile);
+        writer.writeValue(new File(absolutePath), profile);
     }
 
     public static void writeWorkspace(Workspace workspace, String absoluteFile) throws IOException {

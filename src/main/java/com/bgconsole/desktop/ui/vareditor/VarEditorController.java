@@ -1,6 +1,7 @@
 package com.bgconsole.desktop.ui.vareditor;
 
 import com.bgconsole.desktop.variable.VariableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -34,5 +35,8 @@ public class VarEditorController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void add(ActionEvent event) {
     }
 }

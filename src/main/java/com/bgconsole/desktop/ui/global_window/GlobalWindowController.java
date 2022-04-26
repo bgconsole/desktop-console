@@ -86,13 +86,22 @@ public class GlobalWindowController {
 
         searchField.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                if (!commands.isEmpty() && !searchField.getText().isEmpty()) {
-                    TableCommand tableCommand = commandTable.getSelectionModel().getSelectedItem();
-                    if (tableCommand == null) {
-                        tableCommand = commandTable.getItems().get(0);
-                    }
-                    tableCommand.getLocationData().runCommand(tableCommand.getCommand());
-                    stage.close();
+                TableCommand tableCommand = commandTable.getSelectionModel().getSelectedItem();
+                if (tableCommand == null) {
+                    tableCommand = commandTable.getItems().get(0);
+                }
+                tableCommand.getLocationData().runCommand(tableCommand.getCommand());
+                stage.close();
+            } else if (event.getCode() == KeyCode.UP) {
+                var index = commandTable.getSelectionModel().getSelectedIndex();
+                if (index >= 1) {
+                    commandTable.getSelectionModel().select(index - 1);
+                }
+                searchField.end();
+            } else if (event.getCode() == KeyCode.DOWN) {
+                var index = commandTable.getSelectionModel().getSelectedIndex();
+                if (index < commandTable.getItems().size() - 1) {
+                    commandTable.getSelectionModel().select(index + 1);
                 }
             }
         });

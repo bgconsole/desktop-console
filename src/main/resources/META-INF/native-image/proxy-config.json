@@ -1,0 +1,14 @@
+[
+  {
+    "interfaces":["com.pty4j.windows.WinPty$Kern32"]}
+  ,
+  {
+    "interfaces":["com.pty4j.windows.WinPty$WinPtyLib"]}
+  ,
+  {
+    "interfaces":["com.sun.jna.platform.win32.Kernel32"]}
+  ,
+  {
+    "interfaces":["com.sun.jna.platform.win32.User32"]}
+  
+]

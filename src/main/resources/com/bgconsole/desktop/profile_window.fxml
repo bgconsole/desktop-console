@@ -18,8 +18,8 @@
       <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <Button mnemonicParsing="false" text="New" onAction="#add"/>
-            <Button mnemonicParsing="false" text="Update" />
-            <Button mnemonicParsing="false" text="Delete" />
+            <Button mnemonicParsing="false" text="Update" onAction="#update" />
+            <Button mnemonicParsing="false" text="Delete" onAction="#delete"/>
         </items>
       </ToolBar>
    </top>

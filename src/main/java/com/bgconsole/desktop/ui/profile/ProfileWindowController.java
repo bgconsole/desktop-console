@@ -1,13 +1,12 @@
 package com.bgconsole.desktop.ui.profile;
 
+import com.bgconsole.desktop.ProjectData;
 import com.bgconsole.desktop.profile.Profile;
 import com.bgconsole.desktop.profile.ProfileService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -48,6 +47,7 @@ public class ProfileWindowController {
         inputDialog.showAndWait().ifPresent(newName -> {
             Profile profile = new Profile(UUID.randomUUID().toString(), newName, Collections.emptyList());
             profileService.create(profile);
+            refresh();
         });
     }
 
@@ -60,8 +60,30 @@ public class ProfileWindowController {
         inputDialog.getEditor().setText(profile.getName());
         inputDialog.showAndWait().ifPresent(newName -> {
             if (!newName.equals(profile.getName())) {
-
+                profile.setName(newName);
+                profileService.save(profile.getId(), profile);
+                refresh();
             }
         });
+    }
+
+    @FXML
+    public void delete() {
+        Profile profile = profileList.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete profile");
+        alert.setHeaderText("The profile \"" + profile.getName() + "\" is about to be deleted.");
+        alert.setContentText("Are you sure you would like to delete it ?");
+
+        alert.showAndWait().ifPresent(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                profileService.delete(profile.getId());
+                refresh();
+            }
+        });
+    }
+
+    private void refresh() {
+        setProfiles(profileService.loadProfiles(ProjectData.DEFAULT_PROFILE_DIR.toString()));
     }
 }
