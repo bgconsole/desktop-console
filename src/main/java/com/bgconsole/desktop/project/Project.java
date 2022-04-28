@@ -2,20 +2,30 @@ package com.bgconsole.desktop.project;
 
 import com.bgconsole.desktop.location.Location;
 import com.bgconsole.desktop.workspace.Workspace;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
 
     private String id;
     private String name;
+    private String description;
+
     private Workspace workspace;
 
-    private List<ProjectCommand> commands;
-    private List<ProjectVariable> variables;
+    private List<ProjectCommand> commands = new ArrayList<>();
+    private List<ProjectVariable> variables = new ArrayList<>();
 
     public Project() {
+    }
+
+    public Project(String id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
     }
 
     public String getId() {
@@ -58,12 +68,20 @@ public class Project {
         this.variables = variables;
     }
 
+    @JsonIgnore
     public String getPath() {
-        return Paths.get(workspace.getPath(), "projects", id).toString();
+        return workspace != null ? Paths.get(workspace.getPath(), "projects", id).toString() : null;
     }
 
     public Location getWorkspaceLocation() {
-        return new Location(workspace.getName(), workspace.getPath());
+        return workspace != null ? new Location(workspace.getName(), workspace.getPath()) : null;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

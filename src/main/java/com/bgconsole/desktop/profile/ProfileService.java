@@ -1,5 +1,7 @@
 package com.bgconsole.desktop.profile;
 
+import com.bgconsole.desktop.workspace.Workspace;
+
 import java.util.List;
 
 public interface ProfileService {
@@ -11,4 +13,6 @@ public interface ProfileService {
     void delete(String id);
 
     Profile create(Profile profile);
+
+    Profile addWorkspace(String profileId, Workspace workspace, String path);
 }

@@ -1,8 +1,8 @@
-package com.bgconsole.desktop.ui.new_location;
+package com.bgconsole.desktop.ui.new_project;
 
 import com.bgconsole.desktop.AppData;
 import com.bgconsole.desktop.MainWindowController;
-import com.bgconsole.desktop.profile.Profile;
+import com.bgconsole.desktop.workspace.Workspace;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,18 +13,18 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.net.URL;
 
-public class NewLocation {
+public class NewProject {
 
-    public NewLocation(MainWindowController mainWindowController, Profile profile) {
+    public NewProject(MainWindowController mainWindowController, Workspace workspace) {
         try {
-            URL resource = getClass().getResource("/com/bgconsole/desktop/new_location.fxml");
+            URL resource = getClass().getResource("/com/bgconsole/desktop/new_project.fxml");
             FXMLLoader loader = new FXMLLoader(resource);
 
             Parent root = loader.load();
 
-            NewLocationController controller = loader.getController();
+            NewProjectController controller = loader.getController();
             controller.setMainWindowController(mainWindowController);
-            controller.setProfile(profile);
+            controller.setWorkspace(workspace);
 //            controller.setCommandLists(lists);
 
             Stage stage = new Stage(StageStyle.UTILITY);
@@ -35,13 +35,12 @@ public class NewLocation {
 
 //            stage.setOnCloseRequest(event -> trigger.trigger());
 
-            stage.setTitle("New location");
+            stage.setTitle("New project");
             stage.setScene(scene);
             stage.show();
 
             controller.setStage(stage);
-            controller.setWorkspaceService(AppData.instance.getWorkspaceService());
-            controller.setProfileService(AppData.instance.getProfileService());
+            controller.setProjectService(AppData.instance.getProjectService());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,7 +4,7 @@ import com.bgconsole.desktop.location.Location;
 
 public interface WorkspaceService {
 
-    Workspace createWorkspace(String name, String path);
+    Workspace createWorkspace(String profileId, String name, String path);
 
     Workspace createLocalWorkspace(String workspaceId);
 

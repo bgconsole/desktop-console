@@ -4,8 +4,10 @@ import com.bgconsole.desktop.ProjectData;
 import com.bgconsole.desktop.command.Command;
 import com.bgconsole.desktop.location.Location;
 import com.bgconsole.desktop.profile.Profile;
+import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.variable.Variable;
 import com.bgconsole.desktop.workspace.Workspace;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -44,6 +46,13 @@ public class WriteYAMLFile {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
         writer.writeValue(new File(absoluteFile), workspace);
+    }
+
+    public static void writeProject(Project project, String absoluteFile) throws IOException {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+        writer.writeValue(new File(absoluteFile), project);
     }
 
     public static void writeLocations(List<Location> locations, String absoluteFile) throws IOException {

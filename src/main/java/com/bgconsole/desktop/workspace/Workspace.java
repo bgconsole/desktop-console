@@ -9,6 +9,11 @@ public class Workspace {
     public Workspace() {
     }
 
+    public Workspace(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Workspace(String id, String name, String path) {
         this.id = id;
         this.name = name;

@@ -1,8 +1,10 @@
 package com.bgconsole.desktop.profile;
 
 import com.bgconsole.desktop.ProjectData;
+import com.bgconsole.desktop.location.Location;
 import com.bgconsole.desktop.utils.ParseYAMLFile;
 import com.bgconsole.desktop.utils.WriteYAMLFile;
+import com.bgconsole.desktop.workspace.Workspace;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -41,6 +43,20 @@ public class ProfileServiceImpl implements ProfileService {
     public Profile create(Profile profile) {
         var id = UUID.randomUUID().toString();
         return saveProfile(profile, id);
+    }
+
+    @Override
+    public Profile addWorkspace(String profileId, Workspace workspace, String workspacePath) {
+        String path = Paths.get(ProjectData.DEFAULT_PROFILE_DIR.toString(), profileId + ".yaml").toString();
+        try {
+            Profile profile = ParseYAMLFile.readProfile(path);
+            profile.getLocations().add(new Location(workspace.getId(), workspace.getName(), workspacePath));
+            saveProfile(profile, profileId);
+            return profile;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private Profile saveProfile(Profile profile, String id) {

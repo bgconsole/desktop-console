@@ -13,22 +13,21 @@
                     <items>
                         <!--                        <MenuItem fx:id="newMenu" mnemonicParsing="false" onAction="#newLocation" text="New"/>-->
                         <!--                        <MenuItem fx:id="openMenu" mnemonicParsing="false" onAction="#openProject" text="Open..."/>-->
-                        <MenuItem fx:id="profileManagerMenu" onAction="#openProfileManager"
-                                  text="Profile manager..."/>
+                        <MenuItem fx:id="profileManagerMenu" onAction="#openProfileManager" text="Profile manager..."/>
                         <SeparatorMenuItem mnemonicParsing="false"/>
                         <MenuItem fx:id="quitMenu" mnemonicParsing="false" onAction="#quit" text="Quit"/>
                     </items>
                 </Menu>
                 <Menu text="Workspace">
                     <items>
-                        <MenuItem text="New..." onAction="#newWorkspace"/>
-                        <MenuItem text="Open..." onAction="#openWorkspace"/>
-                        <MenuItem text="Remove" onAction="#removeWorkspace"/>
+                        <MenuItem onAction="#newWorkspace" text="New..."/>
+                        <MenuItem onAction="#openWorkspace" text="Open..."/>
+                        <MenuItem onAction="#removeWorkspace" text="Remove"/>
                     </items>
                 </Menu>
                 <Menu text="Project">
                     <items>
-                        <MenuItem text="Create..." onAction="#createProject"/>
+                        <MenuItem onAction="#createProject" text="Create..."/>
                     </items>
                 </Menu>
                 <Menu text="Help">
@@ -70,10 +69,10 @@
                     </BorderPane>
                 </AnchorPane>
                 <AnchorPane prefWidth="100.0">
-                    <children>
-                        <TilePane fx:id="projectPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                    </children>
+                    <TableView fx:id="projectTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                               AnchorPane.rightAnchor="0.0"
+                               AnchorPane.topAnchor="0.0">
+                    </TableView>
                 </AnchorPane>
             </items>
         </SplitPane>
