@@ -6,6 +6,7 @@ import com.bgconsole.desktop.profile.ProfileService;
 import com.bgconsole.desktop.project.Project;
 import com.bgconsole.desktop.ui.ProjectWindow;
 import com.bgconsole.desktop.ui.new_location.NewLocation;
+import com.bgconsole.desktop.ui.new_project.NewProject;
 import com.bgconsole.desktop.ui.profile.ProfileWindow;
 import com.bgconsole.desktop.utils.ParseYAMLFile;
 import com.bgconsole.desktop.utils.ProfileObservableConverter;
@@ -16,9 +17,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.TilePane;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
@@ -30,7 +30,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.bgconsole.desktop.ProjectData.DEFAULT_PROFILE_DIR;
 
@@ -46,13 +45,15 @@ public class MainWindowController {
     private ChoiceBox<Profile> profileSelector;
 
     @FXML
-    private TilePane projectPane;
+    private TableView<Project> projectTable;
 
-    private List<Profile> profiles;
+    private ObservableList<Project> projectObservableList;
 
     private List<Location> locationCache;
 
     private Profile selectedProfile;
+
+    private Workspace selectedWorkspace;
 
     private Stage stage;
 
@@ -66,6 +67,37 @@ public class MainWindowController {
         profileService = AppData.instance.getProfileService();
     }
 
+    public void initialize() {
+        projectObservableList = FXCollections.observableArrayList();
+        var name = new TableColumn<Project, String>("Name");
+        name.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        var description = new TableColumn<Project, String>("Description");
+        description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+
+        projectTable.getColumns().add(name);
+        projectTable.getColumns().add(description);
+
+        projectTable.setRowFactory(tableView -> {
+            TableRow<Project> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    Project project = row.getItem();
+                    try {
+                        AppData.instance.addProject(project);
+                        new ProjectWindow(project);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+            return row;
+        });
+
+        projectTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        projectTable.setItems(projectObservableList);
+    }
+
+
     public void setHostServices(HostServices hostServices) {
         this.hostServices = hostServices;
     }
@@ -77,7 +109,9 @@ public class MainWindowController {
 
     @FXML
     public void newWorkspace(ActionEvent event) {
-        new NewLocation(this);
+        if (selectedProfile != null) {
+            new NewLocation(this, selectedProfile);
+        }
     }
 
     @FXML
@@ -113,7 +147,6 @@ public class MainWindowController {
     }
 
     public void setProfileList(List<Profile> profiles) {
-        this.profiles = profiles;
         ObservableList<Profile> profileList = FXCollections.observableArrayList(profiles);
         profileSelector.getSelectionModel().selectFirst();
         profileSelector.setConverter(new ProfileObservableConverter(profiles));
@@ -136,6 +169,7 @@ public class MainWindowController {
                 Location loc = locationCache.get(locationList.getSelectionModel().getSelectedIndex());
                 Workspace workspace = MainWindowData.instance.loadWorkspace(loc);
                 workspace.setPath(loc.getPath());
+                selectedWorkspace = workspace;
                 List<Project> projects = MainWindowData.instance.loadProjects(loc.getPath());
                 projects.forEach(project -> project.setWorkspace(workspace));
                 changeProjectInPane(projects);
@@ -153,21 +187,8 @@ public class MainWindowController {
     }
 
     private void changeProjectInPane(List<Project> projects) {
-        List<Button> buttons = projects.stream().map(project -> {
-            Button button = new Button();
-            button.setText(project.getName());
-            button.setOnMouseClicked(mouseEvent -> {
-                try {
-                    AppData.instance.addProject(project);
-                    new ProjectWindow(project);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            });
-            return button;
-        }).collect(Collectors.toList());
-        ObservableList<Node> children = projectPane.getChildren();
-        children.addAll(buttons);
+        projectObservableList.clear();
+        projectObservableList.setAll(projects);
     }
 
     public void openProfileManager(ActionEvent event) {
@@ -198,6 +219,8 @@ public class MainWindowController {
     }
 
     public void createProject(ActionEvent event) {
-
+        if (selectedWorkspace != null) {
+            new NewProject(this, selectedWorkspace);
+        }
     }
 }

@@ -35,5 +35,6 @@ module terminal {
     opens com.bgconsole.desktop.global_input to javafx.fxml;
     exports com.bgconsole.desktop.ui.new_location;
     opens com.bgconsole.desktop.ui.new_location to javafx.fxml;
+    opens com.bgconsole.desktop.ui.new_project to javafx.fxml;
     opens com.bgconsole.desktop.project to com.fasterxml.jackson.databind;
 }
