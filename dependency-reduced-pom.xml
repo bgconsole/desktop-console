@@ -4,7 +4,7 @@
   <groupId>com.bgconsole</groupId>
   <artifactId>desktop-console</artifactId>
   <name>desktop-console</name>
-  <version>1.3</version>
+  <version>1.5.0</version>
   <build>
     <plugins>
       <plugin>
@@ -22,9 +22,63 @@
         <version>0.0.8</version>
         <configuration>
           <release>${maven.compiler.release}</release>
-          <jlinkImageName>desktop-console</jlinkImageName>
+          <jlinkImageName>terminal</jlinkImageName>
           <launcher>launcher</launcher>
-          <mainClass>desktop-console/com.bgconsole.desktop.MainClass</mainClass>
+          <mainClass>terminal/com.bgconsole.desktop.MainWindow</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.gluonhq</groupId>
+        <artifactId>gluonfx-maven-plugin</artifactId>
+        <version>1.0.13</version>
+        <configuration>
+          <target>host</target>
+          <reflectionList>
+            <list>javafx.application.Application</list>
+            <list>javafx.fxml.FXMLLoader</list>
+            <list>javafx.beans.value.ObservableValue</list>
+            <list>javafx.event.ActionEvent</list>
+            <list>javafx.event.EventHandler</list>
+            <list>javafx.scene.image.Image</list>
+            <list>javafx.fxml.FXML</list>
+            <list>javafx.scene.control.ScrollPane</list>
+            <list>javafx.scene.control.TextField</list>
+            <list>javafx.scene.input.MouseEvent</list>
+            <list>javafx.scene.layout.FlowPane</list>
+            <list>javafx.scene.layout.StackPane</list>
+            <list>javafx.scene.Parent</list>
+            <list>javafx.scene.Scene</list>
+            <list>javafx.stage.Stage</list>
+            <list>java.util.ArrayList</list>
+            <list>javafx.scene.control.ComboBox</list>
+            <list>javafx.scene.control.ListCell</list>
+            <list>javafx.geometry.Insets</list>
+            <list>javafx.scene.layout.VBox</list>
+            <list>javafx.scene.layout.HBox</list>
+            <list>javafx.scene.control.Button</list>
+            <list>javafx.scene.control.ScrollPane</list>
+            <list>javafx.scene.control.SplitPane</list>
+            <list>javafx.scene.control.ListView</list>
+            <list>javafx.scene.control.MenuBar</list>
+            <list>javafx.scene.control.MenuItem</list>
+            <list>javafx.scene.control.Menu</list>
+            <list>javafx.scene.layout.ColumnConstraints</list>
+            <list>javafx.scene.layout.AnchorPane</list>
+            <list>javafx.scene.layout.BorderPane</list>
+            <list>javafx.scene.layout.TilePane</list>
+            <list>javafx.scene.control.Label</list>
+            <list>javafx.scene.control.ChoiceBox</list>
+            <list>com.bgconsole.desktop.MainWindowController</list>
+            <list>com.bgconsole.desktop.FXMLController</list>
+            <list>com.bgconsole.desktop.ui.commandeditor.CommandEditorController</list>
+            <list>com.bgconsole.desktop.ui.commandeditor.CommandEditorTabController</list>
+            <list>com.bgconsole.desktop.ui.global_window.GlobalWindowController</list>
+            <list>com.bgconsole.desktop.ui.new_location.NewLocationController</list>
+            <list>com.bgconsole.desktop.ui.terminal_window.TerminalWindowController</list>
+            <list>com.bgconsole.desktop.ui.vareditor.VarEditorController</list>
+            <list>com.bgconsole.desktop.ui.vareditor.VarEditorTabController</list>
+          </reflectionList>
+          <mainClass>terminal/com.bgconsole.desktop.MainWindow</mainClass>
         </configuration>
       </plugin>
     </plugins>
@@ -142,6 +196,12 @@
         </dependency>
       </dependencies>
     </profile>
+    <profile>
+      <id>desktop</id>
+      <properties>
+        <client.target>host</client.target>
+      </properties>
+    </profile>
   </profiles>
   <repositories>
     <repository>
@@ -161,6 +221,38 @@
       <url>https://jcenter.bintray.com</url>
     </repository>
   </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>org.graalvm.sdk</groupId>
+      <artifactId>graal-sdk</artifactId>
+      <version>22.0.0.2</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.graalvm.nativeimage</groupId>
+      <artifactId>svm</artifactId>
+      <version>22.0.0.2</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>objectfile</artifactId>
+          <groupId>org.graalvm.nativeimage</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>pointsto</artifactId>
+          <groupId>org.graalvm.nativeimage</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>compiler</artifactId>
+          <groupId>org.graalvm.compiler</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>native-image-base</artifactId>
+          <groupId>org.graalvm.nativeimage</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+  </dependencies>
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <mainClass>com.bgconsole.desktop.MainClass</mainClass>

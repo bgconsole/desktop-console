@@ -82,100 +82,100 @@
         </dependency>
     </dependencies>
     <profiles>
-        <!--        <profile>-->
-        <!--            <id>prod</id>-->
-        <!--            <dependencies>-->
-        <!--                <dependency>-->
-        <!--                    <groupId>org.openjfx</groupId>-->
-        <!--                    <artifactId>javafx-graphics</artifactId>-->
-        <!--                    <version>${javafx.version}</version>-->
-        <!--                    <classifier>win</classifier>-->
-        <!--                </dependency>-->
-        <!--                <dependency>-->
-        <!--                    <groupId>org.openjfx</groupId>-->
-        <!--                    <artifactId>javafx-graphics</artifactId>-->
-        <!--                    <version>${javafx.version}</version>-->
-        <!--                    <classifier>linux</classifier>-->
-        <!--                </dependency>-->
-        <!--                <dependency>-->
-        <!--                    <groupId>org.openjfx</groupId>-->
-        <!--                    <artifactId>javafx-graphics</artifactId>-->
-        <!--                    <version>${javafx.version}</version>-->
-        <!--                    <classifier>mac</classifier>-->
-        <!--                </dependency>-->
-        <!--            </dependencies>-->
-        <!--            <build>-->
-        <!--                <plugins>-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-        <!--                        <artifactId>maven-compiler-plugin</artifactId>-->
-        <!--                        <version>3.8.1</version>-->
-        <!--                        <configuration>-->
-        <!--                            <release>${maven.compiler.release}</release>-->
-        <!--                        </configuration>-->
-        <!--                    </plugin>-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.openjfx</groupId>-->
-        <!--                        <artifactId>javafx-maven-plugin</artifactId>-->
-        <!--                        <version>0.0.8</version>-->
-        <!--                        <configuration>-->
-        <!--                            <release>${maven.compiler.release}</release>-->
-        <!--                            <jlinkImageName>desktop-console</jlinkImageName>-->
-        <!--                            <launcher>launcher</launcher>-->
-        <!--                            <mainClass>desktop-console/com.bgconsole.desktop.MainClass</mainClass>-->
-        <!--                        </configuration>-->
-        <!--                    </plugin>-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.codehaus.mojo</groupId>-->
-        <!--                        <artifactId>exec-maven-plugin</artifactId>-->
-        <!--                        <version>1.6.0</version>-->
-        <!--                        <executions>-->
-        <!--                            <execution>-->
-        <!--                                <goals>-->
-        <!--                                    <goal>java</goal>-->
-        <!--                                </goals>-->
-        <!--                            </execution>-->
-        <!--                        </executions>-->
-        <!--                        <configuration>-->
-        <!--                            <mainClass>com.bgconsole.desktop.MainClass</mainClass>-->
-        <!--                        </configuration>-->
-        <!--                    </plugin>-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-        <!--                        <artifactId>maven-jar-plugin</artifactId>-->
-        <!--                        <version>3.2.0</version>-->
-        <!--                        <configuration>-->
-        <!--                            <archive>-->
-        <!--                                <manifest>-->
-        <!--                                    <mainClass>com.bgconsole.desktop.MainClass</mainClass>-->
-        <!--                                </manifest>-->
-        <!--                            </archive>-->
-        <!--                        </configuration>-->
-        <!--                    </plugin>-->
-        <!--                    <plugin>-->
-        <!--                        <groupId>org.apache.maven.plugins</groupId>-->
-        <!--                        <artifactId>maven-shade-plugin</artifactId>-->
-        <!--                        <version>3.2.0</version>-->
-        <!--                        <executions>-->
-        <!--                            <execution>-->
-        <!--                                <phase>package</phase>-->
-        <!--                                <goals>-->
-        <!--                                    <goal>shade</goal>-->
-        <!--                                </goals>-->
-        <!--                                <configuration>-->
-        <!--                                    <transformers>-->
-        <!--                                        <transformer-->
-        <!--                                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
-        <!--                                            <mainClass>com.bgconsole.desktop.MainClass</mainClass>-->
-        <!--                                        </transformer>-->
-        <!--                                    </transformers>-->
-        <!--                                </configuration>-->
-        <!--                            </execution>-->
-        <!--                        </executions>-->
-        <!--                    </plugin>-->
-        <!--                </plugins>-->
-        <!--            </build>-->
-        <!--        </profile>-->
+                <profile>
+                    <id>prod</id>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.openjfx</groupId>
+                            <artifactId>javafx-graphics</artifactId>
+                            <version>${javafx.version}</version>
+                            <classifier>win</classifier>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.openjfx</groupId>
+                            <artifactId>javafx-graphics</artifactId>
+                            <version>${javafx.version}</version>
+                            <classifier>linux</classifier>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.openjfx</groupId>
+                            <artifactId>javafx-graphics</artifactId>
+                            <version>${javafx.version}</version>
+                            <classifier>mac</classifier>
+                        </dependency>
+                    </dependencies>
+                    <build>
+                        <plugins>
+                            <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-compiler-plugin</artifactId>
+                                <version>3.8.1</version>
+                                <configuration>
+                                    <release>${maven.compiler.release}</release>
+                                </configuration>
+                            </plugin>
+                            <plugin>
+                                <groupId>org.openjfx</groupId>
+                                <artifactId>javafx-maven-plugin</artifactId>
+                                <version>0.0.8</version>
+                                <configuration>
+                                    <release>${maven.compiler.release}</release>
+                                    <jlinkImageName>desktop-console</jlinkImageName>
+                                    <launcher>launcher</launcher>
+                                    <mainClass>desktop-console/com.bgconsole.desktop.MainClass</mainClass>
+                                </configuration>
+                            </plugin>
+                            <plugin>
+                                <groupId>org.codehaus.mojo</groupId>
+                                <artifactId>exec-maven-plugin</artifactId>
+                                <version>1.6.0</version>
+                                <executions>
+                                    <execution>
+                                        <goals>
+                                            <goal>java</goal>
+                                        </goals>
+                                    </execution>
+                                </executions>
+                                <configuration>
+                                    <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+                                </configuration>
+                            </plugin>
+                            <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-jar-plugin</artifactId>
+                                <version>3.2.0</version>
+                                <configuration>
+                                    <archive>
+                                        <manifest>
+                                            <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+                                        </manifest>
+                                    </archive>
+                                </configuration>
+                            </plugin>
+                            <plugin>
+                                <groupId>org.apache.maven.plugins</groupId>
+                                <artifactId>maven-shade-plugin</artifactId>
+                                <version>3.2.0</version>
+                                <executions>
+                                    <execution>
+                                        <phase>package</phase>
+                                        <goals>
+                                            <goal>shade</goal>
+                                        </goals>
+                                        <configuration>
+                                            <transformers>
+                                                <transformer
+                                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                                    <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+                                                </transformer>
+                                            </transformers>
+                                        </configuration>
+                                    </execution>
+                                </executions>
+                            </plugin>
+                        </plugins>
+                    </build>
+                </profile>
         <profile>
             <id>desktop</id>
             <activation>
@@ -203,9 +203,9 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <!--                    <release>${maven.compiler.release}</release>-->
-                    <!--                    <jlinkImageName>terminal</jlinkImageName>-->
-                    <!--                    <launcher>launcher</launcher>-->
+                    <release>${maven.compiler.release}</release>
+                    <jlinkImageName>terminal</jlinkImageName>
+                    <launcher>launcher</launcher>
                     <mainClass>terminal/com.bgconsole.desktop.MainWindow</mainClass>
                 </configuration>
             </plugin>
@@ -262,9 +262,9 @@
                         <list>com.bgconsole.desktop.ui.vareditor.VarEditorController</list>
                         <list>com.bgconsole.desktop.ui.vareditor.VarEditorTabController</list>
                     </reflectionList>
-<!--                    <nativeImageArgs>-->
-<!--                        <nativeImageArg>&#45;&#45;allow-incomplete-classpath</nativeImageArg>-->
-<!--                    </nativeImageArgs>-->
+                    <!--                    <nativeImageArgs>-->
+                    <!--                        <nativeImageArg>&#45;&#45;allow-incomplete-classpath</nativeImageArg>-->
+                    <!--                    </nativeImageArgs>-->
                     <mainClass>terminal/com.bgconsole.desktop.MainWindow</mainClass>
                 </configuration>
             </plugin>
