@@ -24,7 +24,7 @@
           <release>${maven.compiler.release}</release>
           <jlinkImageName>desktop-console</jlinkImageName>
           <launcher>launcher</launcher>
-          <mainClass>desktop-console/com.bgconsole.desktop.MainClass</mainClass>
+          <mainClass>desktop-console/desktop.MainClass</mainClass>
         </configuration>
       </plugin>
     </plugins>
@@ -49,7 +49,7 @@
               <release>${maven.compiler.release}</release>
               <jlinkImageName>desktop-console</jlinkImageName>
               <launcher>launcher</launcher>
-              <mainClass>desktop-console/com.bgconsole.desktop.MainClass</mainClass>
+              <mainClass>desktop-console/desktop.MainClass</mainClass>
             </configuration>
           </plugin>
           <plugin>
@@ -62,12 +62,12 @@
                   <goal>java</goal>
                 </goals>
                 <configuration>
-                  <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+                  <mainClass>desktop.MainClass</mainClass>
                 </configuration>
               </execution>
             </executions>
             <configuration>
-              <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+              <mainClass>desktop.MainClass</mainClass>
             </configuration>
           </plugin>
           <plugin>
@@ -83,7 +83,7 @@
                 <configuration>
                   <archive>
                     <manifest>
-                      <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+                      <mainClass>desktop.MainClass</mainClass>
                     </manifest>
                   </archive>
                 </configuration>
@@ -92,7 +92,7 @@
             <configuration>
               <archive>
                 <manifest>
-                  <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+                  <mainClass>desktop.MainClass</mainClass>
                 </manifest>
               </archive>
             </configuration>
@@ -109,7 +109,7 @@
                 <configuration>
                   <transformers>
                     <transformer>
-                      <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+                      <mainClass>desktop.MainClass</mainClass>
                     </transformer>
                   </transformers>
                 </configuration>
@@ -163,7 +163,7 @@
   </repositories>
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
-    <mainClass>com.bgconsole.desktop.MainClass</mainClass>
+    <mainClass>desktop.MainClass</mainClass>
     <moduleName>bgconsole</moduleName>
     <javafx.version>17.0.1</javafx.version>
   </properties>

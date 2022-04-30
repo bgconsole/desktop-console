@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bgconsole.desktop_ui.ui.commandeditor.CommandEditorController">
+    <children>
+        <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <TabPane fx:id="commandTab" tabClosingPolicy="UNAVAILABLE"
+                         BorderPane.alignment="CENTER"/>
+            </center>
+            <top>
+                <HBox>
+                    <children>
+                        <Button mnemonicParsing="false" text="Add" onAction="#add"/>
+                        <Button mnemonicParsing="false" text="Update" onAction="#modify"/>
+                        <Button mnemonicParsing="false" text="Delete"/>
+                        <Button mnemonicParsing="false" text="Move left"/>
+                        <Button mnemonicParsing="false" text="Move right"/>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </HBox>
+            </top>
+        </BorderPane>
+    </children>
+</AnchorPane>
