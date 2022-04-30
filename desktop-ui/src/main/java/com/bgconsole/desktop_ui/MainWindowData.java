@@ -1,6 +1,7 @@
 package com.bgconsole.desktop_ui;
 
 import com.bgconsole.desktop_ui.location.Location;
+import com.bgconsole.desktop_ui.main_window.MainWindowRedux;
 import com.bgconsole.desktop_ui.profile.Profile;
 import com.bgconsole.desktop_ui.project.Project;
 import com.bgconsole.desktop_ui.workspace.Workspace;

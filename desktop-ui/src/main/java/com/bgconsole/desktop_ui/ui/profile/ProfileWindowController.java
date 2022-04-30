@@ -35,7 +35,7 @@ public class ProfileWindowController {
             }
         });
         profileList.setItems(observableList);
-        store.subscribe(ENGINE_CRUD_PROFILE, profiles -> observableList.setAll((kotlin.collections.List<Profile>) profiles));
+        store.subscribe(ENGINE_CRUD_PROFILE, profiles -> observableList.setAll((List<Profile>) profiles));
         store.dispatch(new ProfileRedux.LoadProfiles());
     }
 

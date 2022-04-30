@@ -4,7 +4,6 @@ import com.bgconsole.desktop_ui.command.Command;
 import com.bgconsole.desktop_ui.command.CommandList;
 import com.bgconsole.desktop_ui.command.CommandService;
 import com.bgconsole.desktop_ui.config.ConfigService;
-import com.bgconsole.desktop_ui.project.Project;
 import com.bgconsole.desktop_ui.terminal.OpenerCallBack;
 import com.bgconsole.desktop_ui.terminal.Terminal;
 import com.bgconsole.desktop_ui.terminal.TerminalService;
@@ -15,6 +14,7 @@ import com.bgconsole.desktop_ui.ui.vareditor.VarEditorWindow;
 import com.bgconsole.desktop_ui.variable.Variable;
 import com.bgconsole.desktop_ui.variable.VariableList;
 import com.bgconsole.desktop_ui.variable.VariableService;
+import com.bgconsole.domain.Project;
 import com.kodedu.terminalfx.TerminalTab;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -120,7 +120,7 @@ public class FXMLController implements CommandRunner {
     @FXML
     public void editCommands(ActionEvent event) {
         List<CommandList> commands = appData.get(project.getId()).getEnvironment().getCommandLists().stream().map(command -> commandService.loadCommands(command.getName(), command.getAbsolutePath())).collect(Collectors.toList());
-        new CommandEditorWindow(appData.getWorkspaceService(), project, commands, this::reloadConfig);
+//        new CommandEditorWindow(appData.getWorkspaceService(), project, commands, this::reloadConfig);
     }
 
     public void runCommand(String command) {

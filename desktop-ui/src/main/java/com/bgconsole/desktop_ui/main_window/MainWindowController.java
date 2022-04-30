@@ -3,16 +3,15 @@ package com.bgconsole.desktop_ui.main_window;
 import com.bgconsole.desktop_engine.store.Store;
 import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.MainWindowData;
-import com.bgconsole.desktop_ui.location.Location;
 import com.bgconsole.desktop_ui.profile.ProfileService;
-import com.bgconsole.desktop_ui.project.Project;
 import com.bgconsole.desktop_ui.ui.ProjectWindow;
 import com.bgconsole.desktop_ui.ui.new_location.NewLocation;
 import com.bgconsole.desktop_ui.ui.new_project.NewProject;
 import com.bgconsole.desktop_ui.ui.profile.ProfileWindow;
 import com.bgconsole.desktop_ui.utils.ProfileObservableConverter;
-import com.bgconsole.desktop_ui.workspace.Workspace;
 import com.bgconsole.domain.Profile;
+import com.bgconsole.domain.Project;
+import com.bgconsole.domain.Workspace;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,10 +27,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.bgconsole.desktop_engine.desktop_services.ProfileReduxKt.ENGINE_CRUD_PROFILE;
+import static com.bgconsole.desktop_engine.desktop_services.ProjectReduxKt.ENGINE_CRUD_PROJECT;
+import static com.bgconsole.desktop_engine.desktop_services.WorkspaceReduxKt.ENGINE_CRUD_WORKSPACE;
+import static com.bgconsole.desktop_ui.main_window.MainWindowReduxKt.UI_MAIN_WINDOW;
 
 public class MainWindowController {
 
@@ -39,7 +40,7 @@ public class MainWindowController {
     private MenuBar menuBar;
 
     @FXML
-    private ListView<String> locationList;
+    private ListView<Workspace> workspaceList;
 
     @FXML
     private ChoiceBox<Profile> profileSelector;
@@ -49,17 +50,13 @@ public class MainWindowController {
 
     private ObservableList<Project> projectObservableList;
 
-    private List<Location> locationCache;
-
-    private Profile selectedProfile;
-
-    private Workspace selectedWorkspace;
-
     private Stage stage;
 
     private ProfileWindow profileWindow;
 
     private final ProfileService profileService;
+
+    private MainWindowContent mainWindow;
 
     private HostServices hostServices;
 
@@ -85,7 +82,7 @@ public class MainWindowController {
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     Project project = row.getItem();
                     try {
-                        AppData.instance.addProject(project);
+//                        AppData.instance.addProject(project);
                         new ProjectWindow(project);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -99,11 +96,35 @@ public class MainWindowController {
         projectTable.setItems(projectObservableList);
 
         ObservableList<Profile> profileList = FXCollections.observableArrayList();
-        profileSelector.getSelectionModel().selectFirst();
+//        profileSelector.getSelectionModel().selectFirst();
         profileSelector.setConverter(new ProfileObservableConverter(profileList));
         profileSelector.setItems(profileList);
-        store.subscribe(ENGINE_CRUD_PROFILE, entity -> profileList.setAll((kotlin.collections.List<Profile>) entity));
-        profileList.setAll((kotlin.collections.List<Profile>) store.get(ENGINE_CRUD_PROFILE));
+        store.subscribe(ENGINE_CRUD_PROFILE, entity -> profileList.setAll((List<Profile>) entity));
+        profileList.setAll((List<Profile>) store.get(ENGINE_CRUD_PROFILE));
+
+        ObservableList<Workspace> workspaceObservableList = FXCollections.observableArrayList();
+        workspaceList.setCellFactory(profileListView -> new ListCell<>() {
+            @Override
+            protected void updateItem(Workspace item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    item.getName();
+                    setText(item.getName());
+                }
+            }
+        });
+        workspaceList.setOnMouseClicked(click -> {
+            store.dispatch(new MainWindowRedux.SelectWorkspace(workspaceList.getSelectionModel().getSelectedItem()));
+        });
+        workspaceList.setItems(workspaceObservableList);
+        store.subscribe(ENGINE_CRUD_WORKSPACE, workspaces -> workspaceObservableList.setAll((List<Workspace>) workspaces));
+
+        store.subscribe(ENGINE_CRUD_PROJECT, projects -> projectObservableList.setAll((List<Project>) projects));
+
+        mainWindow = (MainWindowContent) store.get(UI_MAIN_WINDOW);
+        store.subscribe(UI_MAIN_WINDOW, mainWindow -> this.mainWindow = (MainWindowContent) mainWindow);
     }
 
 
@@ -118,8 +139,8 @@ public class MainWindowController {
 
     @FXML
     public void newWorkspace(ActionEvent event) {
-        if (selectedProfile != null) {
-            new NewLocation(this, selectedProfile);
+        if (mainWindow.getSelectedProfile() != null) {
+            new NewLocation(this, mainWindow.getSelectedProfile());
         }
     }
 
@@ -162,31 +183,32 @@ public class MainWindowController {
     }
 
     private void setCurrentProfile(Profile profile) {
-        selectedProfile = profile;
-//        locationCache = new ArrayList<>(profile.getLocations());
-        locationCache = new ArrayList<>();
-        locationList.getItems().clear();
-        locationCache.forEach(location -> {
-            locationList.getItems().add(location.getName());
-            locationList.setOnMouseClicked(click -> {
-                Location loc = locationCache.get(locationList.getSelectionModel().getSelectedIndex());
-                Workspace workspace = MainWindowData.instance.loadWorkspace(loc);
-                workspace.setPath(loc.getPath());
-                selectedWorkspace = workspace;
-                List<Project> projects = MainWindowData.instance.loadProjects(loc.getPath());
-                projects.forEach(project -> project.setWorkspace(workspace));
-                changeProjectInPane(projects);
-//                if (click.getClickCount() == 1) {
-//                    Location loc = locationCache.get(locationList.getSelectionModel().getSelectedIndex());
-//                    try {
-//                        new TerminalWindow(loc);
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-
-            });
-        });
+        store.dispatch(new MainWindowRedux.SelectProfile(profile));
+//        selectedProfile = profile;
+////        locationCache = new ArrayList<>(profile.getLocations());
+//        locationCache = new ArrayList<>();
+//        locationList.getItems().clear();
+//        locationCache.forEach(location -> {
+//            locationList.getItems().add(location.getName());
+//            locationList.setOnMouseClicked(click -> {
+//                Location loc = locationCache.get(locationList.getSelectionModel().getSelectedIndex());
+//                Workspace workspace = MainWindowData.instance.loadWorkspace(loc);
+//                workspace.setPath(loc.getPath());
+//                selectedWorkspace = workspace;
+//                List<Project> projects = MainWindowData.instance.loadProjects(loc.getPath());
+//                projects.forEach(project -> project.setWorkspace(workspace));
+//                changeProjectInPane(projects);
+////                if (click.getClickCount() == 1) {
+////                    Location loc = locationCache.get(locationList.getSelectionModel().getSelectedIndex());
+////                    try {
+////                        new TerminalWindow(loc);
+////                    } catch (IOException e) {
+////                        e.printStackTrace();
+////                    }
+////                }
+//
+//            });
+//        });
     }
 
     private void changeProjectInPane(List<Project> projects) {
@@ -222,8 +244,8 @@ public class MainWindowController {
     }
 
     public void createProject(ActionEvent event) {
-        if (selectedWorkspace != null) {
-            new NewProject(this, selectedWorkspace);
+        if (mainWindow.getSelectedWorkspace() != null) {
+            new NewProject(this, mainWindow.getSelectedWorkspace());
         }
     }
 }

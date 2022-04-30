@@ -201,7 +201,7 @@
                     <!--                    <release>${maven.compiler.release}</release>-->
                     <!--                    <jlinkImageName>terminal</jlinkImageName>-->
                     <!--                    <launcher>launcher</launcher>-->
-                    <mainClass>com.bgconsole.desktop_ui/com.bgconsole.desktop_ui.MainWindow</mainClass>
+                    <mainClass>com.bgconsole.desktop_ui.MainWindow</mainClass>
                 </configuration>
             </plugin>
 
@@ -260,7 +260,7 @@
                     <!--                    <nativeImageArgs>-->
                     <!--                        <nativeImageArg>&#45;&#45;allow-incomplete-classpath</nativeImageArg>-->
                     <!--                    </nativeImageArgs>-->
-                    <mainClass>com.bgconsole.desktop_ui/com.bgconsole.desktop_ui.MainWindow</mainClass>
+                    <mainClass>com.bgconsole.desktop_ui.MainWindow</mainClass>
                 </configuration>
             </plugin>
 

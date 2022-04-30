@@ -1,8 +1,8 @@
 package com.bgconsole.desktop_ui.ui.new_project;
 
 import com.bgconsole.desktop_ui.project.ProjectService;
-import com.bgconsole.desktop_ui.workspace.Workspace;
 import com.bgconsole.desktop_ui.main_window.MainWindowController;
+import com.bgconsole.domain.Workspace;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -42,7 +42,7 @@ public class NewProjectController {
     public void createProject(ActionEvent event) {
         String strName = name.getText();
 
-        projectService.createProject(workspace, strName);
+//        projectService.createProject(workspace, strName);
         stage.close();
     }
 

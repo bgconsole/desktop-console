@@ -3,6 +3,7 @@ package com.bgconsole.desktop_ui;
 import com.bgconsole.desktop_engine.Engine;
 import com.bgconsole.desktop_engine.desktop_services.ProfileRedux;
 import com.bgconsole.desktop_engine.store.Store;
+import com.bgconsole.desktop_ui.main_window.MainWindowRedux;
 import com.bgconsole.desktop_ui.profile.Profile;
 import com.bgconsole.desktop_ui.profile.ProfileService;
 import com.bgconsole.desktop_ui.profile.ProfileServiceImpl;
@@ -39,6 +40,7 @@ public class AppData {
         Engine engine = new Engine(new Location("", LocationType.FILE, "", "", null));
         store = engine.getStore();
         store.dispatch(new ProfileRedux.LoadProfiles());
+
         projectList = new HashMap<>();
         workspaceService = new WorkspaceServiceImpl();
         projectService = new ProjectServiceImpl();

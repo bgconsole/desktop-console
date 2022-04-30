@@ -3,7 +3,7 @@ package com.bgconsole.desktop_ui.ui;
 import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.FXMLController;
 import com.bgconsole.desktop_ui.MainWindow;
-import com.bgconsole.desktop_ui.project.Project;
+import com.bgconsole.domain.Project;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

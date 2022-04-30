@@ -1,5 +1,7 @@
 package com.bgconsole.desktop_ui.main_window
 
+import com.bgconsole.desktop_engine.desktop_services.LoadProjectsByWorkspace
+import com.bgconsole.desktop_engine.desktop_services.LoadWorkspacesByProfile
 import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.desktop_engine.store.Reducer
 import com.bgconsole.desktop_engine.store.Service
@@ -10,7 +12,7 @@ import com.bgconsole.domain.Workspace
 
 const val UI_MAIN_WINDOW = "ui.main_window"
 
-object MainWindowRedux {
+class MainWindowRedux {
 
     private val store: Store = AppData.instance.store
 
@@ -19,6 +21,7 @@ object MainWindowRedux {
 
     init {
         store.registerReducer(MainWindowReducer())
+        store.registerService(MainWindowService())
         store.addToStore(UI_MAIN_WINDOW, MainWindowContent.default())
     }
 
@@ -45,7 +48,7 @@ object MainWindowRedux {
             action: SelectWorkspace,
             current: MainWindowContent
         ): MainWindowContent {
-            return current.copy(selectWorkspace = action.workspace)
+            return current.copy(selectedWorkspace = action.workspace)
         }
 
     }
@@ -63,12 +66,12 @@ object MainWindowRedux {
         }
 
         private fun selectWorkspace(store: Store, action: SelectWorkspace) {
-            store.dispatch(SelectWorkspace(action.workspace))
+            action.workspace.location?.let { store.dispatch(LoadProjectsByWorkspace(it)) }
         }
 
 
-        private fun selectProfile(store: Store, action: MainWindowRedux.SelectProfile) {
-            store.dispatch(SelectProfile(action.profile))
+        private fun selectProfile(store: Store, action: SelectProfile) {
+            store.dispatch(LoadWorkspacesByProfile(action.profile.id))
         }
 
     }
