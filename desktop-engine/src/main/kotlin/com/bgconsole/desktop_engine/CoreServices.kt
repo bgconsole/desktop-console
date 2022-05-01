@@ -9,9 +9,9 @@ import com.bgconsole.desktop_engine.core_impl.project.ProjectReducer
 import com.bgconsole.desktop_engine.core_impl.workspace.CoreWorkspaceServiceImpl
 import com.bgconsole.desktop_engine.core_impl.workspace.EngineWorkspaceService
 import com.bgconsole.desktop_engine.core_impl.workspace.WorkspaceReducer
-import com.bgconsole.desktop_engine.desktop_services.ENGINE_CRUD_PROFILE
-import com.bgconsole.desktop_engine.desktop_services.ENGINE_CRUD_PROJECT
-import com.bgconsole.desktop_engine.desktop_services.ENGINE_CRUD_WORKSPACE
+import com.bgconsole.desktop_engine.desktop_services.ENGINE_USER_SESSION_PROFILE
+import com.bgconsole.desktop_engine.desktop_services.ENGINE_USER_SESSION_PROJECT
+import com.bgconsole.desktop_engine.desktop_services.ENGINE_USER_SESSION_WORKSPACE
 import com.bgconsole.desktop_engine.store.Store
 import com.bgconsole.domain.Profile
 import com.bgconsole.domain.Project
@@ -43,8 +43,8 @@ class CoreServices(store: Store) {
                 ProjectReducer()
             )
         )
-        store.addToStore(ENGINE_CRUD_PROFILE, emptyList<Profile>())
-        store.addToStore(ENGINE_CRUD_WORKSPACE, emptyList<Workspace>())
-        store.addToStore(ENGINE_CRUD_PROJECT, emptyList<Project>())
+        store.addToStore(ENGINE_USER_SESSION_PROFILE, emptyList<Profile>())
+        store.addToStore(ENGINE_USER_SESSION_WORKSPACE, emptyList<Workspace>())
+        store.addToStore(ENGINE_USER_SESSION_PROJECT, emptyList<Project>())
     }
 }

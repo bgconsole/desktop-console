@@ -1,5 +1,8 @@
-package com.bgconsole.desktop_ui;
+package com.bgconsole.desktop_ui.ui.project;
 
+import com.bgconsole.desktop_ui.AppData;
+import com.bgconsole.desktop_ui.CommandRunner;
+import com.bgconsole.desktop_ui.Config;
 import com.bgconsole.desktop_ui.command.Command;
 import com.bgconsole.desktop_ui.command.CommandList;
 import com.bgconsole.desktop_ui.command.CommandService;
@@ -7,8 +10,7 @@ import com.bgconsole.desktop_ui.config.ConfigService;
 import com.bgconsole.desktop_ui.terminal.OpenerCallBack;
 import com.bgconsole.desktop_ui.terminal.Terminal;
 import com.bgconsole.desktop_ui.terminal.TerminalService;
-import com.bgconsole.desktop_ui.ui.ProjectWindow;
-import com.bgconsole.desktop_ui.ui.commandeditor.CommandEditorWindow;
+import com.bgconsole.desktop_ui.ui.project.ProjectWindow;
 import com.bgconsole.desktop_ui.ui.terminal_window.TerminalWindow;
 import com.bgconsole.desktop_ui.ui.vareditor.VarEditorWindow;
 import com.bgconsole.desktop_ui.variable.Variable;
@@ -28,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class FXMLController implements CommandRunner {
+public class ProjectWindowController implements CommandRunner {
 
     @FXML
     private StackPane termPane;
@@ -59,7 +61,7 @@ public class FXMLController implements CommandRunner {
 
     private List<TerminalWindow> terminalWindows;
 
-    public FXMLController() {
+    public ProjectWindowController() {
         appData = AppData.instance;
         terminalWindows = new ArrayList<>();
     }

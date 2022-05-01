@@ -4,7 +4,7 @@ import com.bgconsole.desktop_engine.store.Store;
 import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.MainWindowData;
 import com.bgconsole.desktop_ui.profile.ProfileService;
-import com.bgconsole.desktop_ui.ui.ProjectWindow;
+import com.bgconsole.desktop_ui.ui.project.ProjectWindow;
 import com.bgconsole.desktop_ui.ui.new_location.NewLocation;
 import com.bgconsole.desktop_ui.ui.new_project.NewProject;
 import com.bgconsole.desktop_ui.ui.profile.ProfileWindow;
@@ -29,9 +29,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static com.bgconsole.desktop_engine.desktop_services.ProfileReduxKt.ENGINE_CRUD_PROFILE;
-import static com.bgconsole.desktop_engine.desktop_services.ProjectReduxKt.ENGINE_CRUD_PROJECT;
-import static com.bgconsole.desktop_engine.desktop_services.WorkspaceReduxKt.ENGINE_CRUD_WORKSPACE;
+import static com.bgconsole.desktop_engine.desktop_services.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
+import static com.bgconsole.desktop_engine.desktop_services.ProjectReduxKt.ENGINE_USER_SESSION_PROJECT;
+import static com.bgconsole.desktop_engine.desktop_services.WorkspaceReduxKt.ENGINE_USER_SESSION_WORKSPACE;
 import static com.bgconsole.desktop_ui.main_window.MainWindowReduxKt.UI_MAIN_WINDOW;
 
 public class MainWindowController {
@@ -99,8 +99,8 @@ public class MainWindowController {
 //        profileSelector.getSelectionModel().selectFirst();
         profileSelector.setConverter(new ProfileObservableConverter(profileList));
         profileSelector.setItems(profileList);
-        store.subscribe(ENGINE_CRUD_PROFILE, entity -> profileList.setAll((List<Profile>) entity));
-        profileList.setAll((List<Profile>) store.get(ENGINE_CRUD_PROFILE));
+        store.subscribe(ENGINE_USER_SESSION_PROFILE, entity -> profileList.setAll((List<Profile>) entity));
+        profileList.setAll((List<Profile>) store.get(ENGINE_USER_SESSION_PROFILE));
 
         ObservableList<Workspace> workspaceObservableList = FXCollections.observableArrayList();
         workspaceList.setCellFactory(profileListView -> new ListCell<>() {
@@ -119,9 +119,9 @@ public class MainWindowController {
             store.dispatch(new MainWindowRedux.SelectWorkspace(workspaceList.getSelectionModel().getSelectedItem()));
         });
         workspaceList.setItems(workspaceObservableList);
-        store.subscribe(ENGINE_CRUD_WORKSPACE, workspaces -> workspaceObservableList.setAll((List<Workspace>) workspaces));
+        store.subscribe(ENGINE_USER_SESSION_WORKSPACE, workspaces -> workspaceObservableList.setAll((List<Workspace>) workspaces));
 
-        store.subscribe(ENGINE_CRUD_PROJECT, projects -> projectObservableList.setAll((List<Project>) projects));
+        store.subscribe(ENGINE_USER_SESSION_PROJECT, projects -> projectObservableList.setAll((List<Project>) projects));
 
         mainWindow = (MainWindowContent) store.get(UI_MAIN_WINDOW);
         store.subscribe(UI_MAIN_WINDOW, mainWindow -> this.mainWindow = (MainWindowContent) mainWindow);

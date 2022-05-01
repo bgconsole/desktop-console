@@ -3,7 +3,7 @@ package com.bgconsole.desktop_engine.desktop_services
 import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.domain.Profile
 
-const val ENGINE_CRUD_PROFILE = "engine.crud.profile"
+const val ENGINE_USER_SESSION_PROFILE = "engine.user.session.profile"
 
 class ProfileRedux {
 

@@ -3,7 +3,7 @@ package com.bgconsole.desktop_engine.desktop_services
 import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.domain.Workspace
 
-const val ENGINE_CRUD_WORKSPACE = "engine.crud.workspace"
+const val ENGINE_USER_SESSION_WORKSPACE = "engine.user.session.workspace"
 
 class WorkspaceRedux {
 

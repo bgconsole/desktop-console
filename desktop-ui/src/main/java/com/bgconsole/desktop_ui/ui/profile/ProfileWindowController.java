@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 
 import java.util.List;
 
-import static com.bgconsole.desktop_engine.desktop_services.ProfileReduxKt.ENGINE_CRUD_PROFILE;
+import static com.bgconsole.desktop_engine.desktop_services.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
 
 public class ProfileWindowController {
 
@@ -35,7 +35,7 @@ public class ProfileWindowController {
             }
         });
         profileList.setItems(observableList);
-        store.subscribe(ENGINE_CRUD_PROFILE, profiles -> observableList.setAll((List<Profile>) profiles));
+        store.subscribe(ENGINE_USER_SESSION_PROFILE, profiles -> observableList.setAll((List<Profile>) profiles));
         store.dispatch(new ProfileRedux.LoadProfiles());
     }
 

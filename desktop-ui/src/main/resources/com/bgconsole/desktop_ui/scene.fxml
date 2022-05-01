@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768"
             prefWidth="1280" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.bgconsole.desktop_ui.FXMLController">
+            fx:controller="com.bgconsole.desktop_ui.ui.project.ProjectWindowController">
     <!--    <children>-->
     <!--        <BorderPane prefHeight="200.0" prefWidth="200.0">-->
     <center>

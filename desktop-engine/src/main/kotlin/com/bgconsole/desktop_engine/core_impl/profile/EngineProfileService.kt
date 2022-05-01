@@ -9,7 +9,7 @@ import com.bgconsole.desktop_engine.store.Store
 class EngineProfileService(private val profileService: ProfileService) : Service {
 
     override fun getKey(): String {
-        return ENGINE_CRUD_PROFILE
+        return ENGINE_USER_SESSION_PROFILE
     }
 
     override fun execute(store: Store, action: Action) {

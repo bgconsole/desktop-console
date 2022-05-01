@@ -1,7 +1,6 @@
-package com.bgconsole.desktop_ui.ui;
+package com.bgconsole.desktop_ui.ui.project;
 
 import com.bgconsole.desktop_ui.AppData;
-import com.bgconsole.desktop_ui.FXMLController;
 import com.bgconsole.desktop_ui.MainWindow;
 import com.bgconsole.domain.Project;
 import javafx.application.Platform;
@@ -27,7 +26,7 @@ public class ProjectWindow {
 
         Parent root = loader.load();
 
-        FXMLController controller = loader.getController();
+        ProjectWindowController controller = loader.getController();
         controller.setProject(project);
         controller.setProjectWindow(this);
 

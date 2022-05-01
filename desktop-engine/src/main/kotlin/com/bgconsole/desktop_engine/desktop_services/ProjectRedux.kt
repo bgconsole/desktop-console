@@ -4,7 +4,7 @@ import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.domain.Location
 import com.bgconsole.domain.Project
 
-const val ENGINE_CRUD_PROJECT = "engine.crud.project"
+const val ENGINE_USER_SESSION_PROJECT = "engine.user.session.project"
 
 class ProjectRedux {
 
