@@ -50,7 +50,7 @@ public class ProjectWindow {
             });
         }
 
-        controller.loadConfig(AppData.instance.get(project.getId()).getEnvironment().getCommandLists());
+//        controller.loadConfig(AppData.instance.get(project.getId()).getEnvironment().getCommandLists());
 
 //        try {
 //            Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());

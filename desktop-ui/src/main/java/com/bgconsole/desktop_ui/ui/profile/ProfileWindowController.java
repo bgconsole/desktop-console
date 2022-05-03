@@ -1,6 +1,6 @@
 package com.bgconsole.desktop_ui.ui.profile;
 
-import com.bgconsole.desktop_engine.desktop_services.ProfileRedux;
+import com.bgconsole.desktop_engine.core_impl.profile.ProfileRedux;
 import com.bgconsole.desktop_engine.store.Store;
 import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.domain.Profile;
@@ -11,7 +11,8 @@ import javafx.scene.control.*;
 
 import java.util.List;
 
-import static com.bgconsole.desktop_engine.desktop_services.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
+import static com.bgconsole.desktop_engine.core_impl.profile.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
+
 
 public class ProfileWindowController {
 

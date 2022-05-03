@@ -1,7 +1,7 @@
 package com.bgconsole.desktop_ui.main_window
 
-import com.bgconsole.desktop_engine.desktop_services.LoadProjectsByWorkspace
-import com.bgconsole.desktop_engine.desktop_services.LoadWorkspacesByProfile
+import com.bgconsole.desktop_engine.core_impl.project.LoadProjectsByWorkspace
+import com.bgconsole.desktop_engine.core_impl.workspace.LoadWorkspacesByProfile
 import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.desktop_engine.store.Reducer
 import com.bgconsole.desktop_engine.store.Service
@@ -16,8 +16,8 @@ class MainWindowRedux {
 
     private val store: Store = AppData.instance.store
 
-    class SelectProfile(val profile: Profile) : Action()
-    class SelectWorkspace(val workspace: Workspace) : Action()
+    class SelectProfile(val profile: Profile) : Action(UI_MAIN_WINDOW)
+    class SelectWorkspace(val workspace: Workspace) : Action(UI_MAIN_WINDOW)
 
     init {
         store.registerReducer(MainWindowReducer())

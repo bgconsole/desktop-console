@@ -8,9 +8,9 @@ const val ENGINE_USER_SESSION_OPENED_PROJECTS = "engine.user.session.opened.proj
 
 class OpenedProjectRedux(store: Store) {
 
-    class OpenProject(val project: Project) : Action()
-    class CloseProject(val project: Project) : Action()
-    class AddAvailableInstructions(val instructions: List<AvailableInstruction>) : Action()
+    class OpenProject(val project: Project) : Action(ENGINE_USER_SESSION_OPENED_PROJECTS)
+    class CloseProject(val project: Project) : Action(ENGINE_USER_SESSION_OPENED_PROJECTS)
+    class AddAvailableInstructions(val instructions: List<AvailableInstruction>) : Action(ENGINE_USER_SESSION_OPENED_PROJECTS)
 
     init {
         store.registerReducer(OpenedProjectReducer())

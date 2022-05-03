@@ -1,9 +1,8 @@
 package com.bgconsole.desktop_ui;
 
 import com.bgconsole.desktop_engine.Engine;
-import com.bgconsole.desktop_engine.desktop_services.ProfileRedux;
+import com.bgconsole.desktop_engine.core_impl.profile.ProfileRedux;
 import com.bgconsole.desktop_engine.store.Store;
-import com.bgconsole.desktop_ui.main_window.MainWindowRedux;
 import com.bgconsole.desktop_ui.profile.Profile;
 import com.bgconsole.desktop_ui.profile.ProfileService;
 import com.bgconsole.desktop_ui.profile.ProfileServiceImpl;

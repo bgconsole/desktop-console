@@ -8,22 +8,24 @@ import com.bgconsole.desktop_ui.AppData
 import com.bgconsole.domain.Project
 import com.bgconsole.domain.Version
 
-class ProjectWindowRedux(storeKey: String, title: String, project: Project) {
+const val ENGINE_PERSPECTIVE_PROJECT = "engine.perspective.project"
+
+class ProjectWindowRedux(title: String, project: Project) {
 
     private val store: Store = AppData.instance.store
 
-    class RunCommand() : Action()
-    class ChangeTitle(val title: String) : Action()
-    class OpenTerminal() : Action()
-    class CloseTerminal() : Action()
-    class ChangeVersion(val version: Version) : Action()
-    class OpenEditInstruction() : Action()
-    class OpenEditVariable() : Action()
+    class RunCommand() : Action(ENGINE_PERSPECTIVE_PROJECT)
+    class ChangeTitle(val title: String) : Action(ENGINE_PERSPECTIVE_PROJECT)
+    class OpenTerminal() : Action(ENGINE_PERSPECTIVE_PROJECT)
+    class CloseTerminal() : Action(ENGINE_PERSPECTIVE_PROJECT)
+    class ChangeVersion(val version: Version) : Action(ENGINE_PERSPECTIVE_PROJECT)
+    class OpenEditInstruction() : Action(ENGINE_PERSPECTIVE_PROJECT)
+    class OpenEditVariable() : Action(ENGINE_PERSPECTIVE_PROJECT)
 
     init {
-        store.registerReducer(ProjectWindowReducer(storeKey))
-        store.registerService(ProjectWindowService(storeKey))
-        store.addToStore(storeKey, ProjectWindowContent.default(title, project))
+        store.addToStore(ENGINE_PERSPECTIVE_PROJECT, ProjectWindowContent.default(title, project))
+        store.registerReducer(ProjectWindowReducer(ENGINE_PERSPECTIVE_PROJECT))
+        store.registerService(ProjectWindowService(ENGINE_PERSPECTIVE_PROJECT))
     }
 
     private class ProjectWindowReducer(val storeKey: String) : Reducer<ProjectWindowContent> {

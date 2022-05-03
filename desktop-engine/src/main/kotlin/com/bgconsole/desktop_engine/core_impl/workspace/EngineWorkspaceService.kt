@@ -2,9 +2,6 @@ package com.bgconsole.desktop_engine.core_impl.workspace
 
 import com.bgconsole.core.profile.ProfileService
 import com.bgconsole.core.workspace.WorkspaceService
-import com.bgconsole.desktop_engine.desktop_services.ENGINE_USER_SESSION_WORKSPACE
-import com.bgconsole.desktop_engine.desktop_services.LoadWorkspacesByProfile
-import com.bgconsole.desktop_engine.desktop_services.LoadWorkspacesSucceeded
 import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.desktop_engine.store.Service
 import com.bgconsole.desktop_engine.store.Store

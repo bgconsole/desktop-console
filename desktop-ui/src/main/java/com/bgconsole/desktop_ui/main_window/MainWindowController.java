@@ -1,13 +1,14 @@
 package com.bgconsole.desktop_ui.main_window;
 
+import com.bgconsole.desktop_engine.desktop_services.opened.project.OpenedProjectRedux;
 import com.bgconsole.desktop_engine.store.Store;
 import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.MainWindowData;
 import com.bgconsole.desktop_ui.profile.ProfileService;
-import com.bgconsole.desktop_ui.ui.project.ProjectWindow;
 import com.bgconsole.desktop_ui.ui.new_location.NewLocation;
 import com.bgconsole.desktop_ui.ui.new_project.NewProject;
 import com.bgconsole.desktop_ui.ui.profile.ProfileWindow;
+import com.bgconsole.desktop_ui.ui.project.ProjectWindow;
 import com.bgconsole.desktop_ui.utils.ProfileObservableConverter;
 import com.bgconsole.domain.Profile;
 import com.bgconsole.domain.Project;
@@ -29,9 +30,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static com.bgconsole.desktop_engine.desktop_services.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
-import static com.bgconsole.desktop_engine.desktop_services.ProjectReduxKt.ENGINE_USER_SESSION_PROJECT;
-import static com.bgconsole.desktop_engine.desktop_services.WorkspaceReduxKt.ENGINE_USER_SESSION_WORKSPACE;
+import static com.bgconsole.desktop_engine.core_impl.profile.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
+import static com.bgconsole.desktop_engine.core_impl.project.ProjectReduxKt.ENGINE_USER_SESSION_PROJECT;
+import static com.bgconsole.desktop_engine.core_impl.workspace.WorkspaceReduxKt.ENGINE_USER_SESSION_WORKSPACE;
 import static com.bgconsole.desktop_ui.main_window.MainWindowReduxKt.UI_MAIN_WINDOW;
 
 public class MainWindowController {
@@ -83,6 +84,7 @@ public class MainWindowController {
                     Project project = row.getItem();
                     try {
 //                        AppData.instance.addProject(project);
+                        store.dispatch(new OpenedProjectRedux.OpenProject(project));
                         new ProjectWindow(project);
                     } catch (IOException e) {
                         e.printStackTrace();

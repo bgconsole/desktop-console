@@ -8,5 +8,5 @@ interface ProjectService : CRUDService<Project> {
 
     fun findByWorkspaceLocation(location: Location): List<Project>
 
-    fun findByPath(location: Location): Project
+    fun findByLocation(location: Location): Project
 }

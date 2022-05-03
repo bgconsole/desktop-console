@@ -1,7 +1,5 @@
 package com.bgconsole.desktop_engine.core_impl.workspace
 
-import com.bgconsole.desktop_engine.desktop_services.ENGINE_USER_SESSION_WORKSPACE
-import com.bgconsole.desktop_engine.desktop_services.LoadWorkspacesSucceeded
 import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.desktop_engine.store.Reducer
 import com.bgconsole.desktop_engine.store.Store

@@ -22,9 +22,9 @@ class Store {
         return uuid
     }
 
-    fun unsubscribe(key: String, id: String) {
-        subscribers[key]?.remove(id)
-    }
+//    fun unsubscribe(key: String, id: String) {
+//        subscribers[key]?.remove(id)
+//    }
 
     fun addToStore(key: String, node: Any) {
         if (!store.containsKey(key)) {
@@ -53,7 +53,7 @@ class Store {
     }
 
     fun dispatch(action: Action) {
-        reducers.forEach {
+        reducers.find { it.getKey() == action.storeKey }?.let {
             val key = it.getKey()
             val newEntity = it.reduce(this, action)
             if (newEntity != null) {
@@ -63,6 +63,10 @@ class Store {
                 }
             }
         }
-        services.forEach { it.execute(this, action) }
+        services.find { it.getKey() == action.storeKey }?.let {
+            if (it.getKey() == action.storeKey) {
+                it.execute(this, action)
+            }
+        }
     }
 }

@@ -15,10 +15,10 @@ class CoreProjectServiceImpl : ProjectService {
 
     override fun findByWorkspaceLocation(location: Location): List<Project> {
         return Paths.get(location.location, "projects").toFile().listFiles { file -> file.isDirectory }
-            ?.map { findByPath(Location.technical(LocationType.FILE, it.absolutePath)) }.orEmpty()
+            ?.map { findByLocation(Location.technical(LocationType.FILE, it.absolutePath)) }.orEmpty()
     }
 
-    override fun findByPath(location: Location): Project {
+    override fun findByLocation(location: Location): Project {
         return yamlParser.readOne(Paths.get(location.location, "project.yaml").toString()).copy(location = location)
     }
 

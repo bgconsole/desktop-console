@@ -1,4 +1,4 @@
-package com.bgconsole.desktop_engine.desktop_services
+package com.bgconsole.desktop_engine.core_impl.project
 
 import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.domain.Location
@@ -8,8 +8,8 @@ const val ENGINE_USER_SESSION_PROJECT = "engine.user.session.project"
 
 class ProjectRedux {
 
-    class LoadProjectsByWorkspace(val workspaceLocation: Location) : Action()
-    class LoadProjectsSucceeded(val projects: List<Project>) : Action()
+    class LoadProjectsByWorkspace(val workspaceLocation: Location) : Action(ENGINE_USER_SESSION_PROJECT)
+    class LoadProjectsSucceeded(val projects: List<Project>) : Action(ENGINE_USER_SESSION_PROJECT)
 }
 
 typealias LoadProjectsByWorkspace = ProjectRedux.LoadProjectsByWorkspace
