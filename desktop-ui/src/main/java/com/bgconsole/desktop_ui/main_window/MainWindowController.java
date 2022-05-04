@@ -84,8 +84,8 @@ public class MainWindowController {
                     Project project = row.getItem();
                     try {
 //                        AppData.instance.addProject(project);
-                        store.dispatch(new OpenedProjectRedux.OpenProject(project));
                         new ProjectWindow(project);
+                        store.dispatch(new OpenedProjectRedux.OpenProject(project));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

@@ -1,6 +1,5 @@
 package com.bgconsole.desktop_ui.ui.project;
 
-import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.MainWindow;
 import com.bgconsole.domain.Project;
 import javafx.application.Platform;
@@ -21,7 +20,7 @@ public class ProjectWindow {
     private final Stage stage;
 
     public ProjectWindow(Project project) throws IOException {
-        URL resource = getClass().getResource("/com/bgconsole/desktop_ui/scene.fxml");
+        URL resource = getClass().getResource("/com/bgconsole/desktop_ui/project_window.fxml");
         FXMLLoader loader = new FXMLLoader(resource);
 
         Parent root = loader.load();
@@ -45,7 +44,7 @@ public class ProjectWindow {
         if (os != null && os.startsWith("Mac")) {
             Platform.runLater(() -> {
                 System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Terminal");
-                controller.getMenuBar().setUseSystemMenuBar(true);
+                Objects.requireNonNull(controller.getMenuBar()).setUseSystemMenuBar(true);
 //                controller.loadConfig(AppData.instance.get(location.getId()).getEnvironment().getCommandLists());
             });
         }

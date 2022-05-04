@@ -12,15 +12,30 @@
                    BorderPane.alignment="CENTER">
             <items>
                 <AnchorPane prefWidth="100.0">
-                    <StackPane fx:id="listPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                        <children>
-                            <ListView fx:id="commandList"/>
-                        </children>
-                    </StackPane>
+                    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                AnchorPane.topAnchor="0.0">
+                        <top>
+                            <AnchorPane>
+                                <ChoiceBox fx:id="versionSelector" onAction="#changeVersion"
+                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                            </AnchorPane>
+                        </top>
+                        <center>
+                            <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <ListView fx:id="instructionList"/>
+                                    </children>
+                                </StackPane>
+                            </AnchorPane>
+                        </center>
+                    </BorderPane>
                 </AnchorPane>
                 <AnchorPane>
-                    <StackPane fx:id="termPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    <StackPane fx:id="projectDetailPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                 </AnchorPane>
             </items>
