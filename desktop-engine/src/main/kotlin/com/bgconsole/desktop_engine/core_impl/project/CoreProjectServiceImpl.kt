@@ -22,7 +22,7 @@ class CoreProjectServiceImpl : ProjectService {
         return yamlParser.readOne(Paths.get(location.location, "project.yaml").toString()).copy(location = location)
     }
 
-    override fun findById(id: String): Profile? {
+    override fun findById(id: String): Project? {
         TODO("Not yet implemented")
     }
 

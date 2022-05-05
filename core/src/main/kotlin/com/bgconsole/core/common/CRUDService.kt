@@ -4,7 +4,7 @@ import com.bgconsole.domain.Profile
 
 interface CRUDService<T> {
 
-    fun findById(id: String): Profile?
+    fun findById(id: String): T?
 
     fun findAll(): List<T>
 

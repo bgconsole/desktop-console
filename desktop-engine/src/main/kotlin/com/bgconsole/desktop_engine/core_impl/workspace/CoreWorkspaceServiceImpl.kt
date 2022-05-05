@@ -15,7 +15,7 @@ class CoreWorkspaceServiceImpl : WorkspaceService {
         return yamlParser.readOne(Paths.get(location.location, "workspace.yaml").toString()).copy(location = location)
     }
 
-    override fun findById(id: String): Profile? {
+    override fun findById(id: String): Workspace? {
         TODO("Not yet implemented")
     }
 

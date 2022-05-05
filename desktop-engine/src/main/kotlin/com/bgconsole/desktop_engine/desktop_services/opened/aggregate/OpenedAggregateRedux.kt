@@ -56,12 +56,7 @@ class OpenedAggregateRedux(
                 aggregates
                     .mapNotNull {
                         it.location?.let { location ->
-                            aggregateService.findByLocation(
-                                absoluteLocation(
-                                    action.version,
-                                    location
-                                )
-                            )
+                            aggregateService.findByLocation(absoluteLocation(action.version, location))
                         }
                     }
             }.orEmpty()
@@ -78,6 +73,6 @@ class OpenedAggregateRedux(
 
 data class OpenedAggregateContent(val aggregates: Map<String, List<Aggregate>>) {
     companion object {
-        fun default(): OpenedAggregateContent = OpenedAggregateContent(emptyMap())
+        fun default() = OpenedAggregateContent(emptyMap())
     }
 }

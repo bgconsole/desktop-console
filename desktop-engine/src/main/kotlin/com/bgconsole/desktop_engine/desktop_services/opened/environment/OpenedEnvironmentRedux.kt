@@ -1,29 +1,42 @@
 package com.bgconsole.desktop_engine.desktop_services.opened.environment
 
+import com.bgconsole.core.environment.EnvironmentService
+import com.bgconsole.desktop_engine.desktop_services.opened.variable.ResolvedVariableRedux
 import com.bgconsole.desktop_engine.store.Action
 import com.bgconsole.desktop_engine.store.Reducer
+import com.bgconsole.desktop_engine.store.Service
 import com.bgconsole.desktop_engine.store.Store
 import com.bgconsole.domain.Environment
+import com.bgconsole.domain.Location
+import com.bgconsole.domain.Version
+import java.nio.file.Paths
 
-const val ENGINE_OPENED_AGGREGATE = "engine.opened.aggregate"
+const val ENGINE_OPENED_ENVIRONMENT = "engine.opened.environment"
 
-class OpenedEnvironmentRedux(store: Store) {
+class OpenedEnvironmentRedux(
+    store: Store,
+    environmentService: EnvironmentService
+) {
 
-    class LoadEnvironment(val versionId: String, val environments: List<List<Environment>>) : Action(ENGINE_OPENED_AGGREGATE)
-    class CloseProject(val versionId: String) : Action(ENGINE_OPENED_AGGREGATE)
+    class LoadEnvironments(val version: Version) : Action(ENGINE_OPENED_ENVIRONMENT)
+    class LoadEnvironmentsSucceeded(val versionId: String, val environments: List<Environment>) :
+        Action(ENGINE_OPENED_ENVIRONMENT)
+
+    class CloseProject(val versionId: String) : Action(ENGINE_OPENED_ENVIRONMENT)
 
     init {
-        store.addToStore(ENGINE_OPENED_AGGREGATE, OpenedEnvironmentContent.default())
+        store.addToStore(ENGINE_OPENED_ENVIRONMENT, OpenedEnvironmentContent.default())
         store.registerReducer(OpenedEnvironmentReducer())
+        store.registerService(OpenedEnvironmentService(environmentService))
     }
 
     private class OpenedEnvironmentReducer : Reducer<OpenedEnvironmentContent> {
-        override fun getKey(): String = ENGINE_OPENED_AGGREGATE
+        override fun getKey(): String = ENGINE_OPENED_ENVIRONMENT
 
         override fun reduce(store: Store, action: Action): OpenedEnvironmentContent {
-            val current = store.get(ENGINE_OPENED_AGGREGATE) as OpenedEnvironmentContent
+            val current = store.get(ENGINE_OPENED_ENVIRONMENT) as OpenedEnvironmentContent
             return when (action) {
-                is LoadEnvironment -> current.copy(environments = current.environments + (action.versionId to action.environments))
+                is LoadEnvironmentsSucceeded -> current.copy(environments = current.environments + (action.versionId to action.environments))
                 is CloseProject -> current.copy(environments = current.environments.filter { it.key != action.versionId })
                 else -> current
             }
@@ -31,9 +44,37 @@ class OpenedEnvironmentRedux(store: Store) {
 
     }
 
+    private class OpenedEnvironmentService(val environmentService: EnvironmentService) : Service {
+        override fun getKey(): String = ENGINE_OPENED_ENVIRONMENT
+
+        override fun execute(store: Store, action: Action) {
+            when (action) {
+                is LoadEnvironments -> loadEnvironments(store, action)
+                is LoadEnvironmentsSucceeded -> store.dispatch(ResolvedVariableRedux.ResolveVariables(action.environments))
+            }
+        }
+
+        private fun loadEnvironments(store: Store, action: LoadEnvironments) {
+            val environments: List<Environment> = action.version.environments?.let { environments ->
+                environments.mapNotNull {
+                    it.location?.let { location ->
+                        environmentService.findByLocation(absoluteLocation(action.version, location))
+                    }
+                }
+            }.orEmpty()
+            store.dispatch(LoadEnvironmentsSucceeded(action.version.id, environments))
+        }
+
+        private fun absoluteLocation(version: Version, location: Location): Location {
+            val newLocation = Paths.get(version.location?.location.orEmpty(), location.location).toString()
+            return location.copy(location = newLocation)
+        }
+    }
 }
 
-data class OpenedEnvironmentContent(val environments: Map<String, List<List<Environment>>>) {
+data class OpenedEnvironmentContent(
+    val environments: Map<String, List<Environment>>
+) {
     companion object {
         fun default(): OpenedEnvironmentContent = OpenedEnvironmentContent(emptyMap())
     }

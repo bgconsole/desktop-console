@@ -3,6 +3,11 @@ package com.bgconsole.desktop_ui.ui.project
 import com.bgconsole.desktop_engine.desktop_services.opened.aggregate.ENGINE_OPENED_AGGREGATE
 import com.bgconsole.desktop_engine.desktop_services.opened.aggregate.OpenedAggregateContent
 import com.bgconsole.desktop_engine.desktop_services.opened.aggregate.OpenedAggregateRedux
+import com.bgconsole.desktop_engine.desktop_services.opened.environment.ENGINE_OPENED_ENVIRONMENT
+import com.bgconsole.desktop_engine.desktop_services.opened.environment.OpenedEnvironmentContent
+import com.bgconsole.desktop_engine.desktop_services.opened.environment.OpenedEnvironmentRedux
+import com.bgconsole.desktop_engine.desktop_services.opened.variable.ENGINE_OPENED_RESOLVED_VARIABLES
+import com.bgconsole.desktop_engine.desktop_services.opened.variable.ResolvedVariableContent
 import com.bgconsole.desktop_engine.desktop_services.opened.version.ENGINE_OPENED_VERSION
 import com.bgconsole.desktop_engine.desktop_services.opened.version.OpenedVersionContent
 import com.bgconsole.desktop_engine.store.Subscriber
@@ -16,6 +21,7 @@ import com.bgconsole.desktop_ui.ui.terminal_window.TerminalWindow
 import com.bgconsole.desktop_ui.utils.VersionObservableConverter
 import com.bgconsole.domain.Instruction
 import com.bgconsole.domain.Project
+import com.bgconsole.domain.Variable
 import com.bgconsole.domain.Version
 import javafx.collections.FXCollections
 import javafx.event.ActionEvent
@@ -42,6 +48,7 @@ class ProjectWindowController : CommandRunner {
     private val appData: AppData = AppData.instance
 
     private var openedAggregates: OpenedAggregateContent? = null
+    private var openedEnvironments: OpenedEnvironmentContent? = null
 
     private val instructionObservableList = FXCollections.observableArrayList<Instruction>()
 
@@ -94,7 +101,6 @@ class ProjectWindowController : CommandRunner {
             Objects.requireNonNull(store.get(ENGINE_OPENED_VERSION) as OpenedVersionContent).versions[project?.id].orEmpty()
         )
 
-
         store.subscribe(ENGINE_OPENED_VERSION, object : Subscriber {
             override fun update(entity: Any) {
                 versionList.setAll((entity as OpenedVersionContent).versions[project?.id].orEmpty())
@@ -105,6 +111,19 @@ class ProjectWindowController : CommandRunner {
             override fun update(entity: Any) {
                 openedAggregates = entity as OpenedAggregateContent
                 updateInstructionInList()
+            }
+        })
+
+        store.subscribe(ENGINE_OPENED_ENVIRONMENT, object : Subscriber {
+            override fun update(entity: Any) {
+                openedEnvironments = entity as OpenedEnvironmentContent
+            }
+        })
+
+        store.subscribe(ENGINE_OPENED_RESOLVED_VARIABLES, object : Subscriber {
+            override fun update(entity: Any) {
+                val variables = entity as ResolvedVariableContent
+                variables.variables.forEach { println(it.name + " = " + it.value) }
             }
         })
     }
@@ -289,7 +308,10 @@ class ProjectWindowController : CommandRunner {
 
     fun changeVersion(event: ActionEvent?) {
         val version = versionSelector.selectionModel?.selectedItem
-        version?.let { store.dispatch(OpenedAggregateRedux.LoadAggregates(it)) }
+        version?.let {
+            store.dispatch(OpenedAggregateRedux.LoadAggregates(it))
+            store.dispatch(OpenedEnvironmentRedux.LoadEnvironments(it))
+        }
     }
 
 }

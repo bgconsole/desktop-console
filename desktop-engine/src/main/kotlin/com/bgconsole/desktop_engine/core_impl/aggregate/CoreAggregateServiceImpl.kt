@@ -4,7 +4,6 @@ import com.bgconsole.core.aggregate.AggregateService
 import com.bgconsole.desktop_engine.common.YAMLParser
 import com.bgconsole.domain.Aggregate
 import com.bgconsole.domain.Location
-import com.bgconsole.domain.Profile
 
 class CoreAggregateServiceImpl : AggregateService {
 
@@ -14,7 +13,7 @@ class CoreAggregateServiceImpl : AggregateService {
         return yamlParser.readOne(location.location).copy(location = location)
     }
 
-    override fun findById(id: String): Profile? {
+    override fun findById(id: String): Aggregate? {
         TODO("Not yet implemented")
     }
 
