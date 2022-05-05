@@ -1,28 +1,39 @@
 package com.bgconsole.desktop_ui.terminal;
 
+import com.bgconsole.desktop_engine.desktop_services.opened.variable.ResolvedVariableContent;
+import com.bgconsole.desktop_engine.store.Store;
 import com.bgconsole.desktop_ui.command.CommandService;
-import com.bgconsole.desktop_ui.command.VariableResolver;
-import com.bgconsole.desktop_ui.environment.Environment;
-import com.bgconsole.desktop_ui.variable.Variable;
-import com.bgconsole.desktop_ui.variable.VariableService;
+import com.bgconsole.desktop_ui.command.CommandServiceImpl;
+import com.bgconsole.domain.Variable;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.bgconsole.desktop_engine.desktop_services.opened.variable.ResolvedVariableReduxKt.ENGINE_OPENED_RESOLVED_VARIABLES;
 
 public class TerminalServiceImpl implements TerminalService {
 
-    private final VariableService variableService;
+    private final TerminalList terminalList;
+
+    private List<Variable> variables;
 
     private final CommandService commandService;
 
-    public TerminalServiceImpl(VariableService variableService, CommandService commandService) {
-        this.variableService = variableService;
-        this.commandService = commandService;
+    public TerminalServiceImpl(Store store) {
+        terminalList = new TerminalList();
+        variables = new ArrayList<>();
+        commandService = new CommandServiceImpl();
+        store.subscribe(ENGINE_OPENED_RESOLVED_VARIABLES, entity -> variables = ((ResolvedVariableContent) entity).getVariables());
     }
 
     @Override
-    public void openTerminal(Environment environment, String id, String name, OpenerCallBack callBack, VariableResolver resolver) {
-        environment.getTerminalList().getOrOpen(id, name, (terminal, isNew) -> {
+    public void openTerminal(String id, String name, OpenerCallBack callBack) {
+        terminalList.getOrOpen(id, name, (terminal, isNew) -> {
             if (isNew) {
-                for (Variable variable : variableService.findVars(environment, "ON_INIT:" + id)) {
-                    commandService.sendCommand(terminal.getTerminalTab(), variable.getValue(), resolver);
+                List<Variable> filteredVars = variables.stream().filter(variable -> variable.getName().equals("ON_INIT" + id)).collect(Collectors.toList());
+                for (Variable variable : filteredVars) {
+                    commandService.sendCommand(terminal.getTerminalTab(), variable.getValue(), variables);
                 }
             }
             callBack.openerCallBack(terminal, isNew);
@@ -30,7 +41,11 @@ public class TerminalServiceImpl implements TerminalService {
     }
 
     @Override
-    public void closeTerminal(Environment environment, Terminal terminal) {
-        environment.getTerminalList().closeTerminal(terminal);
+    public void closeTerminal(Terminal terminal) {
+        terminalList.closeTerminal(terminal);
+    }
+
+    public CommandService getCommandService() {
+        return commandService;
     }
 }

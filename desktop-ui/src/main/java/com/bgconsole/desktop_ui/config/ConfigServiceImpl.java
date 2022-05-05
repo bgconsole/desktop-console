@@ -31,7 +31,7 @@ public class ConfigServiceImpl implements ConfigService {
 //        }
         for (VariableList variableList : environment.getVariableLists()) {
             for (CommandList commandList : environment.getCommandLists()) {
-                commandList.setNewList(commandService.replaceVars(variableList.getVariables(), commandList.getCommands()));
+//                commandList.setNewList(commandService.replaceVars(variableList.getVariables(), commandList.getCommands()));
             }
         }
         environment.getConfigs().clear();

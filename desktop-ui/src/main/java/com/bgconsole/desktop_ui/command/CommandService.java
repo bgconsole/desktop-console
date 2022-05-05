@@ -1,8 +1,8 @@
 package com.bgconsole.desktop_ui.command;
 
 import com.bgconsole.desktop_ui.environment.Environment;
-import com.bgconsole.desktop_ui.variable.Variable;
 import com.bgconsole.desktop_ui.variable.VariableList;
+import com.bgconsole.domain.Variable;
 import com.kodedu.terminalfx.TerminalTab;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public interface CommandService {
 
     CommandList loadCommands(String name, String path);
 
-    void sendCommand(TerminalTab terminalTab, String command, VariableResolver resolver);
+    void sendCommand(TerminalTab terminalTab, String command, List<Variable> variables);
 
     Optional<Command> findAlias(Environment environment, String alias);
 

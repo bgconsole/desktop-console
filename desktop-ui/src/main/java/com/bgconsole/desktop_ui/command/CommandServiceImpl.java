@@ -1,8 +1,9 @@
 package com.bgconsole.desktop_ui.command;
 
+import com.bgconsole.desktop_engine.utils.VariableReplacerUtils;
 import com.bgconsole.desktop_ui.environment.Environment;
-import com.bgconsole.desktop_ui.variable.Variable;
 import com.bgconsole.desktop_ui.variable.VariableList;
+import com.bgconsole.domain.Variable;
 import com.kodedu.terminalfx.TerminalTab;
 
 import java.util.List;
@@ -36,10 +37,10 @@ public class CommandServiceImpl implements CommandService {
     }
 
     @Override
-    public void sendCommand(TerminalTab terminalTab, String command, VariableResolver resolver) {
+    public void sendCommand(TerminalTab terminalTab, String command, List<Variable> variables) {
         String[] commands = command.split("\n");
         for (String cmd : commands) {
-            sendSplitCommand(terminalTab, cmd, resolver);
+            sendSplitCommand(terminalTab, cmd, variables);
         }
     }
 
@@ -47,7 +48,7 @@ public class CommandServiceImpl implements CommandService {
     public List<Command> replaceVars(List<Variable> vars, List<Command> commands) {
         for (Command command : commands) {
             for (Variable var : vars) {
-                command.setCommand(command.getCommand().replace("${" + var.getVariable() + "}", var.getValue()));
+                command.setCommand(command.getCommand().replace("${" + var.getName() + "}", var.getValue()));
             }
         }
         return commands;
@@ -55,26 +56,14 @@ public class CommandServiceImpl implements CommandService {
 
     @Override
     public List<Command> replaceAllVars(List<VariableList> vars, List<Command> commands) {
-        for (VariableList variableList : vars) {
-            commands = replaceVars(variableList.getVariables(), commands);
-        }
+//        for (VariableList variableList : vars) {
+//            commands = replaceVars(variableList.getVariables(), commands);
+//        }
         return commands;
     }
 
-    private void sendSplitCommand(TerminalTab terminalTab, String command, VariableResolver resolver) {
-        boolean abort = false;
-        while (!abort && command.contains("${")) {
-            int pos1 = command.indexOf("${");
-            int pos2 = command.indexOf("}", pos1);
-            String var = command.substring(pos1 + 2, pos2);
-            var res = resolver.resolve(var);
-            if (res.isPresent()) {
-                command = command.replace("${" + var + "}", res.get());
-            } else {
-                abort = true;
-            }
-        }
-        String finalCommand = command;
+    private void sendSplitCommand(TerminalTab terminalTab, String command, List<Variable> variables) {
+        String finalCommand = VariableReplacerUtils.INSTANCE.replaceVariable(command, variables);
         terminalTab.onTerminalFxReady(() -> terminalTab.getTerminal().command(finalCommand + LINE_RETURN));
     }
 

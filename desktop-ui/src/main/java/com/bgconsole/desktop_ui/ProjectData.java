@@ -31,7 +31,7 @@ public class ProjectData {
 
     private final CommandService commandService;
 
-    private final TerminalService terminalService;
+//    private final TerminalService terminalService;
 
     private final VariableService variableService;
 
@@ -49,7 +49,7 @@ public class ProjectData {
         this.project = project;
         commandService = new CommandServiceImpl();
         variableService = new VariableServiceImpl();
-        terminalService = new TerminalServiceImpl(variableService, commandService);
+//        terminalService = new TerminalServiceImpl(variableService, commandService);
         profileService = new ProfileServiceImpl();
         projectService = new ProjectServiceImpl();
         environmentService = new EnvironmentServiceImpl(variableService, projectService, commandService);
@@ -85,10 +85,6 @@ public class ProjectData {
 
     public CommandService getCommandService() {
         return commandService;
-    }
-
-    public TerminalService getTerminalService() {
-        return terminalService;
     }
 
     public VariableService getVariableService() {

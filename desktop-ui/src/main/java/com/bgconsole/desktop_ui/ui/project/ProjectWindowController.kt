@@ -14,14 +14,13 @@ import com.bgconsole.desktop_engine.store.Subscriber
 import com.bgconsole.desktop_ui.AppData
 import com.bgconsole.desktop_ui.CommandRunner
 import com.bgconsole.desktop_ui.Config
-import com.bgconsole.desktop_ui.command.Command
 import com.bgconsole.desktop_ui.terminal.OpenerCallBack
 import com.bgconsole.desktop_ui.terminal.Terminal
+import com.bgconsole.desktop_ui.terminal.TerminalServiceImpl
 import com.bgconsole.desktop_ui.ui.terminal_window.TerminalWindow
 import com.bgconsole.desktop_ui.utils.VersionObservableConverter
 import com.bgconsole.domain.Instruction
 import com.bgconsole.domain.Project
-import com.bgconsole.domain.Variable
 import com.bgconsole.domain.Version
 import javafx.collections.FXCollections
 import javafx.event.ActionEvent
@@ -30,6 +29,7 @@ import javafx.scene.control.*
 import javafx.scene.layout.StackPane
 import java.nio.file.Path
 import java.util.*
+
 
 class ProjectWindowController : CommandRunner {
     @FXML
@@ -49,6 +49,7 @@ class ProjectWindowController : CommandRunner {
 
     private var openedAggregates: OpenedAggregateContent? = null
     private var openedEnvironments: OpenedEnvironmentContent? = null
+    private var resolvedVariables: ResolvedVariableContent? = null
 
     private val instructionObservableList = FXCollections.observableArrayList<Instruction>()
 
@@ -60,8 +61,11 @@ class ProjectWindowController : CommandRunner {
     private var configs: List<Config>? = null
     private var project: Project? = null
     private var projectWindow: ProjectWindow? = null
-    private val terminalWindows: List<TerminalWindow> = ArrayList()
+    private val terminalWindows: List<TerminalWindow> = mutableListOf()
     private val store = AppData.instance.store
+
+    private val terminalService = TerminalServiceImpl(store)
+
     fun setProject(project: Project?) {
         this.project = project
         //        appData.get(project.getId()).setCommandRunner(this);
@@ -83,7 +87,6 @@ class ProjectWindowController : CommandRunner {
         versionSelector.items = versionList
 
         instructionList.items = instructionObservableList
-
         instructionList.setCellFactory {
             object : ListCell<Instruction?>() {
                 override fun updateItem(item: Instruction?, empty: Boolean) {
@@ -94,6 +97,12 @@ class ProjectWindowController : CommandRunner {
                         item?.name
                     }
                 }
+            }
+        }
+        instructionList.setOnMouseClicked {
+            if (it.clickCount == 2) {
+                val instruction = instructionList.selectionModel.selectedItem
+                execCommandInRightTerminal(tabPane!!, instruction);
             }
         }
 
@@ -122,8 +131,7 @@ class ProjectWindowController : CommandRunner {
 
         store.subscribe(ENGINE_OPENED_RESOLVED_VARIABLES, object : Subscriber {
             override fun update(entity: Any) {
-                val variables = entity as ResolvedVariableContent
-                variables.variables.forEach { println(it.name + " = " + it.value) }
+                resolvedVariables = entity as ResolvedVariableContent
             }
         })
     }
@@ -190,10 +198,16 @@ class ProjectWindowController : CommandRunner {
     }
 
     private fun openTerminal(id: String, name: String, callBack: OpenerCallBack) {
-//        terminalService.openTerminal(appData.get(project.getId()).getEnvironment(), id, name, (terminal, isNew) -> {
+//        terminalService.openTerminal(id, name, (terminal, isNew) -> {
 //            addClosingEvent(terminal);
 //            callBack.openerCallBack(terminal, isNew);
 //        }, this::resolveVariable);
+        terminalService.openTerminal(id, name) { terminal, isNew ->
+            run {
+                addClosingEvent(terminal);
+                callBack.openerCallBack(terminal, isNew);
+            }
+        }
     }
 
     private fun buildConfigMenu(configs: List<Config>, menu: Menu) {
@@ -214,22 +228,30 @@ class ProjectWindowController : CommandRunner {
 //        }
     }
 
-    private fun execCommandInRightTerminal(tabPane: TabPane, command: Command) {
-//        Optional<Variable> optTitle = variableService.findVar(appData.get(project.getId()).getEnvironment(), "TITLE:" + command.getConsoleId());
-//        String title = command.getConsoleId();
+    private fun execCommandInRightTerminal(tabPane: TabPane, command: Instruction) {
+//        val optTitle: Optional<Variable> =
+//            variableService.findVar(appData[project!!.id].environment, "TITLE:" + command.getConsoleId())
+//        var title: String = command.consoleId.orEmpty()
 //        if (optTitle.isPresent() && optTitle.get().getValue() != null && !optTitle.get().getValue().isBlank()) {
-//            title = optTitle.get().getValue();
+//            title = optTitle.get().getValue()
 //        }
-//
-//        openTerminal(command.getConsoleId(), title, (terminal, isNew) -> {
-//            if (terminal.getWindow() == null) {
-//                terminalWindows.add(new TerminalWindow(terminal));
-//            }
-//            terminal.getWindow().popUp();
-//            terminal.getWindow().selectTerminal(terminal);
-//
-//            commandService.sendCommand(terminal.getTerminalTab(), command.getCommand(), this::resolveVariable);
-//        });
+        val variables = resolvedVariables?.variables
+        var title: String =
+            variables?.find { it.name == "TITLE:" + command.consoleId }?.value.orEmpty()
+        if (title.isEmpty()) {
+            title = command.consoleId.orEmpty()
+        }
+
+        command.consoleId?.let {
+            openTerminal(it, title) { terminal, isNew ->
+                if (terminal.window == null) {
+                    terminalWindows + TerminalWindow(terminal)
+                }
+                terminal.window.popUp()
+                terminal.window.selectTerminal(terminal)
+                terminalService.commandService.sendCommand(terminal.terminalTab, command.instruction, variables)
+            }
+        }
     }
 
     private fun addClosingEvent(terminal: Terminal) {
