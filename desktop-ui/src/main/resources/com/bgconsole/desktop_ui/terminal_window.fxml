@@ -4,7 +4,7 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.bgconsole.desktop_ui.ui.terminal_window.TerminalWindowController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="560.0" prefWidth="860.0">
 
     <center>
         <AnchorPane>

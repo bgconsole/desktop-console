@@ -19,6 +19,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <bg.platform.version>1.0-SNAPSHOT</bg.platform.version>
         <kotlin.version>1.6.21</kotlin.version>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
