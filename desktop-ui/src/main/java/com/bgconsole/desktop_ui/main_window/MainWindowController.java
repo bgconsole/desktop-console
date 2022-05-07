@@ -1,18 +1,18 @@
 package com.bgconsole.desktop_ui.main_window;
 
 import com.bgconsole.desktop_engine.desktop_services.opened.project.OpenedProjectRedux;
-import com.bgconsole.desktop_engine.store.Store;
 import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.MainWindowData;
-import com.bgconsole.desktop_ui.profile.ProfileService;
 import com.bgconsole.desktop_ui.ui.new_location.NewLocation;
-import com.bgconsole.desktop_ui.ui.new_project.NewProject;
 import com.bgconsole.desktop_ui.ui.profile.ProfileWindow;
 import com.bgconsole.desktop_ui.ui.project.ProjectWindow;
-import com.bgconsole.desktop_ui.utils.ProfileObservableConverter;
-import com.bgconsole.domain.Profile;
-import com.bgconsole.domain.Project;
-import com.bgconsole.domain.Workspace;
+import com.bgconsole.platform.ui.perspective.workspace.ProfileObservableConverter;
+import com.bgconsole.platform.domain.Profile;
+import com.bgconsole.platform.domain.Project;
+import com.bgconsole.platform.domain.Workspace;
+import com.bgconsole.platform.store.Store;
+import com.bgconsole.platform.ui.perspective.workspace.WorkspacePerspectiveContent;
+import com.bgconsole.platform.ui.perspective.workspace.WorkspacePerspectiveRedux;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,10 +30,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static com.bgconsole.desktop_engine.core_impl.profile.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
-import static com.bgconsole.desktop_engine.core_impl.project.ProjectReduxKt.ENGINE_USER_SESSION_PROJECT;
-import static com.bgconsole.desktop_engine.core_impl.workspace.WorkspaceReduxKt.ENGINE_USER_SESSION_WORKSPACE;
-import static com.bgconsole.desktop_ui.main_window.MainWindowReduxKt.UI_MAIN_WINDOW;
+import static com.bgconsole.platform.ui.perspective.workspace.WorkspacePerspectiveReduxKt.UI_MAIN_WINDOW;
+import static com.bgconsole.platform.engine.profile.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
+import static com.bgconsole.platform.engine.project.ProjectReduxKt.ENGINE_USER_SESSION_PROJECT;
+import static com.bgconsole.platform.engine.workspace.WorkspaceReduxKt.ENGINE_USER_SESSION_WORKSPACE;
 
 public class MainWindowController {
 
@@ -55,21 +55,21 @@ public class MainWindowController {
 
     private ProfileWindow profileWindow;
 
-    private final ProfileService profileService;
+//    private final ProfileService profileService;
 
-    private MainWindowContent mainWindow;
+    private WorkspacePerspectiveContent mainWindow;
 
     private HostServices hostServices;
 
     public MainWindowController() {
-        profileService = AppData.instance.getProfileService();
+//        profileService = AppData.instance.getProfileService();
     }
 
     private final Store store = AppData.instance.getStore();
 
     public void initialize() {
         projectObservableList = FXCollections.observableArrayList();
-        var name = new TableColumn<Project, String>("Name");
+        var name = new TableColumn<Project, String>("Project");
         name.setCellValueFactory(new PropertyValueFactory<>("Name"));
         var description = new TableColumn<Project, String>("Description");
         description.setCellValueFactory(new PropertyValueFactory<>("Description"));
@@ -118,15 +118,15 @@ public class MainWindowController {
             }
         });
         workspaceList.setOnMouseClicked(click -> {
-            store.dispatch(new MainWindowRedux.SelectWorkspace(workspaceList.getSelectionModel().getSelectedItem()));
+            store.dispatch(new WorkspacePerspectiveRedux.SelectWorkspace(workspaceList.getSelectionModel().getSelectedItem()));
         });
         workspaceList.setItems(workspaceObservableList);
         store.subscribe(ENGINE_USER_SESSION_WORKSPACE, workspaces -> workspaceObservableList.setAll((List<Workspace>) workspaces));
 
         store.subscribe(ENGINE_USER_SESSION_PROJECT, projects -> projectObservableList.setAll((List<Project>) projects));
 
-        mainWindow = (MainWindowContent) store.get(UI_MAIN_WINDOW);
-        store.subscribe(UI_MAIN_WINDOW, mainWindow -> this.mainWindow = (MainWindowContent) mainWindow);
+        mainWindow = (WorkspacePerspectiveContent) store.get(UI_MAIN_WINDOW);
+        store.subscribe(UI_MAIN_WINDOW, mainWindow -> this.mainWindow = (WorkspacePerspectiveContent) mainWindow);
     }
 
 
@@ -185,7 +185,7 @@ public class MainWindowController {
     }
 
     private void setCurrentProfile(Profile profile) {
-        store.dispatch(new MainWindowRedux.SelectProfile(profile));
+        store.dispatch(new WorkspacePerspectiveRedux.SelectProfile(profile));
 //        selectedProfile = profile;
 ////        locationCache = new ArrayList<>(profile.getLocations());
 //        locationCache = new ArrayList<>();
@@ -247,7 +247,7 @@ public class MainWindowController {
 
     public void createProject(ActionEvent event) {
         if (mainWindow.getSelectedWorkspace() != null) {
-            new NewProject(this, mainWindow.getSelectedWorkspace());
+//            new NewProject(this, mainWindow.getSelectedWorkspace());
         }
     }
 }

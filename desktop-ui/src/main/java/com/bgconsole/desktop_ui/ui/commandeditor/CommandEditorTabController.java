@@ -1,8 +1,7 @@
 package com.bgconsole.desktop_ui.ui.commandeditor;
 
 import com.bgconsole.desktop_ui.AppData;
-import com.bgconsole.desktop_ui.command.Command;
-import com.bgconsole.desktop_ui.command.CommandList;
+import com.bgconsole.domain.Instruction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,9 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CommandEditorTabController {
 
@@ -57,13 +54,13 @@ public class CommandEditorTabController {
 
     private AppData appData;
 
-    private CommandList commandList;
+//    private CommandList commandList;
 
     private String absolutePath;
 
-    private List<Command> commands;
+    private List<Instruction> commands;
 
-    private Command command;
+    private Instruction command;
 
     private boolean isEditing = false;
 
@@ -71,17 +68,17 @@ public class CommandEditorTabController {
         appData = AppData.instance;
     }
 
-    public void setCommandList(CommandList commandList) {
-        this.commandList = commandList;
-        this.absolutePath = commandList.getAbsolutePath();
-        commands = new ArrayList<>(commandList.getCommands());
-        comList.getItems().addAll(commands.stream().map(Command::getName).collect(Collectors.toList()));
-        comList.setOnMouseClicked(click -> {
-            if (click.getClickCount() == 1) {
-                editCom(comList.getSelectionModel().getSelectedIndex());
-            }
-        });
-    }
+//    public void setCommandList(CommandList commandList) {
+//        this.commandList = commandList;
+//        this.absolutePath = commandList.getAbsolutePath();
+//        commands = new ArrayList<>(commandList.getCommands());
+//        comList.getItems().addAll(commands.stream().map(Command::getName).collect(Collectors.toList()));
+//        comList.setOnMouseClicked(click -> {
+//            if (click.getClickCount() == 1) {
+//                editCom(comList.getSelectionModel().getSelectedIndex());
+//            }
+//        });
+//    }
 
     @FXML
     public void add(ActionEvent event) {
@@ -105,8 +102,8 @@ public class CommandEditorTabController {
     @FXML
     public void moveUp(ActionEvent event) {
         int pos = comList.getSelectionModel().getSelectedIndex();
-        Command com = commands.remove(pos);
-        commands.add(pos - 1, com);
+//        Command com = commands.remove(pos);
+//        commands.add(pos - 1, com);
         String item = comList.getItems().remove(pos);
         comList.getItems().add(pos - 1, item);
         comList.getSelectionModel().select(pos - 1);
@@ -117,8 +114,8 @@ public class CommandEditorTabController {
     @FXML
     public void moveDown(ActionEvent event) {
         int pos = comList.getSelectionModel().getSelectedIndex();
-        Command com = commands.remove(pos);
-        commands.add(pos + 1, com);
+//        Command com = commands.remove(pos);
+//        commands.add(pos + 1, com);
         String item = comList.getItems().remove(pos);
         comList.getItems().add(pos + 1, item);
         comList.getSelectionModel().select(pos + 1);
@@ -128,30 +125,30 @@ public class CommandEditorTabController {
 
     @FXML
     public void saveChanges(ActionEvent event) {
-        if (isEditing) {
-            buildCommand(command);
-            saveList();
-        } else {
-            command = new Command();
-            buildCommand(command);
-            comList.getItems().add(command.getName());
-            commands.add(command);
-            saveList();
-            comList.getSelectionModel().selectLast();
-            editCom(comList.getItems().size() - 1);
-        }
+//        if (isEditing) {
+//            buildCommand(command);
+//            saveList();
+//        } else {
+//            command = new Command();
+//            buildCommand(command);
+//            comList.getItems().add(command.getName());
+//            commands.add(command);
+//            saveList();
+//            comList.getSelectionModel().selectLast();
+//            editCom(comList.getItems().size() - 1);
+//        }
     }
 
-    private void buildCommand(Command command) {
-        command.setId(idField.getText());
-        command.setName(nameField.getText());
-        command.setAlias(aliasField.getText());
-        command.setCommand(commandArea.getText());
-        command.setShellType(shellField.getText());
-        command.setConsoleId(consoleIdField.getText());
-        command.setExecBefore(beforeField.getText());
-        command.setExecAfter(afterField.getText());
-    }
+//    private void buildCommand(Command command) {
+//        command.setId(idField.getText());
+//        command.setName(nameField.getText());
+//        command.setAlias(aliasField.getText());
+//        command.setCommand(commandArea.getText());
+//        command.setShellType(shellField.getText());
+//        command.setConsoleId(consoleIdField.getText());
+//        command.setExecBefore(beforeField.getText());
+//        command.setExecAfter(afterField.getText());
+//    }
 
     private void newCom() {
         command = null;
@@ -173,7 +170,7 @@ public class CommandEditorTabController {
         idField.setText(command.getId());
         nameField.setText(command.getName());
         aliasField.setText(command.getAlias());
-        commandArea.setText(command.getCommand());
+        commandArea.setText(command.getInstruction());
         shellField.setText(command.getShellType());
         consoleIdField.setText(command.getConsoleId());
         beforeField.setText(command.getExecBefore());

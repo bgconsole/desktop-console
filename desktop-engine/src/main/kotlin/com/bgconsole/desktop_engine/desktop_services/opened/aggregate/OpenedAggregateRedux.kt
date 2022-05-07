@@ -1,13 +1,13 @@
 package com.bgconsole.desktop_engine.desktop_services.opened.aggregate
 
 import com.bgconsole.core.aggregate.AggregateService
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Reducer
-import com.bgconsole.desktop_engine.store.Service
-import com.bgconsole.desktop_engine.store.Store
 import com.bgconsole.domain.Aggregate
-import com.bgconsole.domain.Location
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.domain.Location
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Reducer
+import com.bgconsole.platform.store.Service
+import com.bgconsole.platform.store.Store
 import java.nio.file.Paths
 
 const val ENGINE_OPENED_AGGREGATE = "engine.opened.aggregate"

@@ -1,8 +1,8 @@
 package com.bgconsole.desktop_ui.global_input;
 
-import com.bgconsole.desktop_ui.command.Command;
-import com.bgconsole.desktop_ui.ui.global_window.GlobalWindowController;
 import com.bgconsole.desktop_ui.AppData;
+import com.bgconsole.desktop_ui.ui.global_window.GlobalWindowController;
+import com.bgconsole.domain.Instruction;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -165,7 +165,7 @@ public class GlobalKeyListener implements ExecCommand {
     }
 
     @Override
-    public void exec(Command command) {
+    public void exec(Instruction command) {
         newWindow.close();
         AppData.instance.get(null).runCommand(command.getAlias());
     }

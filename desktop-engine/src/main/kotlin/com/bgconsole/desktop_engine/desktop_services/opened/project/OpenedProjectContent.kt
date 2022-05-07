@@ -1,8 +1,8 @@
 package com.bgconsole.desktop_engine.desktop_services.opened.project
 
 import com.bgconsole.domain.Instruction
-import com.bgconsole.domain.Project
-import com.bgconsole.domain.Workspace
+import com.bgconsole.platform.domain.Project
+import com.bgconsole.platform.domain.Workspace
 
 data class OpenedProjectContent(
     val projects: List<Project>,

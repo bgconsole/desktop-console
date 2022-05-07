@@ -1,11 +1,10 @@
 package com.bgconsole.desktop_engine.core_impl.version
 
 import com.bgconsole.core.version.VersionService
-import com.bgconsole.desktop_engine.common.YAMLParser
-import com.bgconsole.domain.Location
-import com.bgconsole.domain.LocationType
-import com.bgconsole.domain.Profile
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.domain.Location
+import com.bgconsole.platform.domain.LocationType
+import com.bgconsole.platform.engine.common.YAMLParser
 import java.nio.file.Paths
 
 class CoreVersionServiceImpl : VersionService {

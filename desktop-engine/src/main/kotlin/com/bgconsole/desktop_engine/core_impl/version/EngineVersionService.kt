@@ -2,9 +2,9 @@ package com.bgconsole.desktop_engine.core_impl.version
 
 import com.bgconsole.core.version.VersionService
 import com.bgconsole.desktop_engine.desktop_services.opened.version.OpenedVersionRedux
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Service
-import com.bgconsole.desktop_engine.store.Store
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Service
+import com.bgconsole.platform.store.Store
 
 class EngineVersionService(private val versionService: VersionService) : Service {
     override fun getKey(): String = ENGINE_USER_SESSION_VERSION

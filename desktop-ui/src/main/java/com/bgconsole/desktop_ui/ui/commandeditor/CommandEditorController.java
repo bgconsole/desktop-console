@@ -1,29 +1,19 @@
 package com.bgconsole.desktop_ui.ui.commandeditor;
 
-import com.bgconsole.desktop_ui.command.CommandList;
-import com.bgconsole.desktop_ui.project.Project;
-import com.bgconsole.desktop_ui.workspace.WorkspaceService;
+import com.bgconsole.platform.domain.Project;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
 
 public class CommandEditorController {
 
     @FXML
     private TabPane commandTab;
 
-    private List<CommandList> commandLists;
-
-    private WorkspaceService workspaceService;
+//    private List<CommandList> commandLists;
 
     private Project project;
 
@@ -53,25 +43,25 @@ public class CommandEditorController {
         });
         dialog.showAndWait().ifPresent(result -> {
             if (result.createLocally) {
-                workspaceService.createCommandListLocally(project.getWorkspaceLocation(), result.name);
+//                workspaceService.createCommandListLocally(project.getWorkspaceLocation(), result.name);
             } else {
-                workspaceService.createCommandList(project.getWorkspaceLocation(), result.name);
+//                workspaceService.createCommandList(project.getWorkspaceLocation(), result.name);
             }
         });
     }
 
     @FXML
     public void modify() {
-        CommandList currentCommand = commandLists.get(commandTab.getSelectionModel().getSelectedIndex());
-        TextInputDialog inputDialog = new TextInputDialog("Change command list name");
-        inputDialog.setContentText("Name: ");
-        inputDialog.setHeaderText("Set the new name of the command list");
-        inputDialog.getEditor().setText(currentCommand.getName());
-        inputDialog.showAndWait().ifPresent(newName -> {
-            if (!newName.equals(currentCommand.getName())) {
-
-            }
-        });
+//        CommandList currentCommand = commandLists.get(commandTab.getSelectionModel().getSelectedIndex());
+//        TextInputDialog inputDialog = new TextInputDialog("Change command list name");
+//        inputDialog.setContentText("Name: ");
+//        inputDialog.setHeaderText("Set the new name of the command list");
+//        inputDialog.getEditor().setText(currentCommand.getName());
+//        inputDialog.showAndWait().ifPresent(newName -> {
+//            if (!newName.equals(currentCommand.getName())) {
+//
+//            }
+//        });
     }
 
     @FXML
@@ -79,28 +69,28 @@ public class CommandEditorController {
 
     }
 
-    public void setCommandLists(List<CommandList> commandLists) {
-        this.commandLists = commandLists;
-        try {
-            for (CommandList commandList : commandLists) {
-                URL resource = getClass().getResource("/com/bgconsole/desktop_ui/command_editor_tab.fxml");
-                FXMLLoader loader = new FXMLLoader(resource);
-                Parent root = loader.load();
-                CommandEditorTabController controller = loader.getController();
-                controller.setCommandList(commandList);
+//    public void setCommandLists(List<CommandList> commandLists) {
+//        this.commandLists = commandLists;
+//        try {
+//            for (CommandList commandList : commandLists) {
+//                URL resource = getClass().getResource("/com/bgconsole/desktop_ui/command_editor_tab.fxml");
+//                FXMLLoader loader = new FXMLLoader(resource);
+//                Parent root = loader.load();
+//                CommandEditorTabController controller = loader.getController();
+//                controller.setCommandList(commandList);
+//
+//                Tab tab = new Tab(commandList.getName(), root);
+//
+//                commandTab.getTabs().add(tab);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-                Tab tab = new Tab(commandList.getName(), root);
-
-                commandTab.getTabs().add(tab);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setWorkspaceService(WorkspaceService workspaceService) {
-        this.workspaceService = workspaceService;
-    }
+//    public void setWorkspaceService(WorkspaceService workspaceService) {
+//        this.workspaceService = workspaceService;
+//    }
 
     public void setProject(Project project) {
         this.project = project;

@@ -1,9 +1,9 @@
 package com.bgconsole.desktop_engine.core_impl.version
 
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Reducer
-import com.bgconsole.desktop_engine.store.Store
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Reducer
+import com.bgconsole.platform.store.Store
 
 class VersionReducer : Reducer<List<Version>> {
     override fun getKey(): String = ENGINE_USER_SESSION_VERSION

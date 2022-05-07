@@ -1,12 +1,12 @@
 package com.bgconsole.desktop_engine.desktop_services.opened.variable
 
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Reducer
-import com.bgconsole.desktop_engine.store.Service
-import com.bgconsole.desktop_engine.store.Store
 import com.bgconsole.desktop_engine.utils.VariableReplacerUtils
 import com.bgconsole.domain.Environment
 import com.bgconsole.domain.Variable
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Reducer
+import com.bgconsole.platform.store.Service
+import com.bgconsole.platform.store.Store
 
 const val ENGINE_OPENED_RESOLVED_VARIABLES = "engine.opened.resolved.variables"
 

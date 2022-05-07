@@ -2,13 +2,13 @@ package com.bgconsole.desktop_engine.desktop_services.opened.environment
 
 import com.bgconsole.core.environment.EnvironmentService
 import com.bgconsole.desktop_engine.desktop_services.opened.variable.ResolvedVariableRedux
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Reducer
-import com.bgconsole.desktop_engine.store.Service
-import com.bgconsole.desktop_engine.store.Store
 import com.bgconsole.domain.Environment
-import com.bgconsole.domain.Location
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.domain.Location
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Reducer
+import com.bgconsole.platform.store.Service
+import com.bgconsole.platform.store.Store
 import java.nio.file.Paths
 
 const val ENGINE_OPENED_ENVIRONMENT = "engine.opened.environment"

@@ -1,7 +1,7 @@
 package com.bgconsole.desktop_ui.ui.project;
 
 import com.bgconsole.desktop_ui.MainWindow;
-import com.bgconsole.domain.Project;
+import com.bgconsole.platform.domain.Project;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

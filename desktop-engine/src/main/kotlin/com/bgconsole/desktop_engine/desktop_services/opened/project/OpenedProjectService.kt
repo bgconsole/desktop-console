@@ -1,9 +1,9 @@
 package com.bgconsole.desktop_engine.desktop_services.opened.project
 
 import com.bgconsole.desktop_engine.core_impl.version.VersionRedux
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Service
-import com.bgconsole.desktop_engine.store.Store
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Service
+import com.bgconsole.platform.store.Store
 
 class OpenedProjectService : Service {
     override fun getKey(): String {

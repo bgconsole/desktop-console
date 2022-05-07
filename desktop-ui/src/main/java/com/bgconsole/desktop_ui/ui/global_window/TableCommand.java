@@ -1,14 +1,14 @@
 package com.bgconsole.desktop_ui.ui.global_window;
 
-import com.bgconsole.desktop_ui.command.Command;
 import com.bgconsole.desktop_ui.ProjectData;
+import com.bgconsole.domain.Instruction;
 
 public class TableCommand {
 
-    private Command command;
+    private Instruction command;
     private ProjectData projectData;
 
-    public TableCommand(Command command, ProjectData projectData) {
+    public TableCommand(Instruction command, ProjectData projectData) {
         this.command = command;
         this.projectData = projectData;
     }
@@ -18,7 +18,7 @@ public class TableCommand {
     }
 
     public String getCommand() {
-        return command.getCommand();
+        return command.getInstruction();
     }
 
     public String getWorkspace() {

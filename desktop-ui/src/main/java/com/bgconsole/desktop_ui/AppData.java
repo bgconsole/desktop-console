@@ -1,18 +1,11 @@
 package com.bgconsole.desktop_ui;
 
 import com.bgconsole.desktop_engine.Engine;
-import com.bgconsole.desktop_engine.core_impl.profile.ProfileRedux;
-import com.bgconsole.desktop_engine.store.Store;
-import com.bgconsole.desktop_ui.profile.Profile;
-import com.bgconsole.desktop_ui.profile.ProfileService;
-import com.bgconsole.desktop_ui.profile.ProfileServiceImpl;
-import com.bgconsole.desktop_ui.project.Project;
-import com.bgconsole.desktop_ui.project.ProjectService;
-import com.bgconsole.desktop_ui.project.ProjectServiceImpl;
-import com.bgconsole.desktop_ui.workspace.WorkspaceService;
-import com.bgconsole.desktop_ui.workspace.WorkspaceServiceImpl;
-import com.bgconsole.domain.Location;
-import com.bgconsole.domain.LocationType;
+import com.bgconsole.platform.domain.Location;
+import com.bgconsole.platform.domain.LocationType;
+import com.bgconsole.platform.domain.Profile;
+import com.bgconsole.platform.engine.profile.ProfileRedux;
+import com.bgconsole.platform.store.Store;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,12 +15,6 @@ import java.util.Map;
 public class AppData {
 
     public static final AppData instance = new AppData();
-
-    private final WorkspaceService workspaceService;
-
-    private final ProjectService projectService;
-
-    private final ProfileService profileService;
 
     private final Map<String, ProjectData> projectList;
 
@@ -41,9 +28,6 @@ public class AppData {
         store.dispatch(new ProfileRedux.LoadProfiles());
 
         projectList = new HashMap<>();
-        workspaceService = new WorkspaceServiceImpl();
-        projectService = new ProjectServiceImpl();
-        profileService = new ProfileServiceImpl();
         profiles = new ArrayList<>();
     }
 
@@ -59,24 +43,9 @@ public class AppData {
         return profiles;
     }
 
-    public void addProject(Project project) {
-        projectList.put(project.getId(), new ProjectData(project));
-    }
 
     public List<ProjectData> getProjects() {
         return new ArrayList<>(projectList.values());
-    }
-
-    public WorkspaceService getWorkspaceService() {
-        return workspaceService;
-    }
-
-    public ProjectService getProjectService() {
-        return projectService;
-    }
-
-    public ProfileService getProfileService() {
-        return profileService;
     }
 
     public Store getStore() {

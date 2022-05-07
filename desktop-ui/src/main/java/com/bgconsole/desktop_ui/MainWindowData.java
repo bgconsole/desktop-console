@@ -1,12 +1,7 @@
 package com.bgconsole.desktop_ui;
 
-import com.bgconsole.desktop_ui.location.Location;
-import com.bgconsole.desktop_ui.main_window.MainWindowRedux;
-import com.bgconsole.desktop_ui.profile.Profile;
-import com.bgconsole.desktop_ui.project.Project;
-import com.bgconsole.desktop_ui.workspace.Workspace;
+import com.bgconsole.platform.domain.Profile;
 
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,11 +39,11 @@ public class MainWindowData {
         return new ArrayList<>();
     }
 
-    public Workspace loadWorkspace(Location location) {
-        return AppData.instance.getWorkspaceService().loadWorkspace(Paths.get(location.getPath(), "workspace.yaml").toString());
-    }
-
-    public List<Project> loadProjects(String workspaceDir) {
-        return AppData.instance.getProjectService().loadProjectByWorkspaceDir(workspaceDir);
-    }
+//    public Workspace loadWorkspace(Location location) {
+////        return AppData.instance.getWorkspaceService().loadWorkspace(Paths.get(location.getPath(), "workspace.yaml").toString());
+//    }
+//
+//    public List<Project> loadProjects(String workspaceDir) {
+////        return AppData.instance.getProjectService().loadProjectByWorkspaceDir(workspaceDir);
+//    }
 }

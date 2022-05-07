@@ -1,6 +1,6 @@
 package com.bgconsole.desktop_ui.global_input;
 
-import com.bgconsole.desktop_ui.command.Command;
+import com.bgconsole.domain.Instruction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -13,17 +13,17 @@ import javafx.util.StringConverter;
 import java.util.Optional;
 
 public class AutoCompleteBox implements EventHandler<KeyEvent> {
-    private ComboBox<Command> comboBox;
-    final private ObservableList<Command> data;
+    private ComboBox<Instruction> comboBox;
+    final private ObservableList<Instruction> data;
     private ExecCommand execCommand;
     private Integer sid;
     private boolean executed;
 
-    public AutoCompleteBox(final ComboBox<Command> comboBox, ExecCommand execCommand) {
+    public AutoCompleteBox(final ComboBox<Instruction> comboBox, ExecCommand execCommand) {
         this(comboBox, execCommand, null);
     }
 
-    public AutoCompleteBox(final ComboBox<Command> comboBox, ExecCommand execCommand, Integer sid) {
+    public AutoCompleteBox(final ComboBox<Instruction> comboBox, ExecCommand execCommand, Integer sid) {
         this.comboBox = comboBox;
         this.data = comboBox.getItems();
         this.execCommand = execCommand;
@@ -35,13 +35,13 @@ public class AutoCompleteBox implements EventHandler<KeyEvent> {
     private void doAutoCompleteBox() {
         comboBox.setConverter(new StringConverter<>() {
             @Override
-            public String toString(Command command) {
+            public String toString(Instruction command) {
                 return commandToString(command);
             }
 
             @Override
-            public Command fromString(String s) {
-                return findCommand(s).orElseGet(() -> new Command(s));
+            public Instruction fromString(String s) {
+                return findCommand(s).orElse(null);
             }
         });
 
@@ -84,7 +84,7 @@ public class AutoCompleteBox implements EventHandler<KeyEvent> {
         }
 
         if (!executed && event.getCode() == KeyCode.ENTER) {
-            Command command = comboBox.getValue();
+            Instruction command = comboBox.getValue();
             executed = true;
             execCommand.exec(command);
             return;
@@ -107,14 +107,14 @@ public class AutoCompleteBox implements EventHandler<KeyEvent> {
         setItems();
     }
 
-    private Optional<Command> findCommand(String value) {
+    private Optional<Instruction> findCommand(String value) {
         return data.stream().filter(command -> commandToString(command).equals(value)).findFirst();
     }
 
     private void setItems() {
-        ObservableList<Command> list = FXCollections.observableArrayList();
+        ObservableList<Instruction> list = FXCollections.observableArrayList();
 
-        for (Command command : this.data) {
+        for (Instruction command : this.data) {
             String s = this.comboBox.getEditor().getText().toLowerCase();
             if (commandToString(command).toLowerCase().contains(s.toLowerCase())) {
                 list.add(command);
@@ -131,7 +131,7 @@ public class AutoCompleteBox implements EventHandler<KeyEvent> {
         this.comboBox.getEditor().positionCaret(textLength);
     }
 
-    private String commandToString(Command command) {
+    private String commandToString(Instruction command) {
         if (command == null) {
             return "";
         } else {

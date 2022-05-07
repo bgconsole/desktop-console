@@ -1,8 +1,7 @@
 package com.bgconsole.desktop_ui.ui.new_location;
 
-import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.main_window.MainWindowController;
-import com.bgconsole.domain.Profile;
+import com.bgconsole.platform.domain.Profile;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,8 +39,8 @@ public class NewLocation {
             stage.show();
 
             controller.setStage(stage);
-            controller.setWorkspaceService(AppData.instance.getWorkspaceService());
-            controller.setProfileService(AppData.instance.getProfileService());
+//            controller.setWorkspaceService(AppData.instance.getWorkspaceService());
+//            controller.setProfileService(AppData.instance.getProfileService());
         } catch (IOException e) {
             e.printStackTrace();
         }

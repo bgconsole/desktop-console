@@ -1,9 +1,9 @@
 package com.bgconsole.desktop_engine.core_impl.aggregate
 
 import com.bgconsole.core.aggregate.AggregateService
-import com.bgconsole.desktop_engine.common.YAMLParser
 import com.bgconsole.domain.Aggregate
-import com.bgconsole.domain.Location
+import com.bgconsole.platform.domain.Location
+import com.bgconsole.platform.engine.common.YAMLParser
 
 class CoreAggregateServiceImpl : AggregateService {
 

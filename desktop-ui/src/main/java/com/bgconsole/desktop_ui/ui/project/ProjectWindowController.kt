@@ -10,7 +10,6 @@ import com.bgconsole.desktop_engine.desktop_services.opened.variable.ENGINE_OPEN
 import com.bgconsole.desktop_engine.desktop_services.opened.variable.ResolvedVariableContent
 import com.bgconsole.desktop_engine.desktop_services.opened.version.ENGINE_OPENED_VERSION
 import com.bgconsole.desktop_engine.desktop_services.opened.version.OpenedVersionContent
-import com.bgconsole.desktop_engine.store.Subscriber
 import com.bgconsole.desktop_ui.AppData
 import com.bgconsole.desktop_ui.CommandRunner
 import com.bgconsole.desktop_ui.Config
@@ -20,8 +19,9 @@ import com.bgconsole.desktop_ui.terminal.TerminalServiceImpl
 import com.bgconsole.desktop_ui.ui.terminal_window.TerminalWindow
 import com.bgconsole.desktop_ui.utils.VersionObservableConverter
 import com.bgconsole.domain.Instruction
-import com.bgconsole.domain.Project
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.domain.Project
+import com.bgconsole.platform.store.Subscriber
 import javafx.collections.FXCollections
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -249,7 +249,7 @@ class ProjectWindowController : CommandRunner {
                 }
                 terminal.window.popUp()
                 terminal.window.selectTerminal(terminal)
-                terminalService.commandService.sendCommand(terminal.terminalTab, command.instruction, variables)
+//                terminalService.commandService.sendCommand(terminal.terminalTab, command.instruction, variables)
             }
         }
     }
@@ -318,7 +318,7 @@ class ProjectWindowController : CommandRunner {
     //    }
     private fun reloadConfig() {
         appData[project!!.id].reloadEnv()
-        configs = loadConfigs(ArrayList(), appData[project!!.id].environment.dir)
+//        configs = loadConfigs(ArrayList(), appData[project!!.id].environment.dir)
         //        configMenu.getItems().clear();
 //        buildConfigMenu(configs, configMenu);
 //        loadConfig(appData.get(project.getId()).getEnvironment().getCommandLists());

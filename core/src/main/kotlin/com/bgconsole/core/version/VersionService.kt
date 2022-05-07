@@ -1,8 +1,8 @@
 package com.bgconsole.core.version
 
-import com.bgconsole.core.common.CRUDService
-import com.bgconsole.domain.Location
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.domain.Location
+import com.bgconsole.platform.service.common.CRUDService
 
 interface VersionService : CRUDService<Version> {
 

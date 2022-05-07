@@ -1,9 +1,9 @@
 package com.bgconsole.desktop_engine.core_impl.environment
 
 import com.bgconsole.core.environment.EnvironmentService
-import com.bgconsole.desktop_engine.common.YAMLParser
 import com.bgconsole.domain.Environment
-import com.bgconsole.domain.Location
+import com.bgconsole.platform.domain.Location
+import com.bgconsole.platform.engine.common.YAMLParser
 
 class CoreEnvironmentServiceImpl : EnvironmentService {
 

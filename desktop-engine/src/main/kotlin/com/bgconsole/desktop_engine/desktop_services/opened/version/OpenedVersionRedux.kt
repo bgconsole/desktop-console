@@ -1,9 +1,9 @@
 package com.bgconsole.desktop_engine.desktop_services.opened.version
 
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Reducer
-import com.bgconsole.desktop_engine.store.Store
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Reducer
+import com.bgconsole.platform.store.Store
 
 const val ENGINE_OPENED_VERSION = "engine.opened.version"
 

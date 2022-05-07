@@ -1,9 +1,8 @@
 package com.bgconsole.desktop_engine.core_impl.version
 
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.domain.Location
-import com.bgconsole.domain.Project
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.domain.Project
+import com.bgconsole.platform.store.Action
 
 const val ENGINE_USER_SESSION_VERSION = "engine.user.session.version"
 

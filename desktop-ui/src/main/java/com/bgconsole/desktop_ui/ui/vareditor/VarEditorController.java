@@ -1,6 +1,6 @@
 package com.bgconsole.desktop_ui.ui.vareditor;
 
-import com.bgconsole.desktop_ui.variable.VariableList;
+import com.bgconsole.domain.Environment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,20 +16,20 @@ public class VarEditorController {
     @FXML
     private AnchorPane varTab;
 
-    private List<VariableList> variableLists;
+//    private List<VariableList> variableLists;
 
     public void initialize() {
     }
 
-    public void setVariableLists(List<VariableList> variableLists) {
-        this.variableLists = variableLists;
+    public void setVariableLists(List<Environment> variableLists) {
+//        this.variableLists = variableLists;
         URL resource = getClass().getResource("/com/bgconsole/desktop_ui/var_editor_tab.fxml");
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(resource);
             root = loader.load();
             VarEditorTabController controller = loader.getController();
-            variableLists.stream().findFirst().ifPresent(controller::setVariableList);
+//            variableLists.stream().findFirst().ifPresent(controller::setVariableList);
 
             varTab.getChildren().add(root);
         } catch (IOException e) {

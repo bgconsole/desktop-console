@@ -2,8 +2,7 @@ package com.bgconsole.desktop_ui.ui.vareditor;
 
 import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.Config;
-import com.bgconsole.desktop_ui.variable.Variable;
-import com.bgconsole.desktop_ui.variable.VariableList;
+import com.bgconsole.domain.Variable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,9 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VarEditorTabController {
 
@@ -40,7 +37,7 @@ public class VarEditorTabController {
 
     private AppData appData;
 
-    private VariableList variableList;
+//    private VariableList variableList;
 
     private Config config;
 
@@ -54,17 +51,17 @@ public class VarEditorTabController {
         appData = AppData.instance;
     }
 
-    public void setVariableList(VariableList variableList) {
-        this.variableList = variableList;
-        config = variableList.getConfig();
-        variables = new ArrayList<>(variableList.getVariables());
-        varList.getItems().addAll(variables.stream().map(Variable::getVariable).collect(Collectors.toList()));
-        varList.setOnMouseClicked(click -> {
-            if (click.getClickCount() == 1) {
-                editVar(varList.getSelectionModel().getSelectedIndex());
-            }
-        });
-    }
+//    public void setVariableList(VariableList variableList) {
+//        this.variableList = variableList;
+//        config = variableList.getConfig();
+//        variables = new ArrayList<>(variableList.getVariables());
+//        varList.getItems().addAll(variables.stream().map(Variable::getVariable).collect(Collectors.toList()));
+//        varList.setOnMouseClicked(click -> {
+//            if (click.getClickCount() == 1) {
+//                editVar(varList.getSelectionModel().getSelectedIndex());
+//            }
+//        });
+//    }
 
     @FXML
     public void add(ActionEvent event) {
@@ -112,14 +109,14 @@ public class VarEditorTabController {
     @FXML
     public void saveChanges(ActionEvent event) {
         if (isEditing) {
-            variable.setVariable(varField.getText());
-            variable.setValue(valArea.getText());
+//            variable.setVariable(varField.getText());
+//            variable.setValue(valArea.getText());
             saveList();
         } else {
-            variable = new Variable();
-            variable.setVariable(varField.getText());
-            variable.setValue(valArea.getText());
-            varList.getItems().add(variable.getVariable());
+//            variable = new Variable();
+//            variable.setVariable(varField.getText());
+//            variable.setValue(valArea.getText());
+//            varList.getItems().add(variable.getVariable());
             variables.add(variable);
             saveList();
             varList.getSelectionModel().selectLast();
@@ -138,7 +135,7 @@ public class VarEditorTabController {
 
     private void editVar(int pos) {
         variable = variables.get(pos);
-        varField.setText(variable.getVariable());
+//        varField.setText(variable.getVariable());
         valArea.setText(variable.getValue());
         editButton.setText("Modify");
         isEditing = true;

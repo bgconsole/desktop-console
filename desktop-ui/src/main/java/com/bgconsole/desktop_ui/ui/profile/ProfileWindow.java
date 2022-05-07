@@ -1,10 +1,10 @@
 package com.bgconsole.desktop_ui.ui.profile;
 
-import com.bgconsole.desktop_engine.core_impl.profile.ProfileRedux;
-import com.bgconsole.desktop_engine.store.Store;
 import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.MainWindow;
 import com.bgconsole.desktop_ui.ui.SimpleTrigger;
+import com.bgconsole.platform.engine.profile.ProfileRedux;
+import com.bgconsole.platform.store.Store;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

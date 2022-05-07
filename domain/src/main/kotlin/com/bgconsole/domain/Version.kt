@@ -1,5 +1,7 @@
 package com.bgconsole.domain
 
+import com.bgconsole.platform.domain.Location
+
 data class Version(
     val id: String,
     val name: String,

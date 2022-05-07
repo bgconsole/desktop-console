@@ -1,12 +1,12 @@
 package com.bgconsole.desktop_ui.ui.project
 
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Reducer
-import com.bgconsole.desktop_engine.store.Service
-import com.bgconsole.desktop_engine.store.Store
 import com.bgconsole.desktop_ui.AppData
-import com.bgconsole.domain.Project
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.domain.Project
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Reducer
+import com.bgconsole.platform.store.Service
+import com.bgconsole.platform.store.Store
 
 const val ENGINE_PERSPECTIVE_PROJECT = "engine.perspective.project"
 

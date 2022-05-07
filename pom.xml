@@ -30,6 +30,11 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.bgconsole.platform</groupId>
+            <artifactId>platform-domain</artifactId>
+            <version>${bg.platform.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

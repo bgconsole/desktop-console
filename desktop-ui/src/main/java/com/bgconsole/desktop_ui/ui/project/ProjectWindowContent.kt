@@ -2,8 +2,8 @@ package com.bgconsole.desktop_ui.ui.project
 
 import com.bgconsole.desktop_ui.ui.terminal_window.TerminalWindow
 import com.bgconsole.domain.Instruction
-import com.bgconsole.domain.Project
 import com.bgconsole.domain.Version
+import com.bgconsole.platform.domain.Project
 
 data class ProjectWindowContent(
     val title: String,

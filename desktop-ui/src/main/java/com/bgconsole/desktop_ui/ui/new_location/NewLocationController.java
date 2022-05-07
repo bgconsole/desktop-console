@@ -1,11 +1,10 @@
 package com.bgconsole.desktop_ui.ui.new_location;
 
-import com.bgconsole.desktop_ui.profile.ProfileService;
-import com.bgconsole.desktop_ui.workspace.Workspace;
-import com.bgconsole.desktop_ui.workspace.WorkspaceService;
-import com.bgconsole.desktop_ui.main_window.MainWindowController;
 import com.bgconsole.desktop_ui.MainWindowData;
-import com.bgconsole.domain.Profile;
+import com.bgconsole.desktop_ui.main_window.MainWindowController;
+import com.bgconsole.platform.domain.Profile;
+import com.bgconsole.platform.service.profile.ProfileService;
+import com.bgconsole.platform.service.workspace.WorkspaceService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -36,13 +35,13 @@ public class NewLocationController {
         this.stage = stage;
     }
 
-    public void setWorkspaceService(WorkspaceService workspaceService) {
-        this.workspaceService = workspaceService;
-    }
-
-    public void setProfileService(ProfileService profileService) {
-        this.profileService = profileService;
-    }
+//    public void setWorkspaceService(WorkspaceService workspaceService) {
+//        this.workspaceService = workspaceService;
+//    }
+//
+//    public void setProfileService(ProfileService profileService) {
+//        this.profileService = profileService;
+//    }
 
     public void setProfile(Profile profile) {
         this.profile = profile;
@@ -69,8 +68,8 @@ public class NewLocationController {
         String strPath = path.getText();
         String strName = name.getText();
 
-        Workspace workspace = workspaceService.createWorkspace(profile.getId(), strName, strPath);
-        profileService.addWorkspace(profile.getId(), workspace, strPath);
+//        Workspace workspace = workspaceService.createWorkspace(profile.getId(), strName, strPath);
+//        profileService.addWorkspace(profile.getId(), workspace, strPath);
 
         MainWindowData.instance.reloadLocations();
 //        mainWindowController.setProfileList(MainWindowData.instance.getProfiles());

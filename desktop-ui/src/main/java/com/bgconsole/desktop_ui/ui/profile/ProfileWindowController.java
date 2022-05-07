@@ -1,9 +1,9 @@
 package com.bgconsole.desktop_ui.ui.profile;
 
-import com.bgconsole.desktop_engine.core_impl.profile.ProfileRedux;
-import com.bgconsole.desktop_engine.store.Store;
 import com.bgconsole.desktop_ui.AppData;
-import com.bgconsole.domain.Profile;
+import com.bgconsole.platform.domain.Profile;
+import com.bgconsole.platform.engine.profile.ProfileRedux;
+import com.bgconsole.platform.store.Store;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 
 import java.util.List;
 
-import static com.bgconsole.desktop_engine.core_impl.profile.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
+import static com.bgconsole.platform.engine.profile.ProfileReduxKt.ENGINE_USER_SESSION_PROFILE;
 
 
 public class ProfileWindowController {

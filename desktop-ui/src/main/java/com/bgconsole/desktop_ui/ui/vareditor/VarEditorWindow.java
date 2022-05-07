@@ -2,7 +2,6 @@ package com.bgconsole.desktop_ui.ui.vareditor;
 
 import com.bgconsole.desktop_ui.MainWindow;
 import com.bgconsole.desktop_ui.ui.SimpleTrigger;
-import com.bgconsole.desktop_ui.variable.VariableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,12 +12,11 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Objects;
 
 public class VarEditorWindow {
 
-    public VarEditorWindow(List<VariableList> lists, SimpleTrigger trigger) {
+    public VarEditorWindow( SimpleTrigger trigger) {
         try {
             URL resource = getClass().getResource("/com/bgconsole/desktop_ui/var_editor.fxml");
             FXMLLoader loader = new FXMLLoader(resource);
@@ -26,7 +24,7 @@ public class VarEditorWindow {
             Parent root = loader.load();
 
             VarEditorController controller = loader.getController();
-            controller.setVariableLists(lists);
+//            controller.setVariableLists(lists);
 
             Stage stage = new Stage(StageStyle.UTILITY);
             stage.initModality(Modality.WINDOW_MODAL);

@@ -1,7 +1,7 @@
 package com.bgconsole.desktop_engine
 
-import com.bgconsole.desktop_engine.store.Store
-import com.bgconsole.domain.Location
+import com.bgconsole.platform.domain.Location
+import com.bgconsole.platform.store.Store
 
 class Engine(val location: Location) {
 

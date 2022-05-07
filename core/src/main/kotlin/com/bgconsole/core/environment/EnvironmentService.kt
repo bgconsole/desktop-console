@@ -1,9 +1,8 @@
 package com.bgconsole.core.environment
 
-import com.bgconsole.core.common.CRUDService
-import com.bgconsole.domain.Aggregate
 import com.bgconsole.domain.Environment
-import com.bgconsole.domain.Location
+import com.bgconsole.platform.domain.Location
+import com.bgconsole.platform.service.common.CRUDService
 
 interface EnvironmentService : CRUDService<Environment> {
 

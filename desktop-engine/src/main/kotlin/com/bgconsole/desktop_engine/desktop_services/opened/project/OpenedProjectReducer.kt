@@ -1,10 +1,10 @@
 package com.bgconsole.desktop_engine.desktop_services.opened.project
 
-import com.bgconsole.desktop_engine.store.Action
-import com.bgconsole.desktop_engine.store.Reducer
-import com.bgconsole.desktop_engine.store.Store
+import com.bgconsole.platform.store.Action
+import com.bgconsole.platform.store.Reducer
+import com.bgconsole.platform.store.Store
 
-class OpenedProjectReducer: Reducer<OpenedProjectContent> {
+class OpenedProjectReducer : Reducer<OpenedProjectContent> {
     override fun getKey(): String {
         return ENGINE_USER_SESSION_OPENED_PROJECTS
     }

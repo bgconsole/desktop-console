@@ -1,6 +1,5 @@
 package com.bgconsole.desktop_ui.ui.global_window;
 
-import com.bgconsole.desktop_ui.environment.Environment;
 import com.bgconsole.desktop_ui.AppData;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GlobalWindowController {
 
@@ -36,8 +34,6 @@ public class GlobalWindowController {
         commands = FXCollections.observableArrayList();
         allCommands = new ArrayList<>();
         AppData.instance.getProjects().forEach(locationData -> {
-            Environment environment = locationData.getEnvironment();
-            environment.getCommandLists().forEach(cmds -> allCommands.addAll(cmds.getCommands().stream().map(command -> new TableCommand(command, locationData)).collect(Collectors.toList())));
         });
 
         commands.addAll(allCommands);

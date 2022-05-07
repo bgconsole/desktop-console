@@ -7,7 +7,7 @@ import com.bgconsole.desktop_engine.desktop_services.opened.environment.OpenedEn
 import com.bgconsole.desktop_engine.desktop_services.opened.project.OpenedProjectRedux
 import com.bgconsole.desktop_engine.desktop_services.opened.variable.ResolvedVariableRedux
 import com.bgconsole.desktop_engine.desktop_services.opened.version.OpenedVersionRedux
-import com.bgconsole.desktop_engine.store.Store
+import com.bgconsole.platform.store.Store
 
 class DesktopServices(store: Store) {
 

@@ -1,8 +1,7 @@
 package com.bgconsole.desktop_ui.ui.new_project;
 
-import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.main_window.MainWindowController;
-import com.bgconsole.domain.Workspace;
+import com.bgconsole.platform.domain.Workspace;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,7 +39,7 @@ public class NewProject {
             stage.show();
 
             controller.setStage(stage);
-            controller.setProjectService(AppData.instance.getProjectService());
+//            controller.setProjectService(AppData.instance.getProjectService());
         } catch (IOException e) {
             e.printStackTrace();
         }
