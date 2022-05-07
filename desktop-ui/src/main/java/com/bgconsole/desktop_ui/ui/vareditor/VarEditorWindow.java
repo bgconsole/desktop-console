@@ -1,7 +1,7 @@
 package com.bgconsole.desktop_ui.ui.vareditor;
 
 import com.bgconsole.desktop_ui.MainWindow;
-import com.bgconsole.desktop_ui.ui.SimpleTrigger;
+import com.bgconsole.platform.ui.SimpleTrigger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

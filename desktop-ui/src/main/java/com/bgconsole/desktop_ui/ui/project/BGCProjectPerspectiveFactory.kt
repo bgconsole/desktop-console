@@ -6,9 +6,11 @@ import com.bgconsole.platform.ui.project.ProjectPerspective
 import com.bgconsole.platform.ui.project.ProjectType
 
 const val BGC_PROJECT_TYPE = "com.bgconsole.console"
+const val BGC_PROJECT_NAME = "BG Console"
 
 class BGCProjectPerspectiveFactory : ProjectType() {
     override fun getProjectType(): String = BGC_PROJECT_TYPE
+    override fun getProjectName(): String = BGC_PROJECT_NAME
 
     override fun factory(store: Store, project: Project): ProjectPerspective {
         val bgcProject = BGCProjectPerspective()

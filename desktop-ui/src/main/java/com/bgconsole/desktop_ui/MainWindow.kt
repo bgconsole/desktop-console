@@ -6,7 +6,7 @@ import com.bgconsole.platform.domain.Location
 import com.bgconsole.platform.domain.LocationType
 import com.bgconsole.platform.store.Store
 import com.bgconsole.platform.ui.BGPlatform
-import com.bgconsole.platform.ui.perspective.workspace.WorkspacePerspectiveRedux
+import com.bgconsole.platform.ui.perspective.desk.WorkspacePerspectiveRedux
 import com.bgconsole.platform.ui.project.ProjectTypeRedux
 import javafx.application.Application
 import javafx.stage.Stage
@@ -20,6 +20,7 @@ class MainWindow : Application() {
         val path = Paths.get(System.getProperty("user.home"), ".com.bgconsole", "profiles").toString()
         val location = Location(UUID.randomUUID().toString(), LocationType.FILE, "ROOT_DIR", path)
         val store = Store()
+        stage.title = "BG Console"
         BGPlatform(location, store, stage, hostServices)
 
 

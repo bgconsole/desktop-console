@@ -1,7 +1,7 @@
 package com.bgconsole.desktop_ui.ui.commandeditor;
 
 import com.bgconsole.desktop_ui.MainWindow;
-import com.bgconsole.desktop_ui.ui.SimpleTrigger;
+import com.bgconsole.platform.ui.SimpleTrigger;
 import com.bgconsole.platform.domain.Project;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
