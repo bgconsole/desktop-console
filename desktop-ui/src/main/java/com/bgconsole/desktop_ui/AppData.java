@@ -25,7 +25,6 @@ public class AppData {
     private AppData() {
         Engine engine = new Engine(new Location("", LocationType.FILE, "", "", null));
         store = engine.getStore();
-        store.dispatch(new ProfileRedux.LoadProfiles());
 
         projectList = new HashMap<>();
         profiles = new ArrayList<>();

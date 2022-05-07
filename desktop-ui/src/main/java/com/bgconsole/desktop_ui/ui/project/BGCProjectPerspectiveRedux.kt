@@ -23,18 +23,18 @@ class ProjectWindowRedux(title: String, project: Project) {
     class OpenEditVariable() : Action(ENGINE_PERSPECTIVE_PROJECT)
 
     init {
-        store.addToStore(ENGINE_PERSPECTIVE_PROJECT, ProjectWindowContent.default(title, project))
+        store.addToStore(ENGINE_PERSPECTIVE_PROJECT, BGCProjectPerspectiveContent.default(title, project))
         store.registerReducer(ProjectWindowReducer(ENGINE_PERSPECTIVE_PROJECT))
         store.registerService(ProjectWindowService(ENGINE_PERSPECTIVE_PROJECT))
     }
 
-    private class ProjectWindowReducer(val storeKey: String) : Reducer<ProjectWindowContent> {
+    private class ProjectWindowReducer(val storeKey: String) : Reducer<BGCProjectPerspectiveContent> {
         override fun getKey(): String {
             return storeKey
         }
 
-        override fun reduce(store: Store, action: Action): ProjectWindowContent {
-            val current = store.get(storeKey) as ProjectWindowContent
+        override fun reduce(store: Store, action: Action): BGCProjectPerspectiveContent {
+            val current = store.get(storeKey) as BGCProjectPerspectiveContent
             return when (action) {
                 is RunCommand -> runCommand(store, action)
                 is ChangeTitle -> changeTitle(store, action)
@@ -47,31 +47,31 @@ class ProjectWindowRedux(title: String, project: Project) {
             }
         }
 
-        private fun openEditVariable(store: Store, action: OpenEditVariable): ProjectWindowContent {
+        private fun openEditVariable(store: Store, action: OpenEditVariable): BGCProjectPerspectiveContent {
             TODO("Not yet implemented")
         }
 
-        private fun openEditInstruction(store: Store, action: OpenEditInstruction): ProjectWindowContent {
+        private fun openEditInstruction(store: Store, action: OpenEditInstruction): BGCProjectPerspectiveContent {
             TODO("Not yet implemented")
         }
 
-        private fun changeVersion(store: Store, action: ChangeVersion): ProjectWindowContent {
+        private fun changeVersion(store: Store, action: ChangeVersion): BGCProjectPerspectiveContent {
             TODO("Not yet implemented")
         }
 
-        private fun closeTerminal(store: Store, action: CloseTerminal): ProjectWindowContent {
+        private fun closeTerminal(store: Store, action: CloseTerminal): BGCProjectPerspectiveContent {
             TODO("Not yet implemented")
         }
 
-        private fun openTerminal(store: Store, action: OpenTerminal): ProjectWindowContent {
+        private fun openTerminal(store: Store, action: OpenTerminal): BGCProjectPerspectiveContent {
             TODO("Not yet implemented")
         }
 
-        private fun changeTitle(store: Store, action: ChangeTitle): ProjectWindowContent {
+        private fun changeTitle(store: Store, action: ChangeTitle): BGCProjectPerspectiveContent {
             TODO("Not yet implemented")
         }
 
-        private fun runCommand(store: Store, action: RunCommand): ProjectWindowContent {
+        private fun runCommand(store: Store, action: RunCommand): BGCProjectPerspectiveContent {
             TODO("Not yet implemented")
         }
 

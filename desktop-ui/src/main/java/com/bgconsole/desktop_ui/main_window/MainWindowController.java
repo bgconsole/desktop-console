@@ -5,7 +5,6 @@ import com.bgconsole.desktop_ui.AppData;
 import com.bgconsole.desktop_ui.MainWindowData;
 import com.bgconsole.desktop_ui.ui.new_location.NewLocation;
 import com.bgconsole.desktop_ui.ui.profile.ProfileWindow;
-import com.bgconsole.desktop_ui.ui.project.ProjectWindow;
 import com.bgconsole.platform.ui.perspective.workspace.ProfileObservableConverter;
 import com.bgconsole.platform.domain.Profile;
 import com.bgconsole.platform.domain.Project;
@@ -67,67 +66,6 @@ public class MainWindowController {
 
     private final Store store = AppData.instance.getStore();
 
-    public void initialize() {
-        projectObservableList = FXCollections.observableArrayList();
-        var name = new TableColumn<Project, String>("Project");
-        name.setCellValueFactory(new PropertyValueFactory<>("Name"));
-        var description = new TableColumn<Project, String>("Description");
-        description.setCellValueFactory(new PropertyValueFactory<>("Description"));
-
-        projectTable.getColumns().add(name);
-        projectTable.getColumns().add(description);
-
-        projectTable.setRowFactory(tableView -> {
-            TableRow<Project> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    Project project = row.getItem();
-                    try {
-//                        AppData.instance.addProject(project);
-                        new ProjectWindow(project);
-                        store.dispatch(new OpenedProjectRedux.OpenProject(project));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-            return row;
-        });
-
-        projectTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        projectTable.setItems(projectObservableList);
-
-        ObservableList<Profile> profileList = FXCollections.observableArrayList();
-//        profileSelector.getSelectionModel().selectFirst();
-        profileSelector.setConverter(new ProfileObservableConverter(profileList));
-        profileSelector.setItems(profileList);
-        store.subscribe(ENGINE_USER_SESSION_PROFILE, entity -> profileList.setAll((List<Profile>) entity));
-        profileList.setAll((List<Profile>) store.get(ENGINE_USER_SESSION_PROFILE));
-
-        ObservableList<Workspace> workspaceObservableList = FXCollections.observableArrayList();
-        workspaceList.setCellFactory(profileListView -> new ListCell<>() {
-            @Override
-            protected void updateItem(Workspace item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                } else {
-                    item.getName();
-                    setText(item.getName());
-                }
-            }
-        });
-        workspaceList.setOnMouseClicked(click -> {
-            store.dispatch(new WorkspacePerspectiveRedux.SelectWorkspace(workspaceList.getSelectionModel().getSelectedItem()));
-        });
-        workspaceList.setItems(workspaceObservableList);
-        store.subscribe(ENGINE_USER_SESSION_WORKSPACE, workspaces -> workspaceObservableList.setAll((List<Workspace>) workspaces));
-
-        store.subscribe(ENGINE_USER_SESSION_PROJECT, projects -> projectObservableList.setAll((List<Project>) projects));
-
-        mainWindow = (WorkspacePerspectiveContent) store.get(UI_MAIN_WINDOW);
-        store.subscribe(UI_MAIN_WINDOW, mainWindow -> this.mainWindow = (WorkspacePerspectiveContent) mainWindow);
-    }
 
 
     public void setHostServices(HostServices hostServices) {
@@ -230,11 +168,7 @@ public class MainWindowController {
     }
 
     public void about(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("About BG Console");
-        alert.setHeaderText("BG Console version:" + MainWindowData.VERSION);
-        alert.setContentText("More info: https://bgconsole.com");
-        alert.showAndWait();
+
     }
 
     public void help(ActionEvent event) {

@@ -31,7 +31,7 @@ import java.nio.file.Path
 import java.util.*
 
 
-class ProjectWindowController : CommandRunner {
+class BGCProjectPerspectiveController : CommandRunner {
     @FXML
     private lateinit var projectDetailPane: StackPane
 
@@ -60,7 +60,6 @@ class ProjectWindowController : CommandRunner {
     private var tabPane: TabPane? = null
     private var configs: List<Config>? = null
     private var project: Project? = null
-    private var projectWindow: ProjectWindow? = null
     private val terminalWindows: List<TerminalWindow> = mutableListOf()
     private val store = AppData.instance.store
 
@@ -71,10 +70,6 @@ class ProjectWindowController : CommandRunner {
         //        appData.get(project.getId()).setCommandRunner(this);
 //        configs = loadConfigs(new ArrayList<>(), appData.get(project.getId()).getEnvironment().getDir());
 //        buildConfigMenu(configs, configMenu);
-    }
-
-    fun setProjectWindow(projectWindow: ProjectWindow?) {
-        this.projectWindow = projectWindow
     }
 
     fun initialize() {
@@ -162,11 +157,6 @@ class ProjectWindowController : CommandRunner {
             tabPane!!.tabs.add(terminal.terminalTab)
             tabPane!!.selectionModel.select(terminal.terminalTab)
         }
-    }
-
-    @FXML
-    fun quit(event: ActionEvent?) {
-        projectWindow!!.closeWindow()
     }
 
     @FXML

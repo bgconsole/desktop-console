@@ -5,7 +5,7 @@ import com.bgconsole.domain.Instruction
 import com.bgconsole.domain.Version
 import com.bgconsole.platform.domain.Project
 
-data class ProjectWindowContent(
+data class BGCProjectPerspectiveContent(
     val title: String,
     val project: Project,
     val instructions: List<Instruction>,
@@ -16,8 +16,8 @@ data class ProjectWindowContent(
 ) {
 
     companion object {
-        fun default(title: String, project: Project): ProjectWindowContent {
-            return ProjectWindowContent(
+        fun default(title: String, project: Project): BGCProjectPerspectiveContent {
+            return BGCProjectPerspectiveContent(
                 title,
                 project,
                 emptyList(),
