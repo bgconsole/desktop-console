@@ -1,45 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<StackPane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="com.bgconsole.desktop_ui.ui.project.BGCProjectPerspectiveController"
-           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<?import javafx.scene.web.WebView?>
+<StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+           AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.bgconsole.desktop_ui.ui.project.BGCProjectPerspectiveController">
     <!--    <children>-->
     <!--        <BorderPane prefHeight="200.0" prefWidth="200.0">-->
-        <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0"
-                   BorderPane.alignment="CENTER">
-            <items>
-                <AnchorPane prefWidth="100.0">
-                    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                AnchorPane.topAnchor="0.0">
-                        <top>
-                            <AnchorPane>
-                                <ChoiceBox fx:id="versionSelector" onAction="#changeVersion"
-                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                            </AnchorPane>
-                        </top>
-                        <center>
+    <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0"
+               BorderPane.alignment="CENTER">
+        <items>
+            <AnchorPane prefWidth="100.0">
+                <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                            AnchorPane.topAnchor="0.0">
+                    <top>
+                        <AnchorPane>
+                            <ChoiceBox fx:id="versionSelector" onAction="#changeVersion"
+                                       AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                       AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                        </AnchorPane>
+                    </top>
+                    <center>
+                        <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <ListView fx:id="instructionList"
+                                              AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                        </AnchorPane>
+                    </center>
+                </BorderPane>
+            </AnchorPane>
+            <AnchorPane>
+                <StackPane fx:id="projectDetailPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <TabPane tabClosingPolicy="UNAVAILABLE" rotateGraphic="true">
+                        <Tab fx:id="docTab" text="Doc">
                             <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <StackPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                    <children>
-                                        <ListView fx:id="instructionList"/>
-                                    </children>
-                                </StackPane>
+                                <WebView fx:id="webDoc" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                         AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" minHeight="300"/>
                             </AnchorPane>
-                        </center>
-                    </BorderPane>
-                </AnchorPane>
-                <AnchorPane>
-                    <StackPane fx:id="projectDetailPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                </AnchorPane>
-            </items>
-        </SplitPane>
+                        </Tab>
+                        <Tab fx:id="resVarTab" text="Resolved vars">
+                            <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                        AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <TableView fx:id="resVarTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                            </AnchorPane>
+                        </Tab>
+                    </TabPane>
+                </StackPane>
+            </AnchorPane>
+        </items>
+    </SplitPane>
 </StackPane>

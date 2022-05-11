@@ -19,6 +19,7 @@ import com.bgconsole.desktop_ui.terminal.TerminalServiceImpl
 import com.bgconsole.desktop_ui.ui.terminal_window.TerminalWindow
 import com.bgconsole.desktop_ui.utils.VersionObservableConverter
 import com.bgconsole.domain.Instruction
+import com.bgconsole.domain.Variable
 import com.bgconsole.domain.Version
 import com.bgconsole.platform.domain.Project
 import com.bgconsole.platform.store.Subscriber
@@ -27,6 +28,7 @@ import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.layout.StackPane
+import javafx.scene.web.WebView
 import java.nio.file.Path
 import java.util.*
 
@@ -40,6 +42,18 @@ class BGCProjectPerspectiveController : CommandRunner {
 
     @FXML
     private lateinit var versionSelector: ChoiceBox<Version>
+
+    @FXML
+    private lateinit var docTab: Tab
+
+    @FXML
+    private lateinit var resVarTab: Tab
+
+    @FXML
+    private lateinit var webDoc: WebView
+
+    @FXML
+    private lateinit var resVarTable: TableView<Variable>
 
     //    @FXML
     //    private Menu configMenu;
@@ -57,7 +71,6 @@ class BGCProjectPerspectiveController : CommandRunner {
     //    private TerminalService terminalService;
     //    private VariableService variableService;
     //    private ConfigService configService;
-    private var tabPane: TabPane? = null
     private var configs: List<Config>? = null
     private var project: Project? = null
     private val terminalWindows: List<TerminalWindow> = mutableListOf()
@@ -74,8 +87,8 @@ class BGCProjectPerspectiveController : CommandRunner {
 
     fun initialize() {
         terminalWindows
-        tabPane = TabPane()
-        projectDetailPane.children.add(tabPane)
+
+        webDoc.engine.loadContent("<html><body bgcolor='#141414'></body></html>")
 
         val versionList = FXCollections.observableArrayList<Version>()
         versionSelector.converter = VersionObservableConverter(versionList)
@@ -97,7 +110,7 @@ class BGCProjectPerspectiveController : CommandRunner {
         instructionList.setOnMouseClicked {
             if (it.clickCount == 2) {
                 val instruction = instructionList.selectionModel.selectedItem
-                execCommandInRightTerminal(tabPane!!, instruction);
+//                execCommandInRightTerminal(tabPane!!, instruction);
             }
         }
 
@@ -115,6 +128,7 @@ class BGCProjectPerspectiveController : CommandRunner {
             override fun update(entity: Any) {
                 openedAggregates = entity as OpenedAggregateContent
                 updateInstructionInList()
+                updateDoc()
             }
         })
 
@@ -131,16 +145,6 @@ class BGCProjectPerspectiveController : CommandRunner {
         })
     }
 
-    private fun updateInstructionInList() {
-        val version = versionSelector.selectionModel?.selectedItem
-        val instructions = version?.let { versions ->
-            openedAggregates?.aggregates?.get(versions.id)?.let {
-                it.flatMap { aggregate -> aggregate.instructions.orEmpty() }
-            }
-        }.orEmpty()
-        instructionObservableList.setAll(instructions)
-    }
-
     //    @FXML
     //    public void onEnter(KeyEvent event) {
     //        if (event.getCode() == KeyCode.ENTER) {
@@ -150,13 +154,13 @@ class BGCProjectPerspectiveController : CommandRunner {
     //    }
     @FXML
     fun newTerminal(event: ActionEvent?) {
-        openTerminal(
-            "term" + (tabPane!!.tabs.size + 1),
-            "Terminal " + (tabPane!!.tabs.size + 1)
-        ) { terminal: Terminal, isNew: Boolean ->
-            tabPane!!.tabs.add(terminal.terminalTab)
-            tabPane!!.selectionModel.select(terminal.terminalTab)
-        }
+//        openTerminal(
+//            "term" + (tabPane!!.tabs.size + 1),
+//            "Terminal " + (tabPane!!.tabs.size + 1)
+//        ) { terminal: Terminal, isNew: Boolean ->
+//            tabPane!!.tabs.add(terminal.terminalTab)
+//            tabPane!!.selectionModel.select(terminal.terminalTab)
+//        }
     }
 
     @FXML
@@ -185,6 +189,31 @@ class BGCProjectPerspectiveController : CommandRunner {
 //                commandService.sendCommand(terminalTab, command, this::resolveVariable);
 //            }
 //        }
+    }
+
+    private fun updateInstructionInList() {
+        val version = versionSelector.selectionModel?.selectedItem
+        val instructions = version?.let { versions ->
+            openedAggregates?.aggregates?.get(versions.id)?.let {
+                it.flatMap { aggregate -> aggregate.instructions.orEmpty() }
+            }
+        }.orEmpty()
+        instructionObservableList.setAll(instructions)
+    }
+
+    private fun updateDoc()  {
+        val version = versionSelector.selectionModel?.selectedItem
+        val instructions = version?.let { versions ->
+            openedAggregates?.aggregates?.get(versions.id)?.let {
+                it.flatMap { aggregate -> aggregate.instructions.orEmpty() }
+            }
+        }.orEmpty()
+        val str = StringBuilder("<html><body bgcolor='#141414' style=\"font-size:12px;color:#F3F3F3\">")
+        instructions.forEach {
+            str.append("<h2>").append(it.name).append("</h2>")
+        }
+        str.append("</body></html>")
+        webDoc.engine.loadContent(str.toString())
     }
 
     private fun openTerminal(id: String, name: String, callBack: OpenerCallBack) {
