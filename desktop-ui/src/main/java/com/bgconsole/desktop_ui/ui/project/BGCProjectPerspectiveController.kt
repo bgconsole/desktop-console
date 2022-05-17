@@ -27,6 +27,7 @@ import javafx.collections.FXCollections
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.scene.control.*
+import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.StackPane
 import javafx.scene.web.WebView
 import java.nio.file.Path
@@ -118,6 +119,16 @@ class BGCProjectPerspectiveController : CommandRunner {
             Objects.requireNonNull(store.get(ENGINE_OPENED_VERSION) as OpenedVersionContent).versions[project?.id].orEmpty()
         )
 
+        val resolvedVarsObservableList = FXCollections.observableArrayList<Variable>()
+        val name = TableColumn<Variable, String>("Name")
+        name.cellValueFactory = PropertyValueFactory("Name")
+        val value = TableColumn<Variable, String>("Value")
+        value.cellValueFactory = PropertyValueFactory("Value")
+        resVarTable.columns.add(name)
+        resVarTable.columns.add(value)
+        resVarTable.columnResizePolicy = TableView.CONSTRAINED_RESIZE_POLICY
+        resVarTable.items = resolvedVarsObservableList
+
         store.subscribe(ENGINE_OPENED_VERSION, object : Subscriber {
             override fun update(entity: Any) {
                 versionList.setAll((entity as OpenedVersionContent).versions[project?.id].orEmpty())
@@ -141,6 +152,7 @@ class BGCProjectPerspectiveController : CommandRunner {
         store.subscribe(ENGINE_OPENED_RESOLVED_VARIABLES, object : Subscriber {
             override fun update(entity: Any) {
                 resolvedVariables = entity as ResolvedVariableContent
+                resolvedVariables?.variables.let { resolvedVarsObservableList.setAll(it) }
             }
         })
     }
@@ -201,7 +213,7 @@ class BGCProjectPerspectiveController : CommandRunner {
         instructionObservableList.setAll(instructions)
     }
 
-    private fun updateDoc()  {
+    private fun updateDoc() {
         val version = versionSelector.selectionModel?.selectedItem
         val instructions = version?.let { versions ->
             openedAggregates?.aggregates?.get(versions.id)?.let {
@@ -211,6 +223,9 @@ class BGCProjectPerspectiveController : CommandRunner {
         val str = StringBuilder("<html><body bgcolor='#141414' style=\"font-size:12px;color:#F3F3F3\">")
         instructions.forEach {
             str.append("<h2>").append(it.name).append("</h2>")
+            str.append("<div>").append(it.description.orEmpty()).append("</div>")
+            str.append("<div>").append(it.instruction).append("</div>")
+            str.append("<div>").append(it.alias).append("</div>")
         }
         str.append("</body></html>")
         webDoc.engine.loadContent(str.toString())
