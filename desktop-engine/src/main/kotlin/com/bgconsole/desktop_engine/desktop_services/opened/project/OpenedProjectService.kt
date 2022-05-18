@@ -17,6 +17,6 @@ class OpenedProjectService : Service {
     }
 
     private fun openProject(store: Store, action: OpenedProjectRedux.OpenProject) {
-        action.project.location?.let { store.dispatch(VersionRedux.LoadVersionsByProject(action.project)) }
+//        action.project.location?.let { store.dispatch(VersionRedux.LoadVersionsByProject(action.project)) }
     }
 }

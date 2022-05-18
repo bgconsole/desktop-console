@@ -1,4 +1,4 @@
-package com.bgconsole.desktop_ui.ui.commandeditor;
+package com.bgconsole.desktop_ui.ui.aggreg_editor;
 
 import com.bgconsole.platform.domain.Project;
 import javafx.application.Platform;

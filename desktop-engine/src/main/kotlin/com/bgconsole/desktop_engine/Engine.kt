@@ -9,7 +9,6 @@ class Engine(val location: Location) {
 
     init {
         CoreServices(store)
-        DesktopServices(store)
     }
 
     fun getStore(): Store {

@@ -1,4 +1,4 @@
-package com.bgconsole.desktop_ui.ui.vareditor;
+package com.bgconsole.desktop_ui.ui.env_editor;
 
 import com.bgconsole.desktop_ui.MainWindow;
 import com.bgconsole.platform.ui.SimpleTrigger;

@@ -22,6 +22,7 @@ import com.bgconsole.domain.Instruction
 import com.bgconsole.domain.Variable
 import com.bgconsole.domain.Version
 import com.bgconsole.platform.domain.Project
+import com.bgconsole.platform.store.Store
 import com.bgconsole.platform.store.Subscriber
 import javafx.collections.FXCollections
 import javafx.event.ActionEvent
@@ -75,9 +76,10 @@ class BGCProjectPerspectiveController : CommandRunner {
     private var configs: List<Config>? = null
     private var project: Project? = null
     private val terminalWindows: List<TerminalWindow> = mutableListOf()
-    private val store = AppData.instance.store
+    private lateinit var globalStore: Store
+    private lateinit var projectStore: Store
 
-    private val terminalService = TerminalServiceImpl(store)
+    private lateinit var terminalService: TerminalServiceImpl
 
     fun setProject(project: Project?) {
         this.project = project
@@ -86,9 +88,13 @@ class BGCProjectPerspectiveController : CommandRunner {
 //        buildConfigMenu(configs, configMenu);
     }
 
-    fun initialize() {
-        terminalWindows
+    fun setStore(globalStore: Store, projectStore: Store) {
+        this.globalStore = globalStore
+        this.projectStore = projectStore
+        terminalService = TerminalServiceImpl(globalStore)
+    }
 
+    fun init() {
         webDoc.engine.loadContent("<html><body bgcolor='#141414'></body></html>")
 
         val versionList = FXCollections.observableArrayList<Version>()
@@ -116,7 +122,7 @@ class BGCProjectPerspectiveController : CommandRunner {
         }
 
         versionList.addAll(
-            Objects.requireNonNull(store.get(ENGINE_OPENED_VERSION) as OpenedVersionContent).versions[project?.id].orEmpty()
+            Objects.requireNonNull(projectStore.get(ENGINE_OPENED_VERSION) as OpenedVersionContent).versions[project?.id].orEmpty()
         )
 
         val resolvedVarsObservableList = FXCollections.observableArrayList<Variable>()
@@ -129,13 +135,13 @@ class BGCProjectPerspectiveController : CommandRunner {
         resVarTable.columnResizePolicy = TableView.CONSTRAINED_RESIZE_POLICY
         resVarTable.items = resolvedVarsObservableList
 
-        store.subscribe(ENGINE_OPENED_VERSION, object : Subscriber {
+        projectStore.subscribe(ENGINE_OPENED_VERSION, object : Subscriber {
             override fun update(entity: Any) {
                 versionList.setAll((entity as OpenedVersionContent).versions[project?.id].orEmpty())
             }
         })
 
-        store.subscribe(ENGINE_OPENED_AGGREGATE, object : Subscriber {
+        projectStore.subscribe(ENGINE_OPENED_AGGREGATE, object : Subscriber {
             override fun update(entity: Any) {
                 openedAggregates = entity as OpenedAggregateContent
                 updateInstructionInList()
@@ -143,13 +149,13 @@ class BGCProjectPerspectiveController : CommandRunner {
             }
         })
 
-        store.subscribe(ENGINE_OPENED_ENVIRONMENT, object : Subscriber {
+        projectStore.subscribe(ENGINE_OPENED_ENVIRONMENT, object : Subscriber {
             override fun update(entity: Any) {
                 openedEnvironments = entity as OpenedEnvironmentContent
             }
         })
 
-        store.subscribe(ENGINE_OPENED_RESOLVED_VARIABLES, object : Subscriber {
+        projectStore.subscribe(ENGINE_OPENED_RESOLVED_VARIABLES, object : Subscriber {
             override fun update(entity: Any) {
                 resolvedVariables = entity as ResolvedVariableContent
                 resolvedVariables?.variables.let { resolvedVarsObservableList.setAll(it) }
@@ -365,8 +371,8 @@ class BGCProjectPerspectiveController : CommandRunner {
     fun changeVersion(event: ActionEvent?) {
         val version = versionSelector.selectionModel?.selectedItem
         version?.let {
-            store.dispatch(OpenedAggregateRedux.LoadAggregates(it))
-            store.dispatch(OpenedEnvironmentRedux.LoadEnvironments(it))
+            projectStore.dispatch(OpenedAggregateRedux.LoadAggregates(it))
+            projectStore.dispatch(OpenedEnvironmentRedux.LoadEnvironments(it))
         }
     }
 

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <AnchorPane prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/15.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.bgconsole.desktop_ui.ui.commandeditor.CommandEditorController">
+            fx:controller="com.bgconsole.desktop_ui.ui.aggreg_editor.CommandEditorController">
     <children>
         <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
